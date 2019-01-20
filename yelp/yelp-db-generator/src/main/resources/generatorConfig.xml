@@ -52,23 +52,29 @@
         <!--<columnOverride column="LONG_VARCHAR_FIELD" jdbcType="VARCHAR" />-->
         <!--</table>-->
         <table schema="yelp_db" tableName="attribute" >
+            <generatedKey column="id" sqlStatement="MySql" identity="true" />
         </table>
         <table schema="yelp_db" tableName="business" >
             <generatedKey column="id" sqlStatement="MySql" identity="true" />
         </table>
         <table schema="yelp_db" tableName="category" >
+            <generatedKey column="id" sqlStatement="MySql" identity="true" />
         </table>
 
         <table schema="yelp_db" tableName="checkin" >
+            <generatedKey column="id" sqlStatement="MySql" identity="true" />
         </table>
 
         <table schema="yelp_db" tableName="elite_years" >
+            <generatedKey column="id" sqlStatement="MySql" identity="true" />
         </table>
 
         <table schema="yelp_db" tableName="friend" >
+            <generatedKey column="id" sqlStatement="MySql" identity="true" />
         </table>
 
         <table schema="yelp_db" tableName="hours" >
+            <generatedKey column="id" sqlStatement="MySql" identity="true" />
         </table>
 
         <table schema="yelp_db" tableName="photo" >
@@ -80,6 +86,7 @@
         </table>
 
         <table schema="yelp_db" tableName="tip" >
+            <generatedKey column="id" sqlStatement="MySql" identity="true" />
         </table>
 
         <table schema="yelp_db" tableName="user" >
