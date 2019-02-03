@@ -4,7 +4,7 @@ import evol.common.SearchParam;
 import lombok.*;
 
 @Data
-public class BusinessSearchParam extends SearchParam {
+public final class BusinessSearchParam extends SearchParam {
 
     private String name;
 

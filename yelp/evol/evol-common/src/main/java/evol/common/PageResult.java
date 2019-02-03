@@ -13,7 +13,7 @@ public class PageResult<T>  implements Serializable {
     //总记录数
     private long total;
     //总页数
-    private int pageTotal;
+    private long pageTotal;
     //结果集
     private List<T> list;
     //是否为第一页
@@ -32,7 +32,7 @@ public class PageResult<T>  implements Serializable {
      * @param pageTotal
      * @param recordTotal
      */
-    public PageResult(List<T> list, int pageNum, int pageSize, int pageTotal, int recordTotal) {
+    public PageResult(List<T> list, int pageNum, int pageSize, long pageTotal, long recordTotal) {
         if (list == null)
             throw new NullPointerException("list");
         this.pageNum = pageNum;
@@ -83,7 +83,7 @@ public class PageResult<T>  implements Serializable {
     }
 
 
-    public int getPageTotal() {
+    public long getPageTotal() {
         return pageTotal;
     }
 
