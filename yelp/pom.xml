@@ -10,6 +10,11 @@
     <version>1.0-SNAPSHOT</version>
     <modules>
         <module>yelp-db-generator</module>
+        <module>evol</module>
+        <module>yelp-dao</module>
+        <module>yelp-domain</module>
+        <module>yelp-service</module>
+        <module>yelp-common</module>
     </modules>
 
     <properties>
