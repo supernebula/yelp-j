@@ -3,9 +3,9 @@ package evol.common;
 import lombok.*;
 
 @Data
-public abstract class SearchParam {
+public abstract class BaseSearchParam {
 
-    public SearchParam(){
+    public BaseSearchParam(){
         page = 0;
         pageSize = 10;
         sort = Sort.ASC;

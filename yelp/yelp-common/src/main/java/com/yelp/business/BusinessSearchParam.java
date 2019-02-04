@@ -1,10 +1,10 @@
 package com.yelp.business;
 
-import evol.common.SearchParam;
+import evol.common.BaseSearchParam;
 import lombok.*;
 
 @Data
-public final class BusinessSearchParam extends SearchParam {
+public final class BusinessSearchParam extends BaseSearchParam {
 
     private String name;
 

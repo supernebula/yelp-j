@@ -49,6 +49,7 @@ public class BusinessServiceImpl implements BusinessService {
     }
 
     public Business getBusiness(String id) {
-        return null;
+        Business item = businessMapper.selectByPrimaryKey(id);
+        return item;
     }
 }

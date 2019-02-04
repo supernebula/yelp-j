@@ -8,6 +8,13 @@ public class ApiResult<T> {
     private String message;
     private final T data;
 
+    public ApiResult(StatusCode status, T value){
+        this.code = status.getCode();
+        this.message = status.getDescription();
+        this.data = value;
+
+    }
+
     public ApiResult(int code, String message, T value){
         this.code = code;
         this.message = message;
