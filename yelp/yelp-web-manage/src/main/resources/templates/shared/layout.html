@@ -28,9 +28,6 @@
     <!-- bootstrap wysihtml5 - text editor -->
     <link rel="stylesheet" th:href="@{/plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.min.css}" />
 
-    <div layout:fragment="styles">
-        <!-- css content -->
-    </div>
 
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -337,6 +334,16 @@
             <!-- sidebar menu: : style can be found in sidebar.less -->
             <ul class="sidebar-menu" data-widget="tree">
                 <li class="header">MAIN NAVIGATION</li>
+                <li>
+                    <a th:href="@{/home/index}">
+                        <i class="fa fa-home"></i> <span>Home</span>
+                    </a>
+                </li>
+                <li>
+                    <a th:href="@{/business/index}">
+                        <i class="fa fa-shopping-cart"></i> <span>Business management</span>
+                    </a>
+                </li>
                 <li class="active treeview">
                     <a href="#">
                         <i class="fa fa-dashboard"></i> <span>Dashboard</span>
@@ -349,6 +356,7 @@
                         <li><a href="index2.html"><i class="fa fa-circle-o"></i> Dashboard v2</a></li>
                     </ul>
                 </li>
+
                 <li class="treeview">
                     <a href="#">
                         <i class="fa fa-files-o"></i>
@@ -505,10 +513,9 @@
 <!-- AdminLTE for demo purposes -->
 <script th:src="@{/dist/js/demo.js}"></script>
 
-
-<div layout:fragment="scripts">
+<th:block layout:fragment="scriptsblock">
     <!-- page content -->
-</div>
+</th:block>
 
 </body>
 </html>
