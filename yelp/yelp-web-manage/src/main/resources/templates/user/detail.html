@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="zh-CN" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/web/thymeleaf/layout" layout:decorator="shared/layout">
+
+<head>
+    <title>Yelp User Detail</title>
+    <link rel="stylesheet" th:href="@{/kendoui/css/kendo.common-material.min.css}" />
+    <link rel="stylesheet" th:href="@{/kendoui/css/kendo.material.min.css}" />
+    <link rel="stylesheet" th:href="@{/kendoui/css/kendo.material.mobile.min.css}" />
+</head>
+<body>
+<!-- Content Wrapper. Contains page content -->
+<div layout:fragment="content" class="content-wrapper">
+    <!-- Content Header (Page header) -->
+    <section class="content-header">
+        <h1>
+            User Detail
+        </h1>
+        <ol class="breadcrumb">
+            <li><a href="#"><i class="fa fa-dashboard"></i> User</a></li>
+            <li class="active">detail</li>
+            <li><a class="btn btn-default" href="javascript:history.go(-1)" role="button">返回</a></li>
+        </ol>
+    </section>
+
+    <!-- Main content -->
+    <section class="content">
+        <!-- Main row -->
+        <div class="row">
+            <div class="col-lg-12 col-xs-12">
+                <div id="main-detail">
+                    <form class="form-horizontal">
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">Id</label>
+                            <div class="col-sm-10">
+                                <span id="id"  class="checkbox"></span>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">Name</label>
+                            <div class="col-sm-10">
+                                <span id="name"  class="checkbox"></span>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">ReviewCount</label>
+                            <div class="col-sm-10">
+                                <span id="reviewCount" class="checkbox"></span>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">YelpingSince</label>
+                            <div class="col-sm-10">
+                                <span id="yelpingSince" class="checkbox"></span>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">Useful</label>
+                            <div class="col-sm-10">
+                                <span id="useful" class="checkbox"></span>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">Funny</label>
+                            <div class="col-sm-10">
+                                <span id="funny" class="checkbox"></span>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">Cool</label>
+                            <div class="col-sm-10">
+                                <span id="cool" class="checkbox"></span>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">Fans</label>
+                            <div class="col-sm-10">
+                                <span id="fans" class="checkbox"></span>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">AverageStars</label>
+                            <div class="col-sm-10">
+                                <span id="averageStars" class="checkbox"></span>
+                            </div>
+                        </div>
+
+
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">ComplimentHot</label>
+                            <div class="col-sm-10">
+                                <span id="complimentHot" class="checkbox"></span>
+                            </div>
+                        </div>
+
+
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">ComplimentMore</label>
+                            <div class="col-sm-10">
+                                <span id="complimentMore" class="checkbox"></span>
+                            </div>
+                        </div>
+
+
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">ComplimentProfile</label>
+                            <div class="col-sm-10">
+                                <span id="complimentProfile" class="checkbox"></span>
+                            </div>
+                        </div>
+
+
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">ComplimentCute</label>
+                            <div class="col-sm-10">
+                                <span id="complimentCute" class="checkbox"></span>
+                            </div>
+                        </div>
+
+
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">ComplimentList</label>
+                            <div class="col-sm-10">
+                                <span id="complimentList" class="checkbox"></span>
+                            </div>
+                        </div>
+
+
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">ComplimentNote</label>
+                            <div class="col-sm-10">
+                                <span id="complimentNote" class="checkbox"></span>
+                            </div>
+                        </div>
+
+
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">ComplimentPlain</label>
+                            <div class="col-sm-10">
+                                <span id="complimentPlain" class="checkbox"></span>
+                            </div>
+                        </div>
+
+
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">ComplimentCool</label>
+                            <div class="col-sm-10">
+                                <span id="complimentCool" class="checkbox"></span>
+                            </div>
+                        </div>
+
+
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">ComplimentFunny</label>
+                            <div class="col-sm-10">
+                                <span id="complimentFunny" class="checkbox"></span>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">ComplimentWriter</label>
+                            <div class="col-sm-10">
+                                <span id="complimentWriter" class="checkbox"></span>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">ComplimentPhotos</label>
+                            <div class="col-sm-10">
+                                <span id="complimentPhotos" class="checkbox"></span>
+                            </div>
+                        </div>
+                    </form>
+
+
+                </div>
+            </div>
+        </div>
+        <!-- /.row (main row) -->
+
+    </section>
+    <!-- /.content -->
+</div>
+<th:block layout:fragment="scriptsblock">
+    <script th:inline="javascript">
+
+        var apiUrl = "/api/user/detail/" + [[${id}]];
+        $(document).ready(function() {
+            $.getJSON(apiUrl, null, function (response) {
+                if(!response.success)
+                {
+                    $("#main-detail #name").html(response.message);
+                }
+
+                var item = response.data;
+
+                $("#main-detail #id").html(item.id);
+                $("#main-detail #name").html(item.name);
+                $("#main-detail #reviewCount").html(item.reviewCount);
+                $("#main-detail #yelpingSince").html(item.yelpingSince);
+                $("#main-detail #useful").html(item.useful);
+                $("#main-detail #funny").html(item.funny);
+                $("#main-detail #cool").html(item.cool);
+                $("#main-detail #fans").html(item.fans);
+                $("#main-detail #averageStars").html(item.averageStars);
+                $("#main-detail #complimentHot").html(item.complimentHot);
+                $("#main-detail #complimentMore").html(item.complimentMore);
+                $("#main-detail #complimentProfile").html(item.complimentProfile);
+                $("#main-detail #complimentCute").html(item.complimentCute);
+                $("#main-detail #complimentList").html(item.complimentList);
+                $("#main-detail #complimentNote").html(item.complimentNote);
+                $("#main-detail #complimentPlain").html(item.complimentPlain);
+                $("#main-detail #complimentCool").html(item.complimentCool);
+                $("#main-detail #complimentFunny").html(item.complimentFunny);
+                $("#main-detail #businessId").html(item.businessId);
+                $("#main-detail #complimentWriter").html(item.complimentWriter);
+                $("#main-detail #complimentPhotos").html(item.complimentPhotos);
+            });
+
+        });
+    </script>
+</th:block>
+</body>
+</html>

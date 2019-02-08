@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="zh-CN" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/web/thymeleaf/layout" layout:decorator="shared/layout">
+
+<head>
+    <title>Yelp User Management</title>
+    <link rel="stylesheet" th:href="@{/kendoui/css/kendo.common-material.min.css}" />
+    <link rel="stylesheet" th:href="@{/kendoui/css/kendo.material.min.css}" />
+    <link rel="stylesheet" th:href="@{/kendoui/css/kendo.material.mobile.min.css}" />
+</head>
+<body>
+<!-- Content Wrapper. Contains page content -->
+<div layout:fragment="content" class="content-wrapper">
+    <!-- Content Header (Page header) -->
+    <section class="content-header">
+        <h1>
+            User Management
+            <small>List</small>
+        </h1>
+        <ol class="breadcrumb">
+            <li><a href="#"><i class="fa fa-dashboard"></i> User</a></li>
+            <li class="active">list</li>
+        </ol>
+    </section>
+
+    <!-- Main content -->
+    <section class="content">
+        <!-- Main row -->
+        <div class="row">
+            <div class="col-lg-12 col-xs-12">
+                <div id="main-search" class="search-bar">
+                    <form class="form-inline">
+                        <div class="form-group">
+                            <label for="name">Name</label>
+                            <input type="text" class="form-control" id="name" placeholder="" />
+                        </div>
+                        <div class="form-group">
+                            <label for="yelpSinceStart">YelpSinceStart</label>
+                            <input type="text" class="form-control" id="yelpSinceStart" placeholder="" />
+                        </div>
+                        <div class="form-group">
+                            <label for="yelpSinceEnd">YelpSinceEnd</label>
+                            <input type="text" class="form-control" id="yelpSinceEnd" placeholder="" />
+                        </div>
+
+                        <button type="button" onclick="javascript:mainSearch();" class="btn btn-default">Search</button>
+                        <button type="reset" class="btn btn-default">Clear</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-12 col-xs-12">
+                <div id="main-grid"></div>
+            </div>
+        </div>
+        <!-- /.row (main row) -->
+
+    </section>
+    <!-- /.content -->
+</div>
+<th:block layout:fragment="scriptsblock">
+    <script th:src="@{/kendoui/js/kendo.all.min.js}"></script>
+    <script>
+        function getSearchParam() {
+
+            return {
+                "name" : $("#name").val().trim(),
+                "yelpSinceStart" : $("#yelpSinceStart").val().trim(),
+                "yelpSinceEnd" : $("#yelpSinceEnd").val().trim()
+            };
+        }
+
+        var apiUrl = "/api/user/search";
+
+        $(document).ready(function() {
+            $("#main-grid").kendoGrid({
+                theme: "bootstrap",
+                dataSource: {
+                    transport: {
+                        read:{
+                            url: apiUrl,
+                            contentType: "application/json",
+                            success: function(result) {
+                                // notify the data source that the request succeeded
+                                options.success(result.data.list);
+                            },
+                            error: function(result) {
+                                // notify the data source that the request failed
+                                console.log("错误，code:" + result.code + ", messge:" + result.message);
+                                options.error(result);
+                            }
+                        },
+                        parameterMap: function (data, type) {
+                            if (type === "read") {
+                                var searchParam = getSearchParam();
+                                var param = $.extend(searchParam, data);
+                                // if type is "read", then data is { foo: 1 }, we also want to add { "bar": 2 }
+                                //paramStr = kendo.stringify(param);
+                                return param;
+                            }
+                            return data;
+                        }
+                    },
+                    schema: {
+                        data: function(response) {
+                            return response.data.list; // twitter's response is { "statuses": [ /* results */ ] }
+                        },total: function(response){
+                            return response.data.total;
+                        },
+                        model: {
+                            fields: {
+                                id: { type: "string" },
+                                name: { type: "string" },
+                                reviewCount: { type: "number" },
+                                yelpingSince: { type: "string" },
+                                useful: { type: "number" },
+                                funny: { type: "number" },
+                                cool: { type: "number" },
+                                fans: { type: "string" },
+                                averageStars: { type: "number" }
+                            }
+                        }
+                    },
+                    pageSize: 20,
+                    serverPaging: true,
+                    serverFiltering: true,
+                    serverSorting: true
+                },
+                //height: 550,
+                filterable: true,
+                sortable: true,
+                pageable: {
+                    refresh: true,
+                    pageSizes: true,
+                    buttonCount: 10,
+                    page: 1,
+                    pageSize: 20,
+                    pageSizes: [10, 20, 30, 40, 50, 60, 80, 100]
+                },
+                columns: [{
+                    field: "rowNumber",
+                    title: "No",
+                    width: "60px",
+                    template: '<span style="color:gray;" class="row-number"></span>'
+                },{
+                    field:"id",
+                    title: "Id",
+                    width: "220px",
+                    sortable: false,
+                    filterable: false,
+                    template: '<a href="/user/detail/#: id #">#: id #</a>'
+                },{
+                    field:"name",
+                    title: "Name",
+                    sortable: false,
+                    filterable: false,
+                    template: '<a href="/user/detail/#: id #">#: name #</a>'
+                },{
+                    field:"reviewCount",
+                    title: "ReviewCount",
+                    width: "150px",
+                    sortable: false,
+                    filterable: false,
+                },{
+                    field:"yelpingSince",
+                    title: "YelpingSince",
+                    width: "200px",
+                    sortable: false,
+                    filterable: false
+                },{
+                    field:"useful",
+                    title: "Useful",
+                    width: "80px",
+                    sortable: false,
+                    filterable: false
+                },{
+                    field:"funny",
+                    title: "Funny",
+                    width: "80px",
+                    sortable: false,
+                    filterable: false
+                },{
+                    field:"cool",
+                    title: "Cool",
+                    width: "60px",
+                    sortable: false,
+                    filterable: false
+                },{
+                    field:"fans",
+                    title: "Fans",
+                    width: "60px",
+                    sortable: false,
+                    filterable: false
+                },{
+                    field:"averageStars",
+                    title: "AverageStars",
+                    width: "150px",
+                    sortable: false,
+                    filterable: false
+                }],
+                dataBound: function () {
+                    var rows = this.items();
+
+                    $(rows).each(function () {
+                        var index = $(this).index() + 1;
+                        var rowLabel = $(this).find(".row-number");
+                        $(rowLabel).html(index);
+                    });
+                }
+            });
+        });
+
+
+
+
+
+        /*<![CDATA[*/
+        function mainSearch() {
+            var mainGrid = $("#main-grid").data("kendoGrid");
+            mainGrid.dataSource.read().then(function () {
+                mainGrid.dataSource.view();
+            });
+            mainGrid.refresh();
+
+        }
+        /*]]>*/
+
+    </script>
+</th:block>
+</body>
+</html>

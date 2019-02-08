@@ -146,3 +146,25 @@ pagehelper.params=count=countSql
 
 子页单独需要引用的js,放到底部th:block块内部.
 
+
+
+## 2. Validation failed for object  提交表单或get请求，参数字段类型是 Date
+
+解决方法如下:
+
+在形参后面加上BindingResult bindingResult后解决;
+
+[springboot出错误Validation failed for object='employee'. Error count: 1](https://blog.csdn.net/luo609630199/article/details/81746192)
+
+```java
+
+
+@PostMapping("/emp")
+public String addEmp(Employee employee, BindingResult bindingResult){
+    //some statment
+    return "redirect:/emps";
+
+
+```
+
+
