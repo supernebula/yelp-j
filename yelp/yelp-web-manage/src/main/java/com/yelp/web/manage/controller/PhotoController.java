@@ -7,17 +7,17 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
-@RequestMapping("business")
-public class BusinessController {
+@RequestMapping("photo")
+public class PhotoController {
 
     @GetMapping({"index", "/", ""})
     public String index(Model model){
-        return "business/index";
+        return "photo/index";
     }
 
     @GetMapping("detail/{id}")
     public String detail(Model model, @PathVariable String id){
         model.addAttribute("id", id);
-        return "business/detail";
+        return "photo/detail";
     }
 }

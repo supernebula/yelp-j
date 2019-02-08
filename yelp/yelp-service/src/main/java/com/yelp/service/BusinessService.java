@@ -7,14 +7,14 @@ import com.yelp.entity.Business;
 public interface BusinessService {
 
     /**
-     * 搜索商户
+     * 搜索商家
      * @param param 搜索条件
-     * @return 分页商户列表
+     * @return
      */
     PageInfo<Business> Search(BusinessSearchParam param);
 
     /**
-     * 根据id获取单个商户记录
+     * 根据id获取单条商家记录
      * @param id
      * @return
      */

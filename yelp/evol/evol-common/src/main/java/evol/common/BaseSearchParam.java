@@ -2,6 +2,9 @@ package evol.common;
 
 import lombok.*;
 
+/**
+ * 搜索参数基类
+ */
 @Data
 public abstract class BaseSearchParam {
 

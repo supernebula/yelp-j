@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="zh-CN" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/web/thymeleaf/layout" layout:decorator="shared/layout">
+
+<head>
+    <title>Yelp Business Management</title>
+    <link rel="stylesheet" th:href="@{/kendoui/css/kendo.common-material.min.css}" />
+    <link rel="stylesheet" th:href="@{/kendoui/css/kendo.material.min.css}" />
+    <link rel="stylesheet" th:href="@{/kendoui/css/kendo.material.mobile.min.css}" />
+</head>
+<body>
+<!-- Content Wrapper. Contains page content -->
+<div layout:fragment="content" class="content-wrapper">
+    <!-- Content Header (Page header) -->
+    <section class="content-header">
+        <h1>
+            Business Detail
+        </h1>
+        <ol class="breadcrumb">
+            <li><a href="#"><i class="fa fa-dashboard"></i> Business</a></li>
+            <li class="active">detail</li>
+            <li><a class="btn btn-default" href="javascript:history.go(-1)" role="button">返回</a></li>
+        </ol>
+    </section>
+
+    <!-- Main content -->
+    <section class="content">
+        <!-- Main row -->
+        <div class="row">
+            <div class="col-lg-12 col-xs-12">
+                <div id="business-detail">
+                    <form class="form-horizontal">
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">Name</label>
+                            <div class="col-sm-10">
+                                <span id="name"  class="checkbox"></span>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">City</label>
+                            <div class="col-sm-10">
+                                <span id="city"  class="checkbox"></span>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">State</label>
+                            <div class="col-sm-10">
+                                <span id="state" class="checkbox"></span>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">Neighborhood</label>
+                            <div class="col-sm-10">
+                                <span id="neighborhood" class="checkbox"></span>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">Address</label>
+                            <div class="col-sm-10">
+                                <span id="address" class="checkbox"></span>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">PostalCode</label>
+                            <div class="col-sm-10">
+                                <span id="postalCode" class="checkbox"></span>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">Latitude</label>
+                            <div class="col-sm-10">
+                                <span id="latitude" class="checkbox"></span>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">Longitude</label>
+                            <div class="col-sm-10">
+                                <span id="longitude" class="checkbox"></span>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">Stars</label>
+                            <div class="col-sm-10">
+                                <span id="stars" class="checkbox"></span>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">ReviewCount</label>
+                            <div class="col-sm-10">
+                                <span id="reviewCount" class="checkbox"></span>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">IsOpen</label>
+                            <div class="col-sm-10">
+                                <span id="isOpen" class="checkbox"></span>
+                            </div>
+                        </div>
+
+                    </form>
+
+
+                </div>
+            </div>
+        </div>
+        <!-- /.row (main row) -->
+
+    </section>
+    <!-- /.content -->
+</div>
+<th:block layout:fragment="scriptsblock">
+    <script th:inline="javascript">
+
+        var apiUrl = "/api/business/detail/" + [[${id}]];
+        $(document).ready(function() {
+            $.getJSON(apiUrl, null, function (response) {
+                if(!response.success)
+                {
+                    $("#business-detail #name").html(response.message);
+                }
+
+                var item = response.data;
+                $("#business-detail #name").html(item.name);
+                $("#business-detail #city").html(item.city);
+                $("#business-detail #state").html(item.state);
+                $("#business-detail #neighborhood").html(item.neighborhood);
+                $("#business-detail #address").html(item.address);
+                $("#business-detail #postalCode").html(item.postalCode);
+                $("#business-detail #latitude").html(item.latitude);
+                $("#business-detail #longitude").html(item.longitude);
+                $("#business-detail #stars").html(item.stars);
+                $("#business-detail #reviewCount").html(item.reviewCount);
+                $("#business-detail #isOpen").html(item.isOpen);
+            });
+
+        });
+    </script>
+</th:block>
+</body>
+</html>

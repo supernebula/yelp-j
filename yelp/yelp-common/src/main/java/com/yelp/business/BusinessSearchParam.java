@@ -3,6 +3,9 @@ package com.yelp.business;
 import evol.common.BaseSearchParam;
 import lombok.*;
 
+/**
+ * 商家搜索参数类
+ */
 @Data
 public final class BusinessSearchParam extends BaseSearchParam {
 
@@ -14,5 +17,5 @@ public final class BusinessSearchParam extends BaseSearchParam {
 
     private String postCode;
 
-    private boolean isOpen;
+    private Boolean isOpen;
 }
