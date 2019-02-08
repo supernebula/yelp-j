@@ -74,8 +74,8 @@
                                     neighborhood: {type: "string"},
                                     address:{type: "string"},
                                     postalCode: { type: "string" },
-                                    latitude: { type: "number" },
-                                    longitude: { type: "number" },
+                                    //latitude: { type: "number" },
+                                    //longitude: { type: "number" },
                                     stars: { type: "string" },
                                     reviewCount: { type: "string" },
                                     isOpen: { type: "string" }
@@ -107,7 +107,8 @@
                         field:"name",
                         title: "Name",
                         sortable: false,
-                        filterable: false
+                        filterable: false,
+                        template: '<a href="/business/detail/#: id #" target="_blank">#: name #</a>'
                     },{
                         field:"city",
                         title: "City",
@@ -137,19 +138,21 @@
                         width: "100px",
                         sortable: false,
                         filterable: false
-                    },{
-                        field:"latitude",
-                        title: "Latitude",
-                        width: "100px",
-                        sortable: false,
-                        filterable: false
-                    },{
-                        field:"longitude",
-                        title: "Longitude",
-                        width: "100px",
-                        sortable: false,
-                        filterable: false
-                    },{
+                    }
+                    // ,{
+                    //     field:"latitude",
+                    //     title: "Latitude",
+                    //     width: "100px",
+                    //     sortable: false,
+                    //     filterable: false
+                    // },{
+                    //     field:"longitude",
+                    //     title: "Longitude",
+                    //     width: "100px",
+                    //     sortable: false,
+                    //     filterable: false
+                    // }
+                    ,{
                         field:"stars",
                         title: "Stars",
                         width: "70px",
