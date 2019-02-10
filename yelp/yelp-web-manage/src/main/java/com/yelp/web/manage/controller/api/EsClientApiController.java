@@ -1,10 +1,15 @@
 package com.yelp.web.manage.controller.api;
 
+import com.alibaba.fastjson.JSON;
+import com.yelp.model.ElasticPojo;
 import com.yelp.service.ElasticRestSevice;
+import org.elasticsearch.index.query.QueryBuilders;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import org.elasticsearch.index.query.QueryBuilder;
 
+import java.util.List;
 import java.util.Map;
 
 @RestController
