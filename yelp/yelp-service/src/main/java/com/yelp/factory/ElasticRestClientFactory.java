@@ -20,22 +20,22 @@ public class ElasticRestClientFactory {
     private static String hostname;
     private static int port;
 
-    @Value("${aliyun.elastic.username}")
+    @Value("${elastic.username}")
     public void setUsername(String username) {
         ElasticRestClientFactory.username = username;
     }
 
-    @Value("${aliyun.elastic.password}")
+    @Value("${elastic.password}")
     public void setPassword(String password) {
         ElasticRestClientFactory.password = password;
     }
 
-    @Value("${aliyun.elastic.hostname}")
+    @Value("${elastic.hostname}")
     public void setHostname(String hostname) {
         ElasticRestClientFactory.hostname = hostname;
     }
 
-    @Value("${aliyun.elastic.port}")
+    @Value("${elastic.port}")
     public void setPort(int port) {
         ElasticRestClientFactory.port = port;
     }

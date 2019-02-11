@@ -1,10 +1,19 @@
 # Elasticsearch guide 6.3.2
 
-1. [es官方网站](https://www.elastic.co/products/elasticsearch)    [https://www.elastic.co/products/elasticsearch](https://www.elastic.co/products/elasticsearch)
-    
-## 一、安装 
+[es官方网站](https://www.elastic.co/products/elasticsearch)    [https://www.elastic.co/products/elasticsearch](https://www.elastic.co/products/elasticsearch)
+
+## Installation Steps
 
 
+1. [Download and unzip Elasticsearch](https://www.elastic.co/downloads/past-releases/kibana-6-3-2)
+
+    [https://www.elastic.co/cn/downloads/elasticsearch](https://www.elastic.co/cn/downloads/elasticsearch)
+
+2. Run bin/elasticsearch (or bin\elasticsearch.bat on Windows)
+
+3. Run curl http://localhost:9200/ or Invoke-RestMethod http://localhost:9200 with PowerShell
+
+4. Dive into the [getting started guide](https://www.elastic.co/guide/en/elasticsearch/reference/current/getting-started.html) and video. 
 
 ## 二、启动  
 
@@ -102,3 +111,35 @@ https://www.elastic.co/guide/en/elasticsearch/client/java-rest/6.3/java-rest-hig
    
    [https://blog.csdn.net/wyply115/article/details/50994477?utm_source=blogxgwz1](https://blog.csdn.net/wyply115/article/details/50994477?utm_source=blogxgwz1)
 
+# ES可视化管理工具 Kibana 6.3.2
+
+[官方：https://www.elastic.co/cn/downloads/kibana](https://www.elastic.co/cn/downloads/kibana)
+
+## Installation Steps 
+
+1. [Download and unzip Kibana ](https://www.elastic.co/downloads/past-releases/kibana-6-3-2)
+
+2.  Open config/kibana.yml in an editor
+
+    Set elasticsearch.url to point at your Elasticsearch instance
+    
+3. Run bin/kibana (or bin\kibana.bat on Windows)
+
+4. Point your browser at http://localhost:5601 
+
+## 五、基本教程
+
+### [全文搜索引擎 Elasticsearch 入门教程](http://www.ruanyifeng.com/blog/2017/08/elasticsearch.html)
+
+## 1. 创建索引
+
+## 2.1. 创建记录
+
+## 2.2. 跟新记录
+
+## 2.3. 查找记录
+
+## 2.4. 删除记录
+
+## 3. 搜索
+    
