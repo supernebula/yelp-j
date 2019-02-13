@@ -15,6 +15,7 @@
     <modules>
         <module>evol-common</module>
         <module>evol-util</module>
+        <module>evol-elasticsearch</module>
     </modules>
 
 

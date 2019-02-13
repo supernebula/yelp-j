@@ -129,7 +129,34 @@ https://www.elastic.co/guide/en/elasticsearch/client/java-rest/6.3/java-rest-hig
 
 ## 五、基本教程
 
-### [全文搜索引擎 Elasticsearch 入门教程](http://www.ruanyifeng.com/blog/2017/08/elasticsearch.html)
+### 附录1：参考链接
+
+1. [全文搜索引擎 Elasticsearch 入门教程](http://www.ruanyifeng.com/blog/2017/08/elasticsearch.html)
+
+    http://www.ruanyifeng.com/blog/2017/08/elasticsearch.html
+
+2. Search APIs 
+
+    https://www.elastic.co/guide/en/elasticsearch/reference/current/search.html
+    
+    https://www.elastic.co/guide/en/elasticsearch/reference/current/indices.html
+    
+    https://www.elastic.co/guide/en/elasticsearch/reference/current/query-filter-context.html
+   
+3. ElasticSearch 索引查询使用指南——详细版
+
+    https://www.cnblogs.com/pilihaotian/p/5830754.html
+    
+
+### 附录2：基本工具对别 Shell vs Kinaba vs PostMan
+
+shell
+
+```jshelllanguage
+
+
+
+```
 
 ## 1. 创建索引
 
