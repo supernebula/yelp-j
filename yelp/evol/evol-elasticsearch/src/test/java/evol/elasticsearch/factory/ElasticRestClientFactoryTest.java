@@ -19,8 +19,11 @@ public class ElasticRestClientFactoryTest {
         GetRequest getRequest = new GetRequest(".kibana", "doc", "config:6.3.2");
         try {
             GetResponse getResponse = restHighClient.get(getRequest);
-            String message = getResponse.getField("buildNum").getValue();
-            System.out.printf("Field buildNum is : %s", message);
+            String index = getResponse.getIndex();
+            String type = getResponse.getType();
+            String id = getResponse.getId();
+            //String message = getResponse.getField("buildNum").getValue();
+            System.out.printf("index : %s, type: %s, id: %s", index, type, id);
 
         }catch (IOException exception){
             System.out.println(exception.getMessage());
