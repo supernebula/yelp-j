@@ -21,6 +21,7 @@ import org.elasticsearch.common.xcontent.UnknownNamedObjectException;
 
 import javax.annotation.Resource;
 import java.net.InetAddress;
+import java.net.InetSocketAddress;
 import java.net.UnknownHostException;
 
 public class ElasticRestClientFactory {
@@ -126,12 +127,15 @@ public class ElasticRestClientFactory {
         //transportClient = new PreBuiltTransportClient(Settings.EMPTY)
                 //.addTransportAddress(new TransportAddress(InetAddress.getByName("my-es1"), port));
 
-        Settings settings = Settings.builder().put("cluster.name", "my-es-cluster1").build();
+        Settings settings = Settings.builder().put("cluster.name", "elasticsearchtest").build();
 
-        byte[] addr = {127,0,0,1};
-        transportClient = new PreBuiltTransportClient(Settings.EMPTY)
-                .addTransportAddress(new TransportAddress(InetAddress.getByName("127.0.0.1"), port));
-        //.addTransportAddress(new TransportAddress(InetAddress.getByAddress(addr), port));
+//        byte[] addr = {127,0,0,1};
+//        transportClient = new PreBuiltTransportClient(Settings.EMPTY)
+//                .addTransportAddress(new TransportAddress(InetAddress.getByName("127.0.0.1"), port));
+//        //.addTransportAddress(new TransportAddress(InetAddress.getByAddress(addr), port));
+
+        transportClient = new PreBuiltTransportClient(settings)
+                .addTransportAddress(new TransportAddress(new InetSocketAddress("127.0.0.1", 9300)));
 
         return transportClient;
     }

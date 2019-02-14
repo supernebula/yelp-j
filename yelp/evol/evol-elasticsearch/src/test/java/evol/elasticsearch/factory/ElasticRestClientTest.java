@@ -53,21 +53,22 @@ public class ElasticRestClientTest {
                 ObjectObjectCursor<String, ImmutableOpenMap<String, MappingMetaData>>
                         objectObjectCursor = mappingIterator.next();
                 //LOG.info("index: {}", objectObjectCursor.key);
-                System.out.printf("index:  %s", objectObjectCursor.key);
+                System.out.printf("\n index:  %s", objectObjectCursor.key);
                 ImmutableOpenMap<String, MappingMetaData> immutableOpenMap = objectObjectCursor.value;
                 ObjectLookupContainer<String> keys = immutableOpenMap.keys();
                 Iterator<ObjectCursor<String>> keysIterator = keys.iterator();
                 while (keysIterator.hasNext()) {
                     String type = keysIterator.next().value;
                     //LOG.info("type: {}", type);
-                    System.out.printf("type:  %s", type);
+                    System.out.printf("\n type:  %s", type);
                     MappingMetaData mappingMetaData = immutableOpenMap.get(type);
                     Map<String, Object> mapping = mappingMetaData.getSourceAsMap();
                     if (mapping.containsKey("properties")) {
                         Map<String, Object> properties = (Map<String, Object>) mapping.get("properties");
                         for (String attribute : properties.keySet()) {
                             //LOG.info("attribute: {}", attribute);
-                            System.out.printf("attribute:  %s", attribute);
+                            System.out.printf("\n attribute:  %s", attribute);
+
                         }
                     }
                 }
