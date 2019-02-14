@@ -690,6 +690,10 @@ $ curl -X PUT 'localhost:9200/yelp-business/business/_search'  -d '
               ]
          }
     },
+    "sort" : [                      //排序
+      { "stars" : "asc" },          //按字段stars升序
+      { "review_count" : "desc" }   //按字段review_count倒序
+    ],
     "from": 1,                      //指定位移, 默认是从位置0开始
     "size": 1                       //返回10条结果, 表示返回的条数，默认10条
 }'
@@ -715,6 +719,9 @@ $ curl -X PUT 'localhost:9200/yelp-business/business/_search'  -d '
 }
 
 ```
+
+
+
 
 （3）
 
