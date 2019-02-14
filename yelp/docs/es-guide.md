@@ -148,7 +148,7 @@ https://www.elastic.co/guide/en/elasticsearch/client/java-rest/6.3/java-rest-hig
     https://www.cnblogs.com/pilihaotian/p/5830754.html
     
 
-### 附录2：基本工具对别 Shell vs Kinaba vs PostMan
+### 附录2：基本工具对别 Shell vs Kinaba vs PostMan(浏览器)
 
 #### 1. 示例1命令： 
 
@@ -219,4 +219,49 @@ GetMappingsResponse getMappingsResponse = indicesAdminClient.getMappings(new Get
 ## 2.4. 删除记录
 
 ## 3. 搜索
+
+
+# 附录：调试-常见问题及解决
+
+1. TransportClient 无法访问Elasticsearch问题： "None of the configured nodes are available"
+
+
+https://blog.csdn.net/blueheart20/article/details/79546011
+https://blog.csdn.net/lu_wei_wei/article/details/51263133
+
+PreBuiltTransportClient
+
+https://www.elastic.co/guide/en/elasticsearch/client/java-api/6.3/transport-client.html
+https://discuss.elastic.co/t/prebuilttransportclient-doesnt-exist-in-my-6-3-0-library/156223
+
+TransportClient vs NodeClient
+
+https://www.elastic.co/guide/en/elasticsearch/client/java-api/6.3/client.html#client
+
+如何使用Elasticsearch Node Client Java连接到远程服务器
+https://codeday.me/bug/20190105/481377.html
+https://my.oschina.net/claireliu/blog/464215
+
+IndicesAdminClient
+
+https://www.elastic.co/guide/en/elasticsearch/client/java-api/6.3/java-admin-indices.html
+
+GetMappingsRequest 支持 Es6.4+
+
+https://www.programcreek.com/java-api-examples/?api=org.elasticsearch.action.admin.indices.mapping.get.GetMappingsRequest
+
+
+```
+配置elasticsearchyml 的cluster.name，并在代码中设置
+
+```
+
+2. 
+
+2. InetAddress类相关
+
+[InetAddress类概述与实例   : https://blog.csdn.net/swt369/article/details/77866386](https://blog.csdn.net/swt369/article/details/77866386)
+[InetAddress类之创建新的InetAddress对象:  https://my.oschina.net/fhd/blog/371997](https://my.oschina.net/fhd/blog/371997)
+
+
     
