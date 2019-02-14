@@ -131,7 +131,7 @@ https://www.elastic.co/guide/en/elasticsearch/client/java-rest/6.3/java-rest-hig
 
 ### 附录1：参考链接
 
-1. [全文搜索引擎 Elasticsearch 入门教程](http://www.ruanyifeng.com/blog/2017/08/elasticsearch.html)
+1. [阮一峰：全文搜索引擎 Elasticsearch 基本教程](http://www.ruanyifeng.com/blog/2017/08/elasticsearch.html)
 
     http://www.ruanyifeng.com/blog/2017/08/elasticsearch.html
 
@@ -150,13 +150,53 @@ https://www.elastic.co/guide/en/elasticsearch/client/java-rest/6.3/java-rest-hig
 
 ### 附录2：基本工具对别 Shell vs Kinaba vs PostMan
 
-shell
+#### 1. 示例1命令： 
+
+    列出每个 Index 所包含的 Type
+
+(1). shell (mac、linux、unix)
 
 ```jshelllanguage
+
+#完整格式
+
+$ curl -X GET 'localhost:9200/_mapping?pretty=true'
+
+#如省略" -X GET "，默认GET请求
+
+$ curl 'localhost:9200/_mapping?pretty=true'
+```
+
+(2). 浏览器
+
+```
+http://localhost:9200/_mapping?pretty=true
+```
+
+(3). Kibana (Dev Tools > Console)
+
+```
+GET /_mapping?pretty=true
+```
+
+(4)java伪代码 
+
+```java
+
+import org.apache.http.HttpHost;
+import org.elasticsearch.client.RestClient;
+import org.elasticsearch.client.RestHighLevelClient;
+
+RestHighLevelClient restHighClient = new RestHighLevelClient(RestClient.builder(new HttpHost("localhost", 9200)));
+GetRequest getRequest = new GetRequest(".kibana", "doc", "config:6.3.2");
+
 
 
 
 ```
+
+
+
 
 ## 1. 创建索引
 
