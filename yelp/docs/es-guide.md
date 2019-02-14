@@ -183,12 +183,22 @@ GET /_mapping?pretty=true
 
 ```java
 
-import org.apache.http.HttpHost;
-import org.elasticsearch.client.RestClient;
-import org.elasticsearch.client.RestHighLevelClient;
+import org.elasticsearch.client.transport.TransportClient;
+import org.elasticsearch.transport.client.PreBuiltTransportClient;
+import org.elasticsearch.common.settings.Settings;
+import org.elasticsearch.common.transport.TransportAddress;
+import org.elasticsearch.client.IndicesAdminClient;
+import org.elasticsearch.action.admin.indices.mapping.get.GetMappingsRequest;
+import org.elasticsearch.action.admin.indices.mapping.get.GetMappingsResponse;
+import java.net.InetSocketAddress;
 
-RestHighLevelClient restHighClient = new RestHighLevelClient(RestClient.builder(new HttpHost("localhost", 9200)));
-GetRequest getRequest = new GetRequest(".kibana", "doc", "config:6.3.2");
+//elasticsearch.yml 配置 cluster.name: elasticsearchtest
+Settings settings = Settings.builder().put("cluster.name", "elasticsearchtest").build();
+TransportClient transportClient = new PreBuiltTransportClient(settings).addTransportAddress(new TransportAddress(new InetSocketAddress("127.0.0.1", 9300)));
+IndicesAdminClient indicesAdminClient = transportClient.admin().indices();
+GetMappingsResponse getMappingsResponse = indicesAdminClient.getMappings(new GetMappingsRequest()).get();
+....
+
 
 
 
