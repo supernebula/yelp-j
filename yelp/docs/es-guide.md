@@ -392,7 +392,7 @@ $ curl -X POST 'localhost:9200/yelp-business/business' -d '
 }
 ```
 
-#### 2.3. 查看记录
+#### 2.2. 查看记录
 
 ##### Shell: 
 
@@ -532,6 +532,199 @@ $ curl -X PUT 'localhost:9200/yelp-business/business/--6MefnULPED_I942VcFNA' -d 
 
 
 #### 3. 搜索
+
+##### 3.1 返回所有数据
+
+##### Shell: 
+
+
+
+（1） GET请求1：
+
+```bash
+$ curl -X PUT 'localhost:9200/yelp-business/business/_search'
+```
+返回1：
+```javascript
+{
+  "took": 18,                           //表示该操作的耗时（单位为毫秒）
+  "timed_out": false,                   //表示是否超时
+  "_shards": {
+    "total": 5,
+    "successful": 5,
+    "skipped": 0,
+    "failed": 0
+  },
+  "hits": {                             //表示命中的记录
+    "total": 2,                         //返回记录数
+    "max_score": 1,                     //最高的匹配程度
+    "hits": [                           //返回的记录组成的数组
+      {
+        "_index": "yelp-business",
+        "_type": "business",
+        "_id": "Fe5i62gBMYyY55i0-LfZ",
+        "_score": 1,                    //表示匹配的程序，默认是按照这个字段降序排列
+        "_source": {
+          "id": "----7zmmkVg-IMGaXbuVd0SQ",
+          "name": "Primal Brewery",
+          "neighborhood": "",
+          "address": "16432 Old Statesville Rd",
+          "city": "Huntersville",
+          "state": "NC",
+          "postal_code": "28078",
+          "latitude": 35.4371,
+          "longitude": -80.8437,
+          "stars": 4,
+          "review_count": 42,
+          "is_open": true
+        }
+      },
+      {
+        "_index": "yelp-business",
+        "_type": "business",
+        "_id": "--6MefnULPED_I942VcFNA",
+        "_score": 1,
+        "_source": {
+          "id": "--6MefnULPED_I942VcFNA",
+          "name": "John's Chinese BBQ Restaurant",
+          "neighborhood": "",
+          "address": "328 Highway 7 E, Chalmers Gate 11, Unit 10",
+          "city": "Richmond Hill",
+          "state": "ON",
+          "postal_code": "L4B 3P7",
+          "latitude": 43.8409,
+          "longitude": -79.3996,
+          "stars": 3,
+          "review_count": 30,
+          "is_open": true
+        }
+      }
+    ]
+  }
+}
+```
+
+
+##### 3.2 全文搜索
+
+##### Shell: 
+
+
+
+（1） 基本搜索，GET请求1：
+
+```bash
+$ curl -X PUT 'localhost:9200/yelp-business/business/_search'  -d '
+{
+    "query" : {
+        "match" : {
+            "name" : "Primal"       //指定的匹配条件是name字段里面包含"Primal"这个词
+        }
+    }
+}'
+```
+返回1：
+```javascript
+{
+  "took": 3,				//表示该操作的耗时（单位为毫秒）
+  "timed_out": false,			//表示是否超时
+  "_shards": {
+    "total": 5,
+    "successful": 5,
+    "skipped": 0,
+    "failed": 0
+  },
+  "hits": {				//表示命中的记录
+    "total": 1,				//返回记录数
+    "max_score": 0.80259144,		//最高的匹配程度
+    "hits": [				//返回的记录组成的数组
+      {
+        "_index": "yelp-business",
+        "_type": "business",
+        "_id": "Fe5i62gBMYyY55i0-LfZ",
+        "_score": 0.80259144,		//表示匹配的程序，默认是按照这个字段降序排列
+        "_source": {
+          "id": "----7zmmkVg-IMGaXbuVd0SQ",
+          "name": "Primal Brewery",
+          "neighborhood": "",
+          "address": "16432 Old Statesville Rd",
+          "city": "Huntersville",
+          "state": "NC",
+          "postal_code": "28078",
+          "latitude": 35.4371,
+          "longitude": -80.8437,
+          "stars": 4,
+          "review_count": 42,
+          "is_open": true
+        }
+      }
+    ]
+  }
+}
+```
+
+（2） Elastic 默认一次返回10条结果，可以通过size字段改变这个设置，GET请求：
+
+
+```bash
+$ curl -X PUT 'localhost:9200/yelp-business/business/_search'  -d '
+{
+    "query" : {
+        "match" : {
+            "name" : "软件 系统"       //逻辑运算, 软件 or 系统
+        }
+    },
+    "from": 1,                      //指定位移, 默认是从位置0开始
+    "size": 1                       //返回10条结果, 表示返回的条数，默认10条
+}'
+```
+
+```bash
+$ curl -X PUT 'localhost:9200/yelp-business/business/_search'  -d '
+{
+    "query" : {
+        "bool": {
+              "must": [
+                { "match": { "desc": "软件" } },
+                { "match": { "desc": "系统" } }
+              ]
+         }
+    },
+    "from": 1,                      //指定位移, 默认是从位置0开始
+    "size": 1                       //返回10条结果, 表示返回的条数，默认10条
+}'
+```
+
+返回1，无数据时：
+```javascript
+
+{
+  "took": 1,
+  "timed_out": false,
+  "_shards": {
+    "total": 5,
+    "successful": 5,
+    "skipped": 0,
+    "failed": 0
+  },
+  "hits": {
+    "total": 0,
+    "max_score": null,
+    "hits": []
+  }
+}
+
+```
+
+（3）
+
+
+
+
+
+
+
+
 
 
 # 附录：调试-常见问题及解决
