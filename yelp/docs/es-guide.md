@@ -205,20 +205,333 @@ GetMappingsResponse getMappingsResponse = indicesAdminClient.getMappings(new Get
 
 ```
 
+## ES基本操作
+
+示例数据 Yelp_dataset
+
+
+### 1. Index
+
+
+#### 1.1 创建Index
+
+##### Shell : Empty Index
+请求：
+
+```bash
+$ curl -X PUT 'localhost:9200/yelp-business'
+```
+返回：
+```javascript
+    {
+      "acknowledged":true,  //表示操作成功
+      "shards_acknowledged":true
+    }
+```
+
+##### Shell : 创建 yelp-business
+请求：
+
+```bash
+$ curl -X PUT 'localhost:9200/yelp-business' -d '
+{
+  "mappings": {
+    "business": {
+      "properties": {
+        "id": {
+          "type": "text"
+        },
+        "name": {
+          "type": "text",
+          "analyzer": "standard",
+          "search_analyzer": "standard"
+        },
+        "neighborhood": {
+          "type": "text",
+          "analyzer": "standard",
+          "search_analyzer": "standard"
+        },
+        "address": {
+          "type": "text",
+          "analyzer": "standard",
+          "search_analyzer": "standard"
+        },
+        "city": {
+          "type": "text"
+        },
+        "state": {
+          "type": "text"
+        },
+        "postal_code": {
+          "type": "text"
+        },
+        "latitude": {
+          "type": "float"
+        },
+        "longitude": {
+          "type": "float"
+        },
+         "stars": {
+           "type": "float"
+         },
+         "review_count": {
+           "type": "integer"
+         },
+         "is_open": {
+           "type": "boolean"
+         }
+      }
+    }
+  }
+}'
+```
+返回：
+```javascript
+    {
+      "acknowledged":true,  //表示操作成功
+      "shards_acknowledged":true
+    }
+```
 
 
 
-## 1. 创建索引
 
-## 2.1. 创建记录
+#### 1.2 删除Index
 
-## 2.2. 跟新记录
+##### Shell: 
+请求：
 
-## 2.3. 查找记录
+```bash
+$ curl -X DELETE 'localhost:9200/yelp-business'
+```
+返回：
+```javascript
+    {
+      "acknowledged":true  //表示操作成功
+    }
+```
 
-## 2.4. 删除记录
+## 2.记录
 
-## 3. 搜索
+#### 2.1. 新增记录
+
+##### Shell: 
+
+（1）指定Id，PUT请求1：
+
+```bash
+$ curl -X PUT 'localhost:9200/yelp-business/business/--6MefnULPED_I942VcFNA' -d '
+{
+    "id": "--6MefnULPED_I942VcFNA",
+    "name": "John's Chinese BBQ Restaurant",
+    "neighborhood": "",
+    "address": "328 Highway 7 E, Chalmers Gate 11, Unit 10",
+    "city": "Richmond Hill",
+    "state": "ON",
+    "postal_code": "L4B 3P7",
+    "latitude": 43.8409,
+    "longitude": -79.3996,
+    "stars": 3,
+    "review_count": 30,
+    "is_open": true
+}' 
+```
+返回1：
+```javascript
+{
+  "_index": "yelp-business",
+  "_type": "business",
+  "_id": "--6MefnULPED_I942VcFNA",
+  "_version": 1,
+  "result": "created",
+  "_shards": {
+    "total": 2,
+    "successful": 1,
+    "failed": 0
+  },
+  "_seq_no": 0,
+  "_primary_term": 1
+}
+```
+
+
+（2）未指定Id，POST请求1：
+
+```bash
+$ curl -X POST 'localhost:9200/yelp-business/business' -d '
+{
+    "id": "----7zmmkVg-IMGaXbuVd0SQ",
+    "name": "Primal Brewery",
+    "neighborhood": "",
+    "address": "16432 Old Statesville Rd",
+    "city": "Huntersville",
+    "state": "NC",
+    "postal_code": "28078",
+    "latitude": 35.4371,
+    "longitude": -80.8437,
+    "stars": 4,
+    "review_count": 42,
+    "is_open": true
+}' 
+```
+返回1：
+```javascript
+{
+  "_index": "yelp-business",
+  "_type": "business",
+  "_id": "Fe5i62gBMYyY55i0-LfZ",
+  "_version": 1,
+  "result": "created",
+  "_shards": {
+    "total": 2,
+    "successful": 1,
+    "failed": 0
+  },
+  "_seq_no": 1,
+  "_primary_term": 1
+}
+```
+
+#### 2.3. 查看记录
+
+##### Shell: 
+
+请求:
+
+```bash
+$ curl -X GET 'localhost:9200/yelp-business/business/Fe5i62gBMYyY55i0-LfZ?pretty=true'
+
+```
+Id正确时，返回：
+```javascript
+{
+  "_index": "yelp-business",
+  "_type": "business",
+  "_id": "Fe5i62gBMYyY55i0-LfZ",
+  "_version": 1,
+  "found": true,                        //true,查询成功
+  "_source": {                          //_source字段返回原始记录
+    "id": "----7zmmkVg-IMGaXbuVd0SQ",
+    "name": "Primal Brewery",
+    "neighborhood": "",
+    "address": "16432 Old Statesville Rd",
+    "city": "Huntersville",
+    "state": "NC",
+    "postal_code": "28078",
+    "latitude": 35.4371,
+    "longitude": -80.8437,
+    "stars": 4,
+    "review_count": 42,
+    "is_open": true
+  }
+}
+```
+
+Id不正确，查不到数据，返回：
+```javascript
+{
+  "_index": "yelp-business",
+  "_type": "business",
+  "_id": "Fe5i62gBMYyY55i0-LfZ00",
+  "found": false                        //true,查询失败
+}
+```
+
+#### 2.3. 删除记录
+
+
+##### Shell: 
+
+请求:
+
+```bash
+$ curl -X DELETE 'localhost:9200/yelp-business/business/Fu5r62gBMYyY55i0vbf7?pretty=true'
+
+```
+Id正确时，返回：
+```javascript
+{
+  "_index": "yelp-business",
+  "_type": "business",
+  "_id": "Fu5r62gBMYyY55i0vbf7",
+  "_version": 2,
+  "result": "deleted",                  //deleted, 已删除
+  "_shards": {
+    "total": 2,
+    "successful": 1,
+    "failed": 0
+  },
+  "_seq_no": 3,
+  "_primary_term": 1
+}
+}
+```
+
+Id不正确，查不到数据，返回：
+```javascript
+{
+  "_index": "yelp-business",
+  "_type": "business",
+  "_id": "Fu5r6222222222234234234234",
+  "_version": 9,
+  "result": "not_found",                    ///not_found, Id不正确，未删除
+  "_shards": {
+    "total": 2,
+    "successful": 1,
+    "failed": 0
+  },
+  "_seq_no": 12,
+  "_primary_term": 1
+}
+```
+
+
+#### 2.4. 更新记录
+
+##### Shell: 
+
+更新记录就是使用 PUT 请求，重新发送一次数据。
+
+（1）PUT请求1：
+
+```bash
+$ curl -X PUT 'localhost:9200/yelp-business/business/--6MefnULPED_I942VcFNA' -d '
+{
+    "id": "--6MefnULPED_I942VcFNA 0",
+    "name": "John's Chinese BBQ Restaurant 0",
+    "neighborhood": "0",
+    "address": "328 Highway 7 E, Chalmers Gate 11, Unit 10 0",
+    "city": "Richmond Hill 0",
+    "state": "ON" 0,
+    "postal_code": "L4B 3P7 0",
+    "latitude": 43.84091,
+    "longitude": -79.39961,
+    "stars": 31,
+    "review_count": 301,
+    "is_open": false
+}' 
+```
+返回1：
+```javascript
+{
+  "_index": "yelp-business",
+  "_type": "business",
+  "_id": "--6MefnULPED_I942VcFNA",
+  "_version": 2,
+  "result": "updated",                  //updated，更新成功
+  "_shards": {
+    "total": 2,
+    "successful": 1,
+    "failed": 0
+  },
+  "_seq_no": 13,
+  "_primary_term": 1
+}
+```
+
+
+
+#### 3. 搜索
 
 
 # 附录：调试-常见问题及解决
