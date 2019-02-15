@@ -31,7 +31,7 @@ public class RestHighDocmentHelperTest {
         model.setLongitude(22.2f);
         model.setStars(1f);
         model.setReviewCount(1);
-        model.setIsOpen(true);
+        model.setIsOpen(1);
 
         boolean indexSuccess = restDocHelper.IndexDocument("yelp-business", "business", model.getId(), model, Business.class);
         Assert.assertTrue(indexSuccess);
