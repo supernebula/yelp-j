@@ -19,6 +19,7 @@
             <version>6.3.2</version>
         </dependency>
 
+        <!-- https://www.elastic.co/guide/en/elasticsearch/client/java-rest/6.3/java-rest-high-getting-started-dependencies.html -->
         <!-- https://mvnrepository.com/artifact/org.elasticsearch.client/elasticsearch-rest-high-level-client -->
         <dependency>
             <groupId>org.elasticsearch.client</groupId>

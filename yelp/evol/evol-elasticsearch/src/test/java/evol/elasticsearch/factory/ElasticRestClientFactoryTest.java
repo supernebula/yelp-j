@@ -25,7 +25,7 @@ import static org.junit.Assert.*;
  * Indices APIs
  * https://www.elastic.co/guide/en/elasticsearch/reference/6.3/indices.html
  */
-public class ElasticRestClientTest {
+public class ElasticRestClientFactoryTest {
 
     private ElasticRestClientFactory esRestClientFactory;
 
