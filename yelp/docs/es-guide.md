@@ -278,7 +278,7 @@ $ curl -X PUT 'localhost:9200/yelp-business' -d '
            "type": "integer"
          },
          "is_open": {
-           "type": "boolean"
+           "type": "integer"
          }
       }
     }
