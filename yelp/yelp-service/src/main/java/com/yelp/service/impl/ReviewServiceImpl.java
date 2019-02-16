@@ -4,6 +4,8 @@ import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import com.yelp.business.ReviewSearchParam;
 import com.yelp.dao.mapper.ReviewMapper;
+import com.yelp.entity.Business;
+import com.yelp.entity.BusinessExample;
 import com.yelp.entity.Review;
 import com.yelp.entity.ReviewExample;
 import com.yelp.service.ReviewService;
@@ -53,6 +55,22 @@ public class ReviewServiceImpl implements ReviewService {
         List<Review> list = reviewMapper.selectByExample(example);
         PageInfo<Review> pageInfo = new PageInfo<>(list);
         return pageInfo;
+    }
+
+    @Override
+    public PageInfo<Review> getPageReview(int page, int pageSize) {
+
+        ReviewExample example = new ReviewExample();
+        PageHelper.startPage(page, pageSize);
+        List<Review> list = reviewMapper.selectByExample(example);
+        PageInfo<Review> pageInfo = new PageInfo<>(list);
+        return pageInfo;
+    }
+
+    public List<Review> getAllReview() {
+        ReviewExample example = new ReviewExample();
+        List<Review> list = reviewMapper.selectByExample(example);
+        return list;
     }
 
     public Review getReview(String id) {

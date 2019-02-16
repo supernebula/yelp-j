@@ -43,6 +43,19 @@ public class BusinessServiceImpl implements BusinessService {
         return pageInfo;
     }
 
+    @Override
+    public List<Business> getBusinesses(int offset, int rows) {
+
+
+        //PageHelper.offsetPage(offset, rows);
+        BusinessExample example = new BusinessExample();
+        BusinessExample.Criteria criteria = example.createCriteria();
+        PageHelper.startPage(offset, rows);
+        List<Business> list = businessMapper.selectByExample(example);
+        PageInfo<Business> pageInfo = new PageInfo<Business>(list);
+        return pageInfo.getList();
+    }
+
     public Business getBusiness(String id) {
         Business item = businessMapper.selectByPrimaryKey(id);
         return item;

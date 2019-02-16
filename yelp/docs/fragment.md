@@ -168,3 +168,9 @@ public String addEmp(Employee employee, BindingResult bindingResult){
 ```
 
 
+# Spring Boot CommandLineRunner
+
+[Spring Boot CommandLineRunner和ApplicationRunner](https://www.jianshu.com/p/de7b0e124248)
+
+[Spring Boot Reference Guide 23.8 Using the ApplicationRunner or CommandLineRunner](https://docs.spring.io/spring-boot/docs/1.5.19.RELEASE/reference/htmlsingle/)
+

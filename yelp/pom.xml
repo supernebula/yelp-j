@@ -15,6 +15,7 @@
         <module>yelp-domain</module>
         <module>yelp-service</module>
         <module>yelp-common</module>
+        <module>yelp-esdata-console</module>
     </modules>
 
     <properties>

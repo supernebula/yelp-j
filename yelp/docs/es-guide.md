@@ -285,6 +285,54 @@ $ curl -X PUT 'localhost:9200/yelp-business' -d '
   }
 }'
 ```
+
+
+##### Shell : 创建 yelp-business
+请求：
+
+```bash
+$ curl -X PUT 'localhost:9200/yelp-review' -d '
+{
+  "mappings": {
+    "doc": {
+      "properties": {
+        "id": {
+          "type": "keyword"
+        },
+        "stars": {
+          "type": "integer"
+        },
+        "date": {
+          "type": "date"
+        },
+        "text": {
+          "type": "text",
+          "analyzer": "standard",
+          "search_analyzer": "standard"
+        },
+        "useful": {
+          "type": "integer"
+        },
+        "funny": {
+          "type": "integer"
+        },
+        "cool": {
+          "type": "integer"
+        },
+        "business_id": {
+          "type": "keyword"
+        },
+        "user_id": {
+          "type": "keyword"
+        }
+      }
+    }
+  }
+}'
+```
+
+
+
 返回：
 ```javascript
     {

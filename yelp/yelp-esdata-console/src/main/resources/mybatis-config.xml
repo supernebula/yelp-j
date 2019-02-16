@@ -1,0 +1,32 @@
+<!--<?xml version="1.0" encoding="UTF-8" ?>-->
+<!--<!DOCTYPE configuration-->
+        <!--PUBLIC "-//mybatis.org//DTD Config 3.0//EN"-->
+        <!--"http://mybatis.org/dtd/mybatis-3-config.dtd">-->
+<!--<configuration>-->
+    <!--&lt;!&ndash; 配置全局属性 &ndash;&gt;-->
+    <!--<settings>-->
+        <!--&lt;!&ndash; 使用jdbc的getGeneratedKeys获取数据库自增主键值 &ndash;&gt;-->
+        <!--<setting name="useGeneratedKeys" value="true" />-->
+
+        <!--&lt;!&ndash; 使用列标签替换列别名 默认:true &ndash;&gt;-->
+        <!--<setting name="useColumnLabel" value="true" />-->
+
+        <!--&lt;!&ndash; 开启驼峰命名转换:Table{create_time} -> Entity{createTime} &ndash;&gt;-->
+        <!--<setting name="mapUnderscoreToCamelCase" value="true" />-->
+
+        <!--&lt;!&ndash;&lt;!&ndash; 打印查询语句 &ndash;&gt;&ndash;&gt;-->
+        <!--&lt;!&ndash;<setting name="logImpl" value="LOG4J" />&ndash;&gt;-->
+    <!--</settings>-->
+
+    <!--<plugins>-->
+        <!--&lt;!&ndash; 配置分页插件 &ndash;&gt;-->
+        <!--&lt;!&ndash;<plugin interceptor="com.github.pagehelper.PageHelper">&ndash;&gt;-->
+        <!--&lt;!&ndash;&lt;!&ndash; 设置数据库类型 Oracle,Mysql,MariaDB,SQLite,Hsqldb,PostgreSQL六种数据库&ndash;&gt;&ndash;&gt;-->
+        <!--&lt;!&ndash;<property name="dialect" value="mysql"/>&ndash;&gt;-->
+        <!--&lt;!&ndash;</plugin>&ndash;&gt;-->
+        <!--<plugin interceptor="com.github.pagehelper.PageInterceptor">-->
+        <!--</plugin>-->
+
+    <!--</plugins>-->
+
+<!--</configuration>-->
