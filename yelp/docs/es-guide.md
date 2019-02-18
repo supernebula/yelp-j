@@ -129,6 +129,13 @@ https://www.elastic.co/guide/en/elasticsearch/client/java-rest/6.3/java-rest-hig
 
 ## 五、基本教程
 
+
+### Query DSL.
+
+[常用的Query DSL搜索语法](https://www.jianshu.com/p/5ef2312bf12b)
+
+[官方Query DSL](https://www.elastic.co/guide/en/elasticsearch/reference/6.3/query-dsl.html)
+
 ### 附录1：参考链接
 
 1. [阮一峰：全文搜索引擎 Elasticsearch 基本教程](http://www.ruanyifeng.com/blog/2017/08/elasticsearch.html)

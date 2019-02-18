@@ -17,6 +17,7 @@
         <module name="yelp-esdata-console" />
         <module name="yelp-service" />
         <module name="yelp-web-manage" />
+        <module name="yelp-web-search" />
       </profile>
     </annotationProcessing>
   </component>

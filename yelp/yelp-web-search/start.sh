@@ -1,0 +1,1 @@
+java -Xmx250M -jar -Djava.security.egd=file:/dev/./urandom yelp-web-search-1.0.0-SNAPSHOT.jar &

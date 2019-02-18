@@ -3,5 +3,6 @@
   <component name="Encoding" addBOMForNewFiles="with NO BOM">
     <file url="file://$PROJECT_DIR$/yelp-esdata-console" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/yelp-web-manage" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/yelp-web-search" charset="UTF-8" />
   </component>
 </project>
