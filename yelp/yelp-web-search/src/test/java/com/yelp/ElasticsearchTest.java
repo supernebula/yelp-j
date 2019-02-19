@@ -25,6 +25,7 @@ public class ElasticsearchTest {
     @Test
     public void findAll() {
         MatchAllQueryBuilder matchAllQueryBuilder = QueryBuilders.matchAllQuery();
+        QueryBuilders.boolQuery().must().
         SearchRequestBuilder search = transportClient.prepareSearch("yelp_reveiw").setQuery(matchAllQueryBuilder);
         SearchResponse searchResponse = search.get();
         System.out.println(JSONObject.toJSONString(searchResponse));
