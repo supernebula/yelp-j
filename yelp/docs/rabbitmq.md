@@ -125,3 +125,5 @@ http://localhost:15672
 [简书 Spring boot集成RabbitMQ](https://www.jianshu.com/p/6ca34345b796)
 
 [spring RabbitMQ RabbitTemplate](https://spring.io/guides/gs/messaging-rabbitmq/)
+
+[消息队列之 RabbitMQ](https://www.jianshu.com/p/79ca08116d57)

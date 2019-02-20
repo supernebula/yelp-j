@@ -181,3 +181,6 @@ public String addEmp(Employee employee, BindingResult bindingResult){
 #SpringBoot:  ApplicationEvent & Listener
 
 [SpringBoot使用ApplicationEvent&Listener完成业务解耦](https://segmentfault.com/a/1190000011433514)
+
+
+[EventBus VS Spring Event](https://www.cnblogs.com/shoren/p/eventBus_springEvent.html)
