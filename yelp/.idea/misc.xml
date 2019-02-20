@@ -10,6 +10,7 @@
         <option value="$PROJECT_DIR$/pom.xml" />
         <option value="$PROJECT_DIR$/yelp-web-manage/pom.xml" />
         <option value="$PROJECT_DIR$/yelp-web-search/pom.xml" />
+        <option value="$PROJECT_DIR$/example/example-mq/pom.xml" />
       </list>
     </option>
   </component>

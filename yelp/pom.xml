@@ -16,6 +16,7 @@
         <module>yelp-service</module>
         <module>yelp-common</module>
         <module>yelp-esdata-console</module>
+        <module>example</module>
     </modules>
 
     <properties>

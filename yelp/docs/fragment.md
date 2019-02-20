@@ -142,7 +142,11 @@ pagehelper.params=count=countSql
 </html>
 ```
 
-子页的head内信息会按顺序出现在母版head信息之后,<title>比较特殊,子页会覆盖母版的<title>
+子页的head内信息会按顺序出现在母版head信息之后,
+```aidl
+<title>比较特殊,子页会覆盖母版的<title>
+```
+
 
 子页单独需要引用的js,放到底部th:block块内部.
 
@@ -174,3 +178,6 @@ public String addEmp(Employee employee, BindingResult bindingResult){
 
 [Spring Boot Reference Guide 23.8 Using the ApplicationRunner or CommandLineRunner](https://docs.spring.io/spring-boot/docs/1.5.19.RELEASE/reference/htmlsingle/)
 
+#SpringBoot:  ApplicationEvent & Listener
+
+[SpringBoot使用ApplicationEvent&Listener完成业务解耦](https://segmentfault.com/a/1190000011433514)

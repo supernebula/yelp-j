@@ -97,9 +97,31 @@ evoldeMacBook-Pro:~ evol$
 
 ```
 
+### 启动RabbitMQ
+
+```bash
+## 进入安装目录
+cd /usr/local/Cellar/rabbitmq/3.7.12
+# 启动
+brew services start rabbitmq
+
+#重启
+brew services restart rabbitmq
+```
+
+### 浏览器访问 RabbitMQ
+
+```aidl
+http://localhost:15672
+
+默认账号：guest 密码：guest
+```
+
 
 ##. Spring boot 集成 RabbitMQ
 
 [SpringBoot RabbitMQ support](https://docs.spring.io/spring-boot/docs/1.5.19.RELEASE/reference/htmlsingle/#boot-features-rabbitmq)
 
 [简书 Spring boot集成RabbitMQ](https://www.jianshu.com/p/6ca34345b796)
+
+[spring RabbitMQ RabbitTemplate](https://spring.io/guides/gs/messaging-rabbitmq/)

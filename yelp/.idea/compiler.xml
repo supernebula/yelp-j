@@ -10,6 +10,8 @@
         <module name="evol-common" />
         <module name="evol-elasticsearch" />
         <module name="evol-util" />
+        <module name="example" />
+        <module name="example-mq" />
         <module name="yelp-common" />
         <module name="yelp-dao" />
         <module name="yelp-db-generator" />
