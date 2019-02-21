@@ -31,6 +31,16 @@ public class RabbitMQConfig {
     /** 邮件队列key2*/
     public static final String EMAIL_ROUTINGKEY = "email_queue_key";
 
+
+    /** 队列名称*/
+    public static final String QUEUE_NAME_ONE = "queue_one";
+
+    /** 队列名称*/
+    public static final String QUEUE_NAME_ONE1 = "queue_one1";
+
+    /** 队列名称*/
+    public static final String QUEUE_NAME_EMAIL = "email_queue";
+
     /**
      * 配置链接信息
      * @return
@@ -65,7 +75,7 @@ public class RabbitMQConfig {
      */
     @Bean
     public Queue queue() {
-        return new Queue("queue_one", true); //队列持久
+        return new Queue(QUEUE_NAME_ONE, true); //队列持久
 
     }
     /**
@@ -85,7 +95,7 @@ public class RabbitMQConfig {
      */
     @Bean
     public Queue queue1() {
-        return new Queue("queue_one1", true); //队列持久
+        return new Queue(QUEUE_NAME_ONE1, true); //队列持久
 
     }
     /**
@@ -105,7 +115,7 @@ public class RabbitMQConfig {
      */
     @Bean
     public Queue queueEamil() {
-        return new Queue("email_queue", true); //队列持久
+        return new Queue(QUEUE_NAME_EMAIL, true); //队列持久
 
     }
     /**

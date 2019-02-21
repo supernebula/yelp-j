@@ -17,7 +17,7 @@ import java.util.Date;
 import java.util.UUID;
 
 @Component
-public class UserEmailListener {
+public class UserEmailListener implements  RabbitTemplate.ConfirmCallback{
 
     RabbitTemplate rabbitTemplate;
 
@@ -47,5 +47,18 @@ public class UserEmailListener {
         rabbitTemplate.convertAndSend(RabbitMQConfig.EXCHANGE, RabbitMQConfig.EMAIL_ROUTINGKEY, msg,
                 correlationId);
     }
+
+    @Override
+    public void confirm(CorrelationData correlationData, boolean ack, String cause) {
+        System.out.println(" 邮件消息，回调id:" + correlationData);
+        if (ack) {
+            System.out.println("消息成功消费: 邮件已发送");
+        } else {
+            System.out.println("消息消费失败:" + cause+"\n重新发送");
+        }
+    }
+
+
+
 
 }

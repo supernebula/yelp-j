@@ -127,3 +127,55 @@ http://localhost:15672
 [spring RabbitMQ RabbitTemplate](https://spring.io/guides/gs/messaging-rabbitmq/)
 
 [消息队列之 RabbitMQ](https://www.jianshu.com/p/79ca08116d57)
+
+
+## Issuse
+
+1. [spring boot中集成rabbitMQ启动报错-循环重启](https://ask.csdn.net/questions/374757)
+
+2. [@RabbitHandler causing "No method found for class B"](https://jira.spring.io/browse/AMQP-573)
+
+2. [spring-boot-starter-amqp踩坑记](https://www.cnblogs.com/lazio10000/p/5559999.html)
+
+    关于配置失败，无限重启的官方说明
+```aidl
+If retries are not enabled and the listener throws an exception, by default the delivery will be retried indefinitely. You can modify this behavior in two ways; set the defaultRequeueRejected
+ property to false
+ and zero re-deliveries will be attempted; or, throw an AmqpRejectAndDontRequeueException
+ to signal the message should be rejected. This is the mechanism used when retries are enabled and the maximum delivery attempts are reached.
+ 
+ 
+如果未启用重试并且侦听器抛出异常，则默认情况下将无限期地重试传递。您可以通过两种方式修改此行为;设置defaultRequeueRejected
+ 财产到假
+ 将尝试零重新交付;或者，抛出AmqpRejectAndDontRequeueException
+ 应该拒绝发出信息。这是启用重试并达到最大传递尝试时使用的机制。
+```
+
+发现官方实例坑，一种解决方案，手动新增下转换
+
+```java
+ @Bean
+    public RabbitTemplate rabbitTemplate(ConnectionFactory connectionFactory) {
+        RabbitTemplate template = new RabbitTemplate(connectionFactory);
+        template.setMessageConverter(new Jackson2JsonMessageConverter());
+        return template;
+    }
+
+    @Bean
+    public SimpleRabbitListenerContainerFactory rabbitListenerContainerFactory(ConnectionFactory connectionFactory) {
+        SimpleRabbitListenerContainerFactory factory = new SimpleRabbitListenerContainerFactory();
+        factory.setConnectionFactory(connectionFactory);
+        factory.setMessageConverter(new Jackson2JsonMessageConverter());
+        return factory;
+    }
+```
+
+然后在生产和消费信息的地方使用他们：
+
+```java
+@RabbitListener(queues = "merchant", containerFactory="rabbitListenerContainerFactory")
+public void process(@Payload UpdateMerchant request) { 
+     UpdateMerchantResponse response = new UpdateMerchantResponse();
+    logger.info(request.getMerchantId() + "->" + response.getReturnCode());
+ }
+```
