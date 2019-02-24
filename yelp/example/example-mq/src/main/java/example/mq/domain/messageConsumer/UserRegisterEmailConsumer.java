@@ -47,5 +47,4 @@ public class UserRegisterEmailConsumer{
         factory.setMessageConverter(new Jackson2JsonMessageConverter());
         return factory;
     }
-
 }
