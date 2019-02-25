@@ -193,3 +193,82 @@ OS name: "mac os x", version: "10.12.6", arch: "x86_64", family: "mac"
 ```bash
 $ brew cask install docker
 ```
+
+
+## ISSUE
+
+https://wiki.jenkins.io/display/JENKINS/Jenkins+says+my+reverse+proxy+setup+is+broken
+
+
+
+
+## jenkins 典型构建任务配置Configurate
+
+### General 
+
+```html
+√ Restrict where this project can be run
+Label Expression ： master
+```
+
+### Source Code Management
+
+√ Subversion
+
+    Modules
+        
+            	Repository URL : svn://....
+            	
+            	Credentials :
+            	
+            	Local module directory: .
+            	
+            	Repository depth : infinity
+            	
+            	gnore externals : √
+            	
+    Check-out Strategy
+    
+            Use 'svn update' as mush as possible
+            
+    Repository browser : Auto
+
+### Build Triggers
+
+√ Build whenever a SNAPSHOT dependency is built
+
+### Build Environment
+
+√ Add timestamps to the Console Output
+
+### Pre Steps
+
+执行shell， Command
+```bash
+#!/bin/bash
+fuser -k 8880/tcp
+rm -f -R logs
+rm -f nohup.log
+```
+
+### Build
+
+Root POM：pom.xml
+
+Goals and options: clean package -Dmaven.test.skip=true -P test
+
+### Post Steps
+
+√ Run only if build succeeds
+
+执行shell
+
+Command
+
+```bash
+#!/bin/bash
+BUILD_ID=dianguPlatformTest
+nohup java -jar -Djava.security.egd=file:/dev/./urandom target/diangu-web-platform-1.0.0-SNAPSHOT.jar > nohup.log 2>&1 &
+```
+
+### 构建设置
