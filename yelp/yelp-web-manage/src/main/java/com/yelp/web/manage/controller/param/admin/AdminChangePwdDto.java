@@ -1,4 +1,4 @@
-package com.yelp.web.manage.controller.param.user;
+package com.yelp.web.manage.controller.param.admin;
 
 import lombok.Data;
 import org.hibernate.validator.constraints.NotEmpty;
@@ -7,6 +7,9 @@ import javax.validation.constraints.Size;
 
 @Data
 public class AdminChangePwdDto {
+
+    @NotEmpty()
+    private String username;
 
     @NotEmpty(message = "密码不能为空")
     @Size(min = 6, max = 20, message = "密码长度必须大于 6 且小于 20 字符")
@@ -18,6 +21,14 @@ public class AdminChangePwdDto {
 
     @NotEmpty(message = "验证新密码不能为空")
     @Size(min = 6, max = 20, message = "验证新密码长度必须大于 6 且小于 20 字符")
-    private String ConfirmPassword;
+    private String confirmPassword;
+
+    /**
+     * 验证新密码两次输入是否相同
+     * @return
+     */
+    public boolean confirmNewPassword(){
+        return newPassword.equals(confirmPassword);
+    }
 
 }

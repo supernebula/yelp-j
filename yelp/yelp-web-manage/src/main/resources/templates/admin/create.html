@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="zh-CN" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/web/thymeleaf/layout" layout:decorator="shared/layout">
+
+<head>
+    <title>Yelp Admin Management</title>
+    <link rel="stylesheet" th:href="@{/kendoui/css/kendo.common-material.min.css}" />
+    <link rel="stylesheet" th:href="@{/kendoui/css/kendo.material.min.css}" />
+    <link rel="stylesheet" th:href="@{/kendoui/css/kendo.material.mobile.min.css}" />
+</head>
+<body>
+<!-- Content Wrapper. Contains page content -->
+<div layout:fragment="content" class="content-wrapper">
+    <!-- Content Header (Page header) -->
+    <section class="content-header">
+        <h1>
+            Admin Create
+        </h1>
+        <ol class="breadcrumb">
+            <li><a href="#"><i class="fa fa-dashboard"></i> Admin</a></li>
+            <li class="active">create</li>
+            <li><a class="btn btn-default" href="javascript:history.go(-1)" role="button">返回</a></li>
+        </ol>
+    </section>
+
+    <!-- Main content -->
+    <section class="content">
+        <!-- Main row -->
+        <div class="row">
+            <div class="col-lg-12 col-xs-12">
+                <div id="item-detail">
+                    <form class="form-horizontal">
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">Username</label>
+                            <div class="col-sm-10">
+                                <input type="text" class="form-control" id="username" placeholder="Password">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">Email</label>
+                            <div class="col-sm-10">
+                                <input type="text" class="form-control" id="email" placeholder="Password">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">Mobile</label>
+                            <div class="col-sm-10">
+                                <input type="text" class="form-control" id="mobile" placeholder="Password">
+                            </div>
+                        </div>
+
+                    </form>
+
+
+                </div>
+            </div>
+        </div>
+        <!-- /.row (main row) -->
+
+    </section>
+    <!-- /.content -->
+</div>
+<th:block layout:fragment="scriptsblock">
+    <script th:inline="javascript">
+
+        var apiUrl = "/api/admin/detail/" + [[${id}]];
+        $(document).ready(function() {
+            $.getJSON(apiUrl, null, function (response) {
+                if(!response.success)
+                {
+                    $("#item-detail #name").html(response.message);
+                }
+
+                var item = response.data;
+                $("#item-detail #username").html(item.username);
+                $("#item-detail #password").html(item.password);
+                $("#item-detail #email").html(item.email);
+                $("#item-detail #mobile").html(item.mobile);
+                $("#item-detail #createTime").html(item.createTime);
+                $("#item-detail #lastLoginTime").html(item.lastLoginTime);
+            });
+
+        });
+    </script>
+</th:block>
+</body>
+</html>

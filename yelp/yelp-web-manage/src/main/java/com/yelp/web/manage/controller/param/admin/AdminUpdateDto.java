@@ -1,4 +1,4 @@
-package com.yelp.web.manage.controller.param.user;
+package com.yelp.web.manage.controller.param.admin;
 
 import lombok.Data;
 import org.hibernate.validator.constraints.Email;
