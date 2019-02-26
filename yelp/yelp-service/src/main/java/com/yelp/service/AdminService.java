@@ -1,10 +1,8 @@
 package com.yelp.service;
 
 import com.github.pagehelper.PageInfo;
-import com.yelp.business.AdminSearchParam;
-import com.yelp.business.PhotoSearchParam;
+import com.yelp.user.AdminSearchParam;
 import com.yelp.entity.Admin;
-import com.yelp.entity.Photo;
 
 public interface AdminService {
 
@@ -21,9 +19,11 @@ public interface AdminService {
 
     public Admin getAdminByPwd(String username, String password);
 
-    public Admin save(Admin admin);
+    public boolean insert(Admin admin);
 
-    public void deleteById(String id);
+    public boolean udpate(Admin admin);
+
+    public boolean deleteById(String id);
 
 
 }

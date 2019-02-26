@@ -1,9 +1,10 @@
-package com.yelp.business;
+package com.yelp.user;
 
+import evol.common.BaseSearchParam;
 import lombok.Data;
 
 @Data
-public class AdminSearchParam {
+public class AdminSearchParam extends BaseSearchParam {
 
     private String username;
 
