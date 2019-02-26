@@ -51,6 +51,9 @@
         <!--<ignoreColumn column="FRED" />-->
         <!--<columnOverride column="LONG_VARCHAR_FIELD" jdbcType="VARCHAR" />-->
         <!--</table>-->
+        <table schema="yelp_db" tableName="admin" >
+            <generatedKey column="id" sqlStatement="MySql" identity="true" />
+        </table>
         <table schema="yelp_db" tableName="attribute" >
             <generatedKey column="id" sqlStatement="MySql" identity="true" />
         </table>
