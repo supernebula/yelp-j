@@ -22,13 +22,4 @@ public class AdminChangePwdDto {
     @NotEmpty(message = "验证新密码不能为空")
     @Size(min = 6, max = 20, message = "验证新密码长度必须大于 6 且小于 20 字符")
     private String confirmPassword;
-
-    /**
-     * 验证新密码两次输入是否相同
-     * @return
-     */
-    public boolean confirmNewPassword(){
-        return newPassword.equals(confirmPassword);
-    }
-
 }

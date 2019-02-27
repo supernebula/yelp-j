@@ -20,6 +20,5 @@ public class MD5UtilTest {
         System.out.println("sign:");
         System.out.println(sign);
         Assert.assertEquals(sign, "56a008a5d79885498730b8035343652a");
-
     }
 }

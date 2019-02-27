@@ -12,6 +12,10 @@ import evol.common.api.ApiResult;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+import evol.security.MD5Util;
+
+import java.util.Date;
+import java.util.UUID;
 
 @RestController
 @RequestMapping("/api/admin")
@@ -42,32 +46,51 @@ public class AdminApiController {
     }
 
     @PostMapping("create")
-    public void createPost(AdminCreateDto dto){
-
+    public ApiResult<Object> createPost(AdminCreateDto dto){
+        Admin admin = new Admin();
+        admin.setId(UUID.randomUUID().toString());
+        admin.setUsername(dto.getUsername());
+        admin.setSalt(UUID.randomUUID().toString());
+        String digestPassword = MD5Util.MD5(dto.getPassword(), admin.getSalt());
+        admin.setPassword(digestPassword);
+        admin.setEmail(dto.getEmail());
+        admin.setCreateTime(new Date());
+        boolean flag = adminService.insert(admin);
+        return flag ? ApiResult.success(null) : ApiResult.paramError();
     }
 
     @PostMapping("edit")
-    public void editPost(AdminUpdateDto dto){
-
+    public ApiResult<Object> editPost(@PathVariable String id, AdminUpdateDto dto){
+        if(!id.equals(dto.getId()))
+            throw new RuntimeException("用户id参数错误");
+        Admin admin = adminService.getAdmin(dto.getId());
+        if(admin == null)
+            throw new RuntimeException("用户不存在");
+        admin.setEmail(dto.getEmail());
+        admin.setMobile(dto.getMobile());
+        boolean flag = adminService.udpate(admin);
+        return flag ? ApiResult.success(null) : ApiResult.paramError();
     }
 
     @DeleteMapping("delete")
-    public void delete(String id){
-        adminService.deleteById(id);
+    public ApiResult<Object> delete(String id){
+        boolean flag = adminService.deleteById(id);
+        return flag ? ApiResult.success(null) : ApiResult.paramError();
     }
 
     @PutMapping("changePassword")
-    public boolean changePassword(@PathVariable() String id, @RequestBody AdminChangePwdDto dto){
+    public ApiResult<Object> changePassword(@PathVariable() String id, @RequestBody AdminChangePwdDto dto){
         Admin admin = adminService.getAdminByPwd(dto.getUsername(), dto.getPassword());
         if(admin == null)
             throw new RuntimeException("原始密码错误");
         if(!admin.getId().equals(id))
             throw new RuntimeException("用户id参数错误");
-        if(!dto.confirmNewPassword())
+        if(!dto.getNewPassword().equals(dto.getConfirmPassword()))
             throw new RuntimeException("两次新密码输入不同");
-        admin.setPassword(dto.getNewPassword());
+        String digestPassword = MD5Util.MD5(dto.getNewPassword(), admin.getSalt());
+        admin.setPassword(digestPassword);
         boolean flag = adminService.udpate(admin);
-        return flag;
+        return flag ? ApiResult.success(null) : ApiResult.paramError();
     }
 
 }
