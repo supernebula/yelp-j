@@ -27,7 +27,7 @@
         <!-- Main row -->
         <div class="row">
             <div class="col-lg-12 col-xs-12">
-                <div id="item-detail">
+                <div id="item-form">
                     <form class="form-horizontal">
                         <div class="form-group">
                             <label class="col-sm-2 control-label">Username</label>
@@ -48,6 +48,17 @@
                             </div>
                         </div>
 
+                        <div class="form-group">
+                            <div class="col-sm-offset-2 col-sm-10">
+                                <button id="submitButton" type="submit"  onclick="javascript:adminCreateSubmit();"  class="btn btn-default">Submit</button>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-sm-offset-2 col-sm-10">
+                                <span id="validate-message-ok" style="color: green;"></span>
+                                <span id="validate-message-error" style="color: red;"></span>
+                            </div>
+                        </div>
                     </form>
 
 
@@ -62,24 +73,29 @@
 <th:block layout:fragment="scriptsblock">
     <script th:inline="javascript">
 
-        var apiUrl = "/api/admin/detail/" + [[${id}]];
-        $(document).ready(function() {
-            $.getJSON(apiUrl, null, function (response) {
-                if(!response.success)
-                {
-                    $("#item-detail #name").html(response.message);
-                }
+        function adminCreateSubmit() {
+            var username =$("#item-form input#username").val();
+            var email =$("#item-form input#email").val();
+            var mobile =$("#item-form input#mobile").val();
 
-                var item = response.data;
-                $("#item-detail #username").html(item.username);
-                $("#item-detail #password").html(item.password);
-                $("#item-detail #email").html(item.email);
-                $("#item-detail #mobile").html(item.mobile);
-                $("#item-detail #createTime").html(item.createTime);
-                $("#item-detail #lastLoginTime").html(item.lastLoginTime);
-            });
 
-        });
+            $("#item-form input#mobile")
+            $.post(apiUrl, { username: username, email: email, mobile : mobile },
+                function(response){
+                    $("#validate-message-ok").html("");
+                    $("#validate-message-error").html("");
+                    if(!response.success)
+                    {
+                        $("#validate-message-ok").html(response.message);
+                    }else{
+                        $("#validate-message-error").html(response.message);
+                    }
+
+                    $("#submitButton").removeAttr("disabled");
+
+                }, "json");
+            
+        }
     </script>
 </th:block>
 </body>

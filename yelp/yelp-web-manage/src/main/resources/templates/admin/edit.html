@@ -27,13 +27,13 @@
         <!-- Main row -->
         <div class="row">
             <div class="col-lg-12 col-xs-12">
-                <div id="item-detail">
+                <div id="item-form">
                     <form class="form-horizontal">
                         <div class="form-group">
                             <label class="col-sm-2 control-label">Username</label>
                             <div class="col-sm-10">
-                                <input type="hidden" id="id">
-                                <input type="text" class="form-control" id="username" placeholder="Password">
+                                <input type="hidden"  id="id">
+                                <span id="username"  class="checkbox"></span>
                             </div>
                         </div>
                         <div class="form-group">
@@ -49,6 +49,31 @@
                             </div>
                         </div>
 
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">CreateTime</label>
+                            <div class="col-sm-10">
+                                <span id="createTime" class="checkbox"></span>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">LastLoginTime</label>
+                            <div class="col-sm-10">
+                                <span id="lastLoginTime" class="checkbox"></span>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <div class="col-sm-offset-2 col-sm-10">
+                                <button id="submitButton" type="submit"  onclick="javascript:adminEditSubmit();"  class="btn btn-default">Submit</button>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-sm-offset-2 col-sm-10">
+                                <span id="validate-message-ok" style="color: green;"></span>
+                                <span id="validate-message-error" style="color: red;"></span>
+                            </div>
+                        </div>
                     </form>
 
 
@@ -68,18 +93,43 @@
             $.getJSON(apiUrl, null, function (response) {
                 if(!response.success)
                 {
-                    $("#item-detail #name").html(response.message);
+                    $("#validate-message").html(response.message);
                 }
 
                 var item = response.data;
-                $("#item-detail #id").html(item.id);
+                $("#item-detail input#id").val(item.id);
                 $("#item-detail #username").html(item.username);
-                $("#item-detail #password").html(item.password);
-                $("#item-detail #email").html(item.email);
-                $("#item-detail #mobile").html(item.mobile);
+                $("#item-detail input#email").val(item.email);
+                $("#item-detail input#mobile").val(item.mobile);
+                $("#item-detail #createTime").html(item.createTime);
+                $("#item-detail #lastLoginTime").html(item.lastLoginTime);
             });
 
         });
+
+        function adminEditSubmit() {
+
+            $("#submitButton").attr({"disabled":"disabled"});
+
+            var email =$("#item-form input#email").val();
+            var mobile =$("#item-form input#mobile").val();
+
+            $.post(apiUrl, { email: email, mobile : mobile },
+                function(response){
+                    $("#validate-message-ok").html("");
+                    $("#validate-message-error").html("");
+                    if(!response.success)
+                    {
+                        $("#validate-message-ok").html(response.message);
+                    }else{
+                        $("#validate-message-error").html(response.message);
+                    }
+
+                    $("#submitButton").removeAttr("disabled");
+
+                }, "json");
+
+        }
     </script>
 </th:block>
 </body>
