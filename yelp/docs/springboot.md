@@ -16,3 +16,7 @@
 ```
 
 ## 对象转换java：dozer
+
+Dozer 使用小结
+
+https://www.cnblogs.com/jingmoxukong/p/5952447.html
