@@ -79,6 +79,7 @@ public class AdminApiController {
         String digestPassword = MD5Util.MD5(dto.getPassword(), admin.getSalt());
         admin.setPassword(digestPassword);
         admin.setEmail(dto.getEmail());
+        admin.setMobile(dto.getMobile());
         admin.setCreateTime(new Date());
         boolean flag = adminService.insert(admin);
         return flag ? ApiResult.success(null) : ApiResult.paramError();
