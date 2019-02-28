@@ -4,33 +4,35 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
+@RequestMapping("admin")
 public class AdminController {
-    @GetMapping({"index", "/", ""})
+    @RequestMapping({"index", "/"})
     public String index(Model model){
         return "admin/index";
     }
 
-    @GetMapping("detail/{id}")
+    @RequestMapping("detail/{id}")
     public String detail(Model model, @PathVariable String id){
         model.addAttribute("id", id);
         return "admin/detail";
     }
 
-    @GetMapping("create/{id}")
-    public String create(Model model, @PathVariable String id){
-        model.addAttribute("id", id);
+    @RequestMapping("create")
+    public String create(Model model){
         return "admin/create";
     }
 
-    @GetMapping("edit/{id}")
+    @RequestMapping("edit/{id}")
     public String edit(Model model, @PathVariable String id){
         model.addAttribute("id", id);
         return "admin/edit";
     }
 
-    @GetMapping("changePwd/{id}")
+    @RequestMapping("changePwd/{id}")
     public String changePwd(Model model, @PathVariable String id){
         model.addAttribute("id", id);
         return "admin/changePwd";

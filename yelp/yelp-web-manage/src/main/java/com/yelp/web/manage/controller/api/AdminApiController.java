@@ -1,20 +1,26 @@
 package com.yelp.web.manage.controller.api;
 
 import com.github.pagehelper.PageInfo;
+import com.yelp.dao.mapper.AdminMapper;
 import com.yelp.entity.Admin;
 import com.yelp.service.AdminService;
 import com.yelp.user.AdminSearchParam;
 import com.yelp.web.manage.controller.param.admin.AdminChangePwdDto;
 import com.yelp.web.manage.controller.param.admin.AdminCreateDto;
 import com.yelp.web.manage.controller.param.admin.AdminUpdateDto;
+import com.yelp.web.manage.controller.result.admin.AdminView;
 import evol.common.PageResult;
 import evol.common.api.ApiResult;
 import org.apache.commons.lang3.StringUtils;
+import org.dozer.DozerBeanMapper;
+import org.dozer.Mapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import evol.security.MD5Util;
 
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 import java.util.UUID;
 
 @RestController
@@ -28,20 +34,39 @@ public class AdminApiController {
         this.adminService = service;
     }
 
+    private AdminView ConvertAdminToView(Admin admin){
+        Mapper mapper = new DozerBeanMapper();
+        AdminView destAdminView = mapper.map(admin, AdminView.class);
+        return destAdminView;
+    }
+
+    private List<AdminView> ConvertAdminToView(List<Admin> admins){
+        Mapper mapper = new DozerBeanMapper();
+        ArrayList<AdminView> list = new ArrayList<>();
+        for (Admin item : admins) {
+            AdminView view = mapper.map(item, AdminView.class);
+            list.add(view);
+        }
+        return list;
+    }
+
     @GetMapping("search")
-    public ApiResult<PageResult<Admin>> search(AdminSearchParam param){
+    public ApiResult<PageResult<AdminView>> search(AdminSearchParam param){
         PageInfo<Admin> pageInfo = adminService.Search(param);
-        PageResult<Admin> result = new PageResult<>(pageInfo.getList(), pageInfo.getPages(), pageInfo.getPageSize(), pageInfo.getTotal() / pageInfo.getPageSize(), pageInfo.getTotal());
+
+        List<AdminView> adminViews = ConvertAdminToView(pageInfo.getList());
+        PageResult<AdminView> result = new PageResult<>(adminViews, pageInfo.getPages(), pageInfo.getPageSize(), pageInfo.getTotal() / pageInfo.getPageSize(), pageInfo.getTotal());
         return ApiResult.success(result);
     }
 
     @GetMapping("detail/{id}")
-    public ApiResult<Admin> detail(@PathVariable String id){
+    public ApiResult<AdminView> detail(@PathVariable String id){
         if(StringUtils.isEmpty(id)) {
             return ApiResult.paramError();
         }
-        Admin item = adminService.getAdmin(id);
-        return ApiResult.success(item);
+        Admin admin = adminService.getAdmin(id);
+        AdminView adminView = ConvertAdminToView(admin);
+        return ApiResult.success(adminView);
 
     }
 

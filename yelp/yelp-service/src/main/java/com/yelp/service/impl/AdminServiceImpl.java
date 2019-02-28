@@ -9,9 +9,11 @@ import com.yelp.entity.AdminExample;
 import com.yelp.service.AdminService;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 
+@Service
 public class AdminServiceImpl implements AdminService {
 
     private AdminMapper adminMapper;
