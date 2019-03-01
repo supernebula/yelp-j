@@ -205,6 +205,10 @@
             var apiDeleteUrl = $(_this).attr("api-href");
             console.log("api-href:" + apiDeleteUrl);
 
+            if(!confirm("确定删除？")){
+                return;
+            }
+
             $.ajax({
                 type: "DELETE",
                 url: apiDeleteUrl,
@@ -217,7 +221,7 @@
                     }
                 }
             });
-            return confirm("确定删除？");
+
         }
 
 

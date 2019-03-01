@@ -127,20 +127,7 @@
 
                 }, "json");
 
-            $.post(apiEditUrl, { email: email, mobile : mobile },
-                function(response){
-                    $("#submitButton").removeAttr("disabled");
-                    $("#validate-message-ok").html("");
-                    $("#validate-message-error").html("");
-                    if(response.success)
-                    {
-                        $("#validate-message-ok").html(response.message);
-                    }else{
-                        $("#validate-message-error").html(response.message);
-                    }
 
-
-                }, "json");
 
         }
     </script>

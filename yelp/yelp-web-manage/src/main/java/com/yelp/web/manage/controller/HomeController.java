@@ -12,4 +12,11 @@ public class HomeController {
     public String index(){
         return "home/index";
     }
+
+
+    @RequestMapping({"testErr"})
+    public String testErr(){
+
+        throw new RuntimeException();
+    }
 }
