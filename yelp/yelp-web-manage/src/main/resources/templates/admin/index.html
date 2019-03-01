@@ -179,7 +179,7 @@
                     title: "Operate",
                     sortable: false,
                     filterable: false,
-                    template: '<a href="/admin/edit/#: id #">edit</a>&nbsp;&nbsp;&nbsp;&nbsp;<a href="/admin/changePwd/#: id #">Change Password</a>&nbsp;&nbsp;&nbsp;&nbsp;<a onclick="javascript: return confirmDelete();" href="/admin/delete/#: id #">delete</a>'
+                    template: '<a href="/admin/edit/#: id #">edit</a>&nbsp;&nbsp;&nbsp;&nbsp;<a href="/admin/changePwd/#: id #">Change Password</a>&nbsp;&nbsp;&nbsp;&nbsp;<a onclick="javascript: return confirmDelete(this);" api-href="/api/admin/delete/#: id #" style="cursor:pointer; ">delete</a>'
                 }],
                 dataBound: function () {
                     var rows = this.items();
@@ -201,7 +201,22 @@
         });
 
 
-        function confirmDelete() {
+        function confirmDelete(_this) {
+            var apiDeleteUrl = $(_this).attr("api-href");
+            console.log("api-href:" + apiDeleteUrl);
+
+            $.ajax({
+                type: "DELETE",
+                url: apiDeleteUrl,
+                dataType: "json",
+                success: function(response){
+                    if(response.success)
+                    {
+                        console.log(response.msg);
+                        window.location.reload();
+                    }
+                }
+            });
             return confirm("确定删除？");
         }
 
