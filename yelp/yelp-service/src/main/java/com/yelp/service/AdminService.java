@@ -17,7 +17,9 @@ public interface AdminService {
 
     public Admin getAdmin(String id);
 
-    public Admin getAdminByPwd(String username, String password);
+    public Admin login(String username, String password);
+
+    public Admin getAdminByPwd(String id, String password);
 
     public boolean insert(Admin admin);
 

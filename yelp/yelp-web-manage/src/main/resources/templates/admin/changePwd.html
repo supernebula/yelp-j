@@ -91,8 +91,8 @@
                 }
 
                 var item = response.data;
-                $("#item-detail input#id").val(item.id);
-                $("#item-detail #username").html(item.username);
+                $("#item-form input#id").val(item.id);
+                $("#item-form #username").html(item.username);
             });
 
         });
@@ -108,6 +108,7 @@
             if(newPassword !== confirmPassword){
                 $("#validate-message-ok").html("");
                 $("#validate-message-error").html("newPassword、confirmPassword 必须相同");
+                $("#submitButton").removeAttr("disabled");
             }
 
             $.post(apiChangePwdUrl, { password: password, newPassword : newPassword, confirmPassword : confirmPassword },
@@ -123,6 +124,21 @@
                     }
 
                     $("#submitButton").removeAttr("disabled");
+
+                }, "json");
+
+            $.post(apiEditUrl, { email: email, mobile : mobile },
+                function(response){
+                    $("#submitButton").removeAttr("disabled");
+                    $("#validate-message-ok").html("");
+                    $("#validate-message-error").html("");
+                    if(response.success)
+                    {
+                        $("#validate-message-ok").html(response.message);
+                    }else{
+                        $("#validate-message-error").html(response.message);
+                    }
+
 
                 }, "json");
 

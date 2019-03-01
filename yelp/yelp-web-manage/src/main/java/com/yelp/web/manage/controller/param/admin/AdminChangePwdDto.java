@@ -9,7 +9,7 @@ import javax.validation.constraints.Size;
 public class AdminChangePwdDto {
 
     @NotEmpty()
-    private String username;
+    private String id;
 
     @NotEmpty(message = "密码不能为空")
     @Size(min = 6, max = 20, message = "密码长度必须大于 6 且小于 20 字符")

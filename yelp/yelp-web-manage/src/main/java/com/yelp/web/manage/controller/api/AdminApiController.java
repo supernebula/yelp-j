@@ -77,11 +77,7 @@ public class AdminApiController {
             return ApiResult.paramError("两次密码输入输入必须相同");
 
         Admin admin = new Admin();
-        admin.setId(UUID.randomUUID().toString());
         admin.setUsername(dto.getUsername());
-        admin.setSalt(UUID.randomUUID().toString());
-        String digestPassword = MD5Util.MD5(dto.getPassword(), admin.getSalt());
-        admin.setPassword(digestPassword);
         admin.setEmail(dto.getEmail());
         admin.setMobile(dto.getMobile());
         admin.setCreateTime(new Date());
@@ -109,8 +105,10 @@ public class AdminApiController {
     }
 
     @PostMapping("changePwd/{id}")
-    public ApiResult<Object> changePassword(@PathVariable() String id, @RequestBody AdminChangePwdDto dto){
-        Admin admin = adminService.getAdminByPwd(dto.getUsername(), dto.getPassword());
+    public ApiResult<Object> changePassword(@PathVariable() String id, AdminChangePwdDto dto){
+        if(!id.equals(dto.getId()))
+            throw new RuntimeException("用户id参数错误");
+        Admin admin = adminService.getAdminByPwd(dto.getId(), dto.getPassword());
         if(admin == null)
             throw new RuntimeException("原始密码错误");
         if(!admin.getId().equals(id))

@@ -10,8 +10,10 @@ import com.yelp.service.AdminService;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import evol.security.MD5Util;
 
 import java.util.List;
+import java.util.UUID;
 
 @Service
 public class AdminServiceImpl implements AdminService {
@@ -62,22 +64,56 @@ public class AdminServiceImpl implements AdminService {
         return item;
     }
 
+
+    public Admin getAdminByPwd(String id, String clearPassword){
+        if(id == null)
+            throw new NullPointerException("id");
+        if(clearPassword == null)
+            throw new NullPointerException("password");
+        Admin admin = adminMapper.selectByPrimaryKey(id);
+        if(admin == null)
+            return null;
+        String digestPwd = MD5Util.MD5(clearPassword, admin.getSalt());
+        if(!digestPwd.equals(admin.getPassword())){
+            throw new RuntimeException("密码错误");
+        }
+        return admin;
+    }
+
+
     @Override
-    public Admin getAdminByPwd(String username, String password) {
+    public Admin login(String username, String clearPassword) {
         if(username == null)
             throw new NullPointerException("username");
-        if(password == null)
+        if(clearPassword == null)
             throw new NullPointerException("password");
         AdminExample example = new AdminExample();
         AdminExample.Criteria criteria = example.createCriteria();
         criteria.andUsernameEqualTo(username);
-        criteria.andPasswordEqualTo(password);
         List<Admin> list = adminMapper.selectByExample(example);
-        return list.size() == 0 ? null : list.get(0);
+        if(list.size() == 0)
+            return null;
+        Admin admin = list.get(0);
+        String digestPwd = MD5Util.MD5(clearPassword, admin.getSalt());
+        if(!digestPwd.equals(admin.getPassword())){
+            throw new RuntimeException("密码错误");
+        }
+        return admin;
     }
 
     @Override
     public boolean insert(Admin admin) {
+
+        admin.setId(UUID.randomUUID().toString());
+        admin.setSalt(UUID.randomUUID().toString());
+        String digestPassword = MD5Util.MD5(admin.getPassword(), admin.getSalt());
+        admin.setPassword(digestPassword);
+        AdminExample example = new AdminExample();
+        AdminExample.Criteria criteria = example.createCriteria();
+        criteria.andUsernameEqualTo(admin.getUsername());
+        List<Admin> list = adminMapper.selectByExample(example);
+        if(list.size() > 0)
+            throw new RuntimeException("用户" + admin.getUsername() + "已存在，不能重复创建");
         int num = adminMapper.insert(admin);
         return num > 0;
     }
