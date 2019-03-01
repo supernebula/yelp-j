@@ -72,6 +72,10 @@ public class AdminApiController {
 
     @PostMapping("create")
     public ApiResult<Object> createPost(AdminCreateDto dto){
+
+        if(!dto.getPassword().equals(dto.getConfirmPassword()))
+            return ApiResult.paramError("两次密码输入输入必须相同");
+
         Admin admin = new Admin();
         admin.setId(UUID.randomUUID().toString());
         admin.setUsername(dto.getUsername());
@@ -85,7 +89,7 @@ public class AdminApiController {
         return flag ? ApiResult.success(null) : ApiResult.paramError();
     }
 
-    @PostMapping("edit")
+    @PostMapping("edit/{id}")
     public ApiResult<Object> editPost(@PathVariable String id, AdminUpdateDto dto){
         if(!id.equals(dto.getId()))
             throw new RuntimeException("用户id参数错误");
@@ -98,13 +102,13 @@ public class AdminApiController {
         return flag ? ApiResult.success(null) : ApiResult.paramError();
     }
 
-    @DeleteMapping("delete")
-    public ApiResult<Object> delete(String id){
+    @DeleteMapping("delete/{id}")
+    public ApiResult<Object> delete(@PathVariable String id){
         boolean flag = adminService.deleteById(id);
         return flag ? ApiResult.success(null) : ApiResult.paramError();
     }
 
-    @PutMapping("changePassword")
+    @PostMapping("changePwd/{id}")
     public ApiResult<Object> changePassword(@PathVariable() String id, @RequestBody AdminChangePwdDto dto){
         Admin admin = adminService.getAdminByPwd(dto.getUsername(), dto.getPassword());
         if(admin == null)

@@ -118,8 +118,9 @@
                                 username: { type: "string" },
                                 email: { type: "string" },
                                 mobile: { type: "string" },
-                                createTime: {type: "date"},
-                                lastLoginTime:{type: "date"}
+                                createTime: {type: "string"},
+                                lastLoginTime:{type: "string"},
+                                operate:{type: "string"}
                             }
                         }
                     },
@@ -142,14 +143,14 @@
                 columns: [{
                     field: "rowNumber",
                     title: "No",
-                    width: "60px",
+                    width: "100px",
                     template: '<span style="color:gray;" class="row-number"></span>'
                 },{
                     field:"username",
                     title: "Username",
                     sortable: false,
                     filterable: false,
-                    template: '<a href="/admin/detail/#: id #">#: name #</a>'
+                    template: '<a href="/admin/detail/#: id #">#: username #</a>'
                 },{
                     field:"email",
                     title: "Email",
@@ -159,13 +160,13 @@
                 },{
                     field:"mobile",
                     title: "Mobile",
-                    width: "80px",
+                    width: "200px",
                     sortable: false,
                     filterable: false,
                 },{
                     field:"createTime",
                     title: "CreateTime",
-                    width: "130px",
+                    width: "150px",
                     sortable: false,
                     filterable: false
                 },{
@@ -173,6 +174,12 @@
                     title: "LastLoginTime",
                     sortable: false,
                     filterable: false
+                },{
+                    field:"operate",
+                    title: "Operate",
+                    sortable: false,
+                    filterable: false,
+                    template: '<a href="/admin/edit/#: id #">edit</a>&nbsp;&nbsp;&nbsp;&nbsp;<a href="/admin/changePwd/#: id #">Change Password</a>&nbsp;&nbsp;&nbsp;&nbsp;<a onclick="javascript: return confirmDelete();" href="/admin/delete/#: id #">delete</a>'
                 }],
                 dataBound: function () {
                     var rows = this.items();
@@ -194,7 +201,9 @@
         });
 
 
-
+        function confirmDelete() {
+            return confirm("确定删除？");
+        }
 
 
         /*<![CDATA[*/

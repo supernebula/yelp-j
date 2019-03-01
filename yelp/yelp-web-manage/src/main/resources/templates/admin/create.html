@@ -19,7 +19,7 @@
         <ol class="breadcrumb">
             <li><a href="#"><i class="fa fa-dashboard"></i> Admin</a></li>
             <li class="active">create</li>
-            <li><a class="btn btn-default" href="javascript:history.go(-1)" role="button">返回</a></li>
+            <li><a class="btn btn-default" th:href="@{/admin/index}" role="button">返回</a></li>
         </ol>
     </section>
 
@@ -39,13 +39,13 @@
                         <div class="form-group">
                             <label class="col-sm-2 control-label">Password</label>
                             <div class="col-sm-10">
-                                <input type="text" style="width: 300px;"  class="short-input" id="password" placeholder="" />
+                                <input type="password" style="width: 300px;"  class="short-input" id="password" placeholder="" />
                             </div>
                         </div>
                         <div class="form-group">
                             <label class="col-sm-2 control-label">Confirm Password</label>
                             <div class="col-sm-10">
-                                <input type="text" style="width: 300px;"  class="short-input" id="confirmPassword" placeholder="" />
+                                <input type="password" style="width: 300px;"  class="short-input" id="confirmPassword" placeholder="" />
                             </div>
                         </div>
                         <div class="form-group">
@@ -94,19 +94,20 @@
             var mobile =$("#item-form input#mobile").val();
 
             var apiUrl = "/api/admin/create";
+            var adminIndexUrl = "/admin/index";
 
-            $("#item-form input#mobile")
             $.post(apiUrl, { username: username, password : password, confirmPassword: confirmPassword, email: email, mobile : mobile },
                 function(response){
                     $("#validate-message-ok").html("");
                     $("#validate-message-error").html("");
-                    if(!response.success)
+                    if(response.success)
                     {
                         $("#validate-message-ok").html(response.message);
-                    }else{
-                        $("#validate-message-error").html(response.message);
+                        window.location.href = adminIndexUrl;
+                        return;
                     }
 
+                    $("#validate-message-error").html(response.message);
                     $("#submitButton").removeAttr("disabled");
 
                 }, "json");

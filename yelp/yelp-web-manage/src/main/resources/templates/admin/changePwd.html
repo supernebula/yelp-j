@@ -18,7 +18,7 @@
         <ol class="breadcrumb">
             <li><a href="#"><i class="fa fa-dashboard"></i> Admin</a></li>
             <li class="active">Change Password</li>
-            <li><a class="btn btn-default" href="javascript:history.go(-1)" role="button">返回</a></li>
+            <li><a class="btn btn-default" th:href="@{/admin/index}" role="button">返回</a></li>
         </ol>
     </section>
 
@@ -27,32 +27,32 @@
         <!-- Main row -->
         <div class="row">
             <div class="col-lg-12 col-xs-12">
-                <div id="item-detail">
+                <div id="item-form">
                     <form class="form-horizontal">
                         <div class="form-group">
                             <label class="col-sm-2 control-label">Username</label>
                             <div class="col-sm-10">
-                                <input type="hidden"  id="id">
+                                <input type="hidden"  id="id" />
                                 <span id="username"  class="checkbox"></span>
                             </div>
                         </div>
                         <div class="form-group">
                             <label class="col-sm-2 control-label">Password</label>
                             <div class="col-sm-10">
-                                <input type="password" class="form-control" id="password" placeholder="Password">
+                                <input type="password"  style="width: 300px;" id="password" placeholder="Password" />
                             </div>
                         </div>
                         <div class="form-group">
                             <label class="col-sm-2 control-label">New Password</label>
                             <div class="col-sm-10">
-                                <input type="password" class="form-control" id="newPassword" placeholder="New Password">
+                                <input type="password"  style="width: 300px;" id="newPassword" placeholder="New Password" />
                             </div>
                         </div>
 
                         <div class="form-group">
                             <label class="col-sm-2 control-label">Confirm Password</label>
                             <div class="col-sm-10">
-                                <input type="password" class="form-control" id="confirmPassword" placeholder="Confirm New Password">
+                                <input type="password"  style="width: 300px;" id="confirmPassword" placeholder="Confirm New Password" />
                             </div>
                         </div>
 
@@ -68,7 +68,6 @@
                             </div>
                         </div>
                     </form>
-                    </form>
 
 
                 </div>
@@ -82,9 +81,10 @@
 <th:block layout:fragment="scriptsblock">
     <script th:inline="javascript">
 
-        var apiUrl = "/api/admin/detail/" + [[${id}]];
+        var apiDetailUrl = "/api/admin/detail/" + [[${id}]];
+        var apiChangePwdUrl = "/api/admin/changePwd/" + [[${id}]];
         $(document).ready(function() {
-            $.getJSON(apiUrl, null, function (response) {
+            $.getJSON(apiDetailUrl, null, function (response) {
                 if(!response.success)
                 {
                     $("#validate-message").html(response.message);
@@ -101,24 +101,25 @@
 
             $("#submitButton").attr({"disabled":"disabled"});
 
-            var password =$("#item-form input#password").val();
-            var newPassword =$("#item-form input#newPassword").val();
-            var confirmPassword =$("#item-form input#confirmPassword").val();
+            var password = $("#item-form input#password").val();
+            var newPassword = $("#item-form input#newPassword").val();
+            var confirmPassword = $("#item-form input#confirmPassword").val();
 
             if(newPassword !== confirmPassword){
                 $("#validate-message-ok").html("");
                 $("#validate-message-error").html("newPassword、confirmPassword 必须相同");
             }
 
-            $.post(apiUrl, { password: password, newPassword : newPassword, confirmPassword : confirmPassword },
+            $.post(apiChangePwdUrl, { password: password, newPassword : newPassword, confirmPassword : confirmPassword },
                 function(response){
                     $("#validate-message-ok").html("");
                     $("#validate-message-error").html("");
                     if(!response.success)
                     {
-                        $("#validate-message-ok").html(response.message);
-                    }else{
                         $("#validate-message-error").html(response.message);
+
+                    }else{
+                        $("#validate-message-ok").html(response.message);
                     }
 
                     $("#submitButton").removeAttr("disabled");

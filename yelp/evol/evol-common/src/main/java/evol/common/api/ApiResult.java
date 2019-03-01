@@ -35,4 +35,9 @@ public class ApiResult<T> {
         ApiResult result = new ApiResult(StatusCode.PARAMS_ERROR, StatusCode.PARAMS_ERROR.getDescription(), null);
         return result;
     }
+
+    public static <T> ApiResult<T> paramError(String message){
+        ApiResult result = new ApiResult(StatusCode.PARAMS_ERROR, message, null);
+        return result;
+    }
 }
