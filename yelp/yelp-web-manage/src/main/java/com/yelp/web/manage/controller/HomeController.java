@@ -19,4 +19,15 @@ public class HomeController {
 
         throw new RuntimeException();
     }
+
+    @RequestMapping("/login")
+    public String login(){
+        return "home/login";
+    }
+
+    @RequestMapping("/logout")
+    public String logout(){
+        // 退出逻辑
+        return "redirect:/login";
+    }
 }

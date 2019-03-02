@@ -9,6 +9,9 @@ import com.yelp.entity.AdminExample;
 import com.yelp.service.AdminService;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 import evol.security.MD5Util;
 
@@ -16,7 +19,7 @@ import java.util.List;
 import java.util.UUID;
 
 @Service
-public class AdminServiceImpl implements AdminService {
+public class AdminServiceImpl implements AdminService, UserDetailsService {
 
     private AdminMapper adminMapper;
 
@@ -101,6 +104,10 @@ public class AdminServiceImpl implements AdminService {
         return admin;
     }
 
+    public boolean updateLastloginIp(String id, String ip) {
+        throw new RuntimeException("方法未实现");
+    }
+
     @Override
     public boolean insert(Admin admin) {
 
@@ -133,5 +140,14 @@ public class AdminServiceImpl implements AdminService {
     public boolean deleteById(String id) {
         int num = adminMapper.deleteByPrimaryKey(id);
         return num > 0;
+    }
+
+    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+        Admin admin = this.getAdminByUsername(username);
+        org.springframework.security.core.userdetails.User user
+                =  new org.springframework.security.core.userdetails.User(admin.getUsername()
+                , admin.getPassword()
+                , null);
+        return user;
     }
 }

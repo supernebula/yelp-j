@@ -20,3 +20,11 @@
 Dozer 使用小结
 
 https://www.cnblogs.com/jingmoxukong/p/5952447.html
+
+
+## Spring Security
+
+1. [Spring Boot 整合Spring Security](https://netfilx.github.io/spring-boot/11.springboot-security/springboot-security)
+
+2. [SpringBoot + Spring Security 基本使用及个性化登录配置详解](https://www.jb51.net/article/140429.htm)
+
