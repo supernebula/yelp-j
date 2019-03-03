@@ -2,6 +2,8 @@
 
 ## Spring Boot 表单验证
 
+# [纯洁的微笑   Spring Boot 系列文章](http://www.ityouknow.com/spring-boot.html)
+
 [Spring Boot 表单验证篇](https://www.bysocket.com/?p=1942)
 
 
