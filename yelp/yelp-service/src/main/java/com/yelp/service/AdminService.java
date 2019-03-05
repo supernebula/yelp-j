@@ -3,8 +3,9 @@ package com.yelp.service;
 import com.github.pagehelper.PageInfo;
 import com.yelp.user.AdminSearchParam;
 import com.yelp.entity.Admin;
+import org.springframework.security.core.userdetails.UserDetailsService;
 
-public interface AdminService {
+public interface AdminService extends UserDetailsService {
 
     /**
      * 搜索照片

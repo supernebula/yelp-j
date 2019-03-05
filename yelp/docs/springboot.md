@@ -30,3 +30,4 @@ https://www.cnblogs.com/jingmoxukong/p/5952447.html
 
 2. [SpringBoot + Spring Security 基本使用及个性化登录配置详解](https://www.jb51.net/article/140429.htm)
 
+3. [Spring boot + Spring Security 实现用户登录管理](https://blog.csdn.net/wtopps/article/details/78297197)

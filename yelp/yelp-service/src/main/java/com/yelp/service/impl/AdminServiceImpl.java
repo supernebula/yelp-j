@@ -9,6 +9,7 @@ import com.yelp.entity.AdminExample;
 import com.yelp.service.AdminService;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.authority.AuthorityUtils;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -17,11 +18,15 @@ import evol.security.MD5Util;
 
 import java.util.List;
 import java.util.UUID;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 @Service
 public class AdminServiceImpl implements AdminService, UserDetailsService {
 
     private AdminMapper adminMapper;
+
+    private Logger logger = LoggerFactory.getLogger(getClass());
 
     @Autowired
     public AdminServiceImpl(AdminMapper mapper){
@@ -142,12 +147,18 @@ public class AdminServiceImpl implements AdminService, UserDetailsService {
         return num > 0;
     }
 
+    /**
+     * https://blog.csdn.net/u013435893/article/details/79596628
+     * @param username
+     * @return
+     * @throws UsernameNotFoundException
+     */
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         Admin admin = this.getAdminByUsername(username);
         org.springframework.security.core.userdetails.User user
                 =  new org.springframework.security.core.userdetails.User(admin.getUsername()
-                , admin.getPassword()
-                , null);
+                ,"123456" //, admin.getPassword()
+                , AuthorityUtils.commaSeparatedStringToAuthorityList("admin"));
         return user;
     }
 }
