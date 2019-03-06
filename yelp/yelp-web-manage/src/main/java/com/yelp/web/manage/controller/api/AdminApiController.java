@@ -15,6 +15,7 @@ import org.apache.commons.lang3.StringUtils;
 import org.dozer.DozerBeanMapper;
 import org.dozer.Mapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.web.bind.annotation.*;
 import evol.security.MD5Util;
 
@@ -77,6 +78,7 @@ public class AdminApiController {
             return ApiResult.paramError("两次密码输入输入必须相同");
 
         Admin admin = new Admin();
+        admin.setPassword(dto.getConfirmPassword());
         admin.setUsername(dto.getUsername());
         admin.setEmail(dto.getEmail());
         admin.setMobile(dto.getMobile());
@@ -120,5 +122,12 @@ public class AdminApiController {
         boolean flag = adminService.udpate(admin);
         return flag ? ApiResult.success(null) : ApiResult.paramError();
     }
+
+
+//    @RequestMapping("login/{id}")
+//    public ApiResult<Object> login(@PathVariable String username, @PathVariable String password){
+//        UserDetails userDetails = adminService.loadUserByUsername(username);
+//        return flag ? ApiResult.success(null) : ApiResult.paramError();
+//    }
 
 }

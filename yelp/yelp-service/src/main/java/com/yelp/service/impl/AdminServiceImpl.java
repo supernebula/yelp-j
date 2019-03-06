@@ -2,6 +2,7 @@ package com.yelp.service.impl;
 
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
+import com.yelp.debug.MockAdmin;
 import com.yelp.user.AdminSearchParam;
 import com.yelp.dao.mapper.AdminMapper;
 import com.yelp.entity.Admin;
@@ -155,10 +156,16 @@ public class AdminServiceImpl implements AdminService, UserDetailsService {
      */
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         Admin admin = this.getAdminByUsername(username);
-        org.springframework.security.core.userdetails.User user
-                =  new org.springframework.security.core.userdetails.User(admin.getUsername()
-                ,"123456" //, admin.getPassword()
-                , AuthorityUtils.commaSeparatedStringToAuthorityList("admin"));
+//        org.springframework.security.core.userdetails.User user
+//                =  new org.springframework.security.core.userdetails.User(admin.getUsername()
+//                ,"123456" //, admin.getPassword()
+//                , AuthorityUtils.commaSeparatedStringToAuthorityList("admin"));
+
+                org.springframework.security.core.userdetails.User user
+                =  new org.springframework.security.core.userdetails.User(MockAdmin.USERNAME
+                , MockAdmin.PASSWORD //, admin.getPassword()
+                , AuthorityUtils.commaSeparatedStringToAuthorityList(MockAdmin.ROLE));
+
         return user;
     }
 }
