@@ -79,3 +79,11 @@ spring.resources.static-locations=file:D://User/ 
 ## ISSUE
 
 [解决Springboot中给Interceptor配置的excludePathPatterns无效的问题](https://blog.csdn.net/turbo_zone/article/details/84454193)
+
+
+# Integrating Apache Shiro 
+
+[Integrating Apache Shiro into Spring-Boot Applications](http://shiro.apache.org/spring-boot.html)
+
+
+[spring boot学习教程---------集成shiro(用户授权和权限控制)](https://www.vxzsk.com/769.html)
