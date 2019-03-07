@@ -11,6 +11,8 @@ import com.yelp.web.manage.controller.param.admin.AdminUpdateDto;
 import com.yelp.web.manage.controller.result.admin.AdminView;
 import evol.common.PageResult;
 import evol.common.api.ApiResult;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
 import org.apache.commons.lang3.StringUtils;
 import org.dozer.DozerBeanMapper;
 import org.dozer.Mapper;
@@ -26,6 +28,7 @@ import java.util.UUID;
 
 @RestController
 @RequestMapping("/api/admin")
+@Api(value = "Admin management")
 public class AdminApiController {
 
     private AdminService adminService;
@@ -51,6 +54,7 @@ public class AdminApiController {
         return list;
     }
 
+    @ApiOperation(value = "搜索分页获取管理员列表", notes = "")
     @GetMapping("search")
     public ApiResult<PageResult<AdminView>> search(AdminSearchParam param){
         PageInfo<Admin> pageInfo = adminService.Search(param);
@@ -60,6 +64,7 @@ public class AdminApiController {
         return ApiResult.success(result);
     }
 
+    @ApiOperation(value = "获取管理员信息", notes = "根据id获取管理员信息")
     @GetMapping("detail/{id}")
     public ApiResult<AdminView> detail(@PathVariable String id){
         if(StringUtils.isEmpty(id)) {
@@ -71,6 +76,7 @@ public class AdminApiController {
 
     }
 
+    @ApiOperation(value = "创建管理员", notes = "")
     @PostMapping("create")
     public ApiResult<Object> createPost(AdminCreateDto dto){
 
@@ -87,6 +93,7 @@ public class AdminApiController {
         return flag ? ApiResult.success(null) : ApiResult.paramError();
     }
 
+    @ApiOperation(value = "编辑管理员", notes = "")
     @PostMapping("edit/{id}")
     public ApiResult<Object> editPost(@PathVariable String id, AdminUpdateDto dto){
         if(!id.equals(dto.getId()))
@@ -100,12 +107,14 @@ public class AdminApiController {
         return flag ? ApiResult.success(null) : ApiResult.paramError();
     }
 
+    @ApiOperation(value = "删除管理员", notes = "")
     @DeleteMapping("delete/{id}")
     public ApiResult<Object> delete(@PathVariable String id){
         boolean flag = adminService.deleteById(id);
         return flag ? ApiResult.success(null) : ApiResult.paramError();
     }
 
+    @ApiOperation(value = "修改管理员密码", notes = "")
     @PostMapping("changePwd/{id}")
     public ApiResult<Object> changePassword(@PathVariable() String id, AdminChangePwdDto dto){
         if(!id.equals(dto.getId()))

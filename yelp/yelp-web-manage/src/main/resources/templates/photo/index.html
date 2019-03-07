@@ -104,6 +104,7 @@
                         model: {
                             fields: {
                                 id: { type: "string" },
+                                photo: { type: "string" },
                                 businessId: { type: "string" },
                                 caption: { type: "string" },
                                 label: { type: "string" }
@@ -138,6 +139,13 @@
                     sortable: false,
                     filterable: false,
                     template: '<a href="/photo/detail/#: id #">#: id #</a>'
+                },{
+                    field:"photo",
+                    title: "Photo",
+                    width: "220px",
+                    sortable: false,
+                    filterable: false,
+                    template: '<img style="width:100px;" src="/image/#: id #.jpg" />'
                 },{
                     field:"businessId",
                     title: "BusinessId",
