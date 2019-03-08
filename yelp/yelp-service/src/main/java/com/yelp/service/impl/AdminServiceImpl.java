@@ -3,7 +3,7 @@ package com.yelp.service.impl;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import com.yelp.debug.MockAdmin;
-import com.yelp.user.AdminSearchParam;
+import com.yelp.searchParam.AdminSearchParam;
 import com.yelp.dao.mapper.AdminMapper;
 import com.yelp.entity.Admin;
 import com.yelp.entity.AdminExample;

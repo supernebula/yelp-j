@@ -2,7 +2,9 @@ package com.yelp.service.impl;
 
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
-import com.yelp.business.UserSearchParam;
+import com.yelp.entity.Permission;
+import com.yelp.entity.Role;
+import com.yelp.searchParam.UserSearchParam;
 import com.yelp.dao.mapper.UserMapper;
 import com.yelp.entity.User;
 import com.yelp.entity.UserExample;
@@ -70,5 +72,15 @@ public class UserServiceImpl implements UserService {
     public User getUser(String id) {
         User item = userMapper.selectByPrimaryKey(id);
         return item;
+    }
+
+    @Override
+    public List<Role> getRoleList(String userId) {
+        return null;
+    }
+
+    @Override
+    public List<Permission> getPermissionList(String userId) {
+        return null;
     }
 }

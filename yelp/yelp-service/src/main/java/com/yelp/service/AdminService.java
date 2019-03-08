@@ -1,7 +1,7 @@
 package com.yelp.service;
 
 import com.github.pagehelper.PageInfo;
-import com.yelp.user.AdminSearchParam;
+import com.yelp.searchParam.AdminSearchParam;
 import com.yelp.entity.Admin;
 import org.springframework.security.core.userdetails.UserDetailsService;
 

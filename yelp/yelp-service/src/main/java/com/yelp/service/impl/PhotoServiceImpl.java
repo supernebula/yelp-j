@@ -2,7 +2,7 @@ package com.yelp.service.impl;
 
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
-import com.yelp.business.PhotoSearchParam;
+import com.yelp.searchParam.PhotoSearchParam;
 import com.yelp.dao.mapper.PhotoMapper;
 import com.yelp.entity.Photo;
 import com.yelp.entity.PhotoExample;

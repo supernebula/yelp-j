@@ -1,7 +1,7 @@
 package com.yelp.web.manage.controller.api;
 
 import com.github.pagehelper.PageInfo;
-import com.yelp.business.UserSearchParam;
+import com.yelp.searchParam.UserSearchParam;
 import com.yelp.entity.User;
 import com.yelp.service.UserService;
 import evol.common.PageResult;

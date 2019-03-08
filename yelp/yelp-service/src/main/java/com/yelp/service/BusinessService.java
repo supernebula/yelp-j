@@ -1,7 +1,7 @@
 package com.yelp.service;
 
 import com.github.pagehelper.PageInfo;
-import com.yelp.business.BusinessSearchParam;
+import com.yelp.searchParam.BusinessSearchParam;
 import com.yelp.entity.Business;
 
 import java.util.List;

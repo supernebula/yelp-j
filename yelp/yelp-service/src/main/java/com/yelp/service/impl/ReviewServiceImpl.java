@@ -2,10 +2,8 @@ package com.yelp.service.impl;
 
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
-import com.yelp.business.ReviewSearchParam;
+import com.yelp.searchParam.ReviewSearchParam;
 import com.yelp.dao.mapper.ReviewMapper;
-import com.yelp.entity.Business;
-import com.yelp.entity.BusinessExample;
 import com.yelp.entity.Review;
 import com.yelp.entity.ReviewExample;
 import com.yelp.service.ReviewService;

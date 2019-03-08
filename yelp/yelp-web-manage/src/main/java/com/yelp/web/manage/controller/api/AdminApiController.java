@@ -1,10 +1,9 @@
 package com.yelp.web.manage.controller.api;
 
 import com.github.pagehelper.PageInfo;
-import com.yelp.dao.mapper.AdminMapper;
 import com.yelp.entity.Admin;
 import com.yelp.service.AdminService;
-import com.yelp.user.AdminSearchParam;
+import com.yelp.searchParam.AdminSearchParam;
 import com.yelp.web.manage.controller.param.admin.AdminChangePwdDto;
 import com.yelp.web.manage.controller.param.admin.AdminCreateDto;
 import com.yelp.web.manage.controller.param.admin.AdminUpdateDto;
@@ -17,14 +16,12 @@ import org.apache.commons.lang3.StringUtils;
 import org.dozer.DozerBeanMapper;
 import org.dozer.Mapper;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.web.bind.annotation.*;
 import evol.security.MD5Util;
 
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
-import java.util.UUID;
 
 @RestController
 @RequestMapping("/api/admin")

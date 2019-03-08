@@ -2,7 +2,7 @@ package com.yelp.service.impl;
 
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
-import com.yelp.business.BusinessSearchParam;
+import com.yelp.searchParam.BusinessSearchParam;
 import com.yelp.dao.mapper.BusinessMapper;
 import com.yelp.entity.Business;
 import com.yelp.entity.BusinessExample;

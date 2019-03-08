@@ -1,4 +1,4 @@
-package com.yelp.user;
+package com.yelp.searchParam;
 
 import evol.common.BaseSearchParam;
 import lombok.Data;

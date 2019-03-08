@@ -1,7 +1,7 @@
 package com.yelp.web.manage.controller.api;
 
 import com.github.pagehelper.PageInfo;
-import com.yelp.business.PhotoSearchParam;
+import com.yelp.searchParam.PhotoSearchParam;
 import com.yelp.entity.Photo;
 import com.yelp.service.PhotoService;
 import evol.common.PageResult;

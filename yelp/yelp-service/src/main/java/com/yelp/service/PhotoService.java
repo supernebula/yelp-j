@@ -1,7 +1,7 @@
 package com.yelp.service;
 
 import com.github.pagehelper.PageInfo;
-import com.yelp.business.PhotoSearchParam;
+import com.yelp.searchParam.PhotoSearchParam;
 import com.yelp.entity.Photo;
 
 public interface PhotoService {

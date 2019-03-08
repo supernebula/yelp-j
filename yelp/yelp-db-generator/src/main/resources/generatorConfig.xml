@@ -54,6 +54,22 @@
         <table schema="yelp_db" tableName="admin" >
             <!--<generatedKey column="id" sqlStatement="MySql" identity="true" />-->
         </table>
+
+        <table schema="yelp_db" tableName="role" >
+            <generatedKey column="id" sqlStatement="MySql" identity="true" />
+        </table>
+        <table schema="yelp_db" tableName="permission" >
+            <generatedKey column="id" sqlStatement="MySql" identity="true" />
+        </table>
+        <table schema="yelp_db" tableName="user_role" >
+            <generatedKey column="id" sqlStatement="MySql" identity="true" />
+        </table>
+        <table schema="yelp_db" tableName="role_permission" >
+            <generatedKey column="id" sqlStatement="MySql" identity="true" />
+        </table>
+
+
+
         <table schema="yelp_db" tableName="attribute" >
             <generatedKey column="id" sqlStatement="MySql" identity="true" />
         </table>

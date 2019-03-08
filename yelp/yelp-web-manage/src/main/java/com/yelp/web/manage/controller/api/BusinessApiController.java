@@ -5,11 +5,10 @@ import com.yelp.entity.Business;
 import com.yelp.service.BusinessService;
 import evol.common.PageResult;
 import evol.common.api.ApiResult;
-import evol.common.api.StatusCode;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
-import com.yelp.business.BusinessSearchParam;
+import com.yelp.searchParam.BusinessSearchParam;
 
 @RestController
 @RequestMapping("/api/business")
