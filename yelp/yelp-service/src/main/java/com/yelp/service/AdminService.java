@@ -1,14 +1,18 @@
 package com.yelp.service;
 
 import com.github.pagehelper.PageInfo;
+import com.yelp.entity.Permission;
+import com.yelp.entity.Role;
 import com.yelp.searchParam.AdminSearchParam;
 import com.yelp.entity.Admin;
 import org.springframework.security.core.userdetails.UserDetailsService;
 
+import java.util.List;
+
 public interface AdminService extends UserDetailsService {
 
     /**
-     * 搜索照片
+     * 搜索管理员
      * @param param 搜索条件
      * @return
      */
@@ -29,6 +33,18 @@ public interface AdminService extends UserDetailsService {
     public boolean udpate(Admin admin);
 
     public boolean deleteById(String id);
+
+    /**
+     * 获取指定用户的角色集合
+     * @return
+     */
+    List<Role> getRoleList(String userId);
+
+    /**
+     * 获取指定用户的权限集合
+     * @return
+     */
+    List<Permission> getPermissionList(String userId);
 
 
 }

@@ -74,13 +74,5 @@ public class UserServiceImpl implements UserService {
         return item;
     }
 
-    @Override
-    public List<Role> getRoleList(String userId) {
-        return null;
-    }
 
-    @Override
-    public List<Permission> getPermissionList(String userId) {
-        return null;
-    }
 }

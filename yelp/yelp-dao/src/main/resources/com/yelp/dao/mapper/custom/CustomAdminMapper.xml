@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Config 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.essg.dao.mapper.custom.CustomAdminMapper">
+
+
+
+    <select id="getRoleList" resultType="com.essg.entity.Role">
+      SELECT role.id, role.name, role.description, role.available
+      FROM role INNER JOIN user_role
+	  ON role.id = user_role.role_id AND user_role.user_id = #{userId}
+    </select>
+
+    <!--测试添加了临时表测试-->
+    <select id="getPermissionList" resultType="com.essg.entity.Permission">
+       DROP TEMPORARY TABLE IF EXISTS temp_user_role_permission;
+			  DROP TEMPORARY TABLE IF EXISTS new_table;
+
+			 CREATE TEMPORARY TABLE  temp_user_role_permission
+			 SELECT role_permission.role_id, role_permission.permission_id
+        FROM user_role INNER JOIN role_permission
+				ON role_permission.role_id = user_role.role_id AND user_role.user_id = #{userId};
+
+				SELECT permission.*
+				FROM permission, temp_user_role_permission
+				WHERE permission.id = temp_user_role_permission.permission_id;
+    </select>
+
+</mapper>

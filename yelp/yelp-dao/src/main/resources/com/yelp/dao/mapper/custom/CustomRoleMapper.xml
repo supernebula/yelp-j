@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Config 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.essg.dao.mapper.custom.CustomAdminMapper">
+
+
+
+    <select id="getPermissionList" resultType="com.essg.entity.Role">
+      SELECT permission.id, permission.name, permission.resource_type, permission.url, permission.parent_id, permission.parent_ids, permission.available
+      FROM permission INNER JOIN role_permission
+	  ON permission.id = role_permission.role_id AND role_permission.role_id = #{roleId}
+    </select>
+
+
+</mapper>
