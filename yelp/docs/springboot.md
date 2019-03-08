@@ -87,3 +87,10 @@ spring.resources.static-locations=file:D://User/ 
 
 
 [spring boot学习教程---------集成shiro(用户授权和权限控制)](https://www.vxzsk.com/769.html)
+
+
+[Spring Boot 集成 Shiro权限框架](https://www.jianshu.com/p/63449d21b4b9)
+
+
+
+## 缓存 Ehcache（进程内缓存框架）、 Redis
