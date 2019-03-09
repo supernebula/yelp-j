@@ -7,6 +7,7 @@ import com.yelp.service.RoleService;
 import com.yelp.web.manage.controller.param.role.RoleAvailableDto;
 import com.yelp.web.manage.controller.param.role.RoleCreateDto;
 import com.yelp.web.manage.controller.param.role.RoleUpdateDto;
+import com.yelp.web.manage.controller.param.role.AdminRoleCreateDto;
 import evol.common.PageResult;
 import evol.common.api.ApiResult;
 import io.swagger.annotations.ApiOperation;
@@ -95,6 +96,15 @@ public class RoleApiController {
         if(!id.equals(dto.getId()))
             throw new RuntimeException("角色id参数错误");
         boolean flag = roleService.changeAvailable(dto.getId(), dto.getAvailable());
+        return flag ? ApiResult.success(null) : ApiResult.paramError();
+    }
+
+    @ApiOperation(value = "设置（管理员）用户角色", notes = "")
+    @PostMapping("createUserRole/{adminid}")
+    public ApiResult<Object> changeAvailable(@PathVariable(name = "adminid") String adminId, AdminRoleCreateDto dto){
+        if(!adminId.equals(dto.getAdminId()))
+            throw new RuntimeException("（管理员）用户id参数错误");
+        boolean flag = roleService.insertAdminRole(dto.getAdminId(), dto.getRoleId());
         return flag ? ApiResult.success(null) : ApiResult.paramError();
     }
 

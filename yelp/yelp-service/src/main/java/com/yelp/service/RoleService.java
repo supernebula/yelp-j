@@ -49,4 +49,6 @@ public interface RoleService {
 
     public boolean changeAvailable(String roleId, AvailableStatus available);
 
+    public boolean insertAdminRole(String adminId, String[] roleIds);
+
 }

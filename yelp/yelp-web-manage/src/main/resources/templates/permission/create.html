@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="zh-CN" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/web/thymeleaf/layout" layout:decorator="shared/layout">
+
+<head>
+    <title>Yelp Permission Management</title>
+    <link rel="stylesheet" th:href="@{/kendoui/css/kendo.common-material.min.css}" />
+    <link rel="stylesheet" th:href="@{/kendoui/css/kendo.material.min.css}" />
+    <link rel="stylesheet" th:href="@{/kendoui/css/kendo.material.mobile.min.css}" />
+
+</head>
+<body>
+<!-- Content Wrapper. Contains page content -->
+<div layout:fragment="content" class="content-wrapper">
+    <!-- Content Header (Page header) -->
+    <section class="content-header">
+        <h1>
+            Permission Create
+        </h1>
+        <ol class="breadcrumb">
+            <li><a href="#"><i class="fa fa-dashboard"></i> Permission</a></li>
+            <li class="active">create</li>
+            <li><a class="btn btn-default" th:href="@{/permission/index}" role="button">返回</a></li>
+        </ol>
+    </section>
+
+    <!-- Main content -->
+    <section class="content">
+        <!-- Main row -->
+        <div class="row">
+            <div class="col-lg-12 col-xs-12">
+                <div id="item-form">
+                    <form class="form-horizontal">
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">Name</label>
+                            <div class="col-sm-10">
+                                <input type="text" style="width: 300px;" id="name" placeholder="" />
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">Resource Type</label>
+                            <div class="col-sm-10">
+                                <input type="password" style="width: 300px;"  class="short-input" id="resourceType" placeholder="" />
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">Url</label>
+                            <div class="col-sm-10">
+                                <input type="url" style="width: 300px;"  class="short-input" id="url" placeholder="" />
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">Permission</label>
+                            <div class="col-sm-10">
+                                <input type="text" style="width: 300px;"  class="short-input" id="permission" placeholder="" />
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">Parent Id</label>
+                            <div class="col-sm-10">
+                                <input type="text" style="width: 300px;" class="short-input" id="parentId" placeholder="" />
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">Parent Ids</label>
+                            <div class="col-sm-10">
+                                <input type="text" style="width: 300px;" class="short-input" id="parentIds" placeholder="" />
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">Available</label>
+                            <div class="col-sm-10">
+                                <input type="text" style="width: 300px;" class="short-input" id="available" placeholder="" />
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <div class="col-sm-offset-2 col-sm-10">
+                                <button id="submitButton" type="button"  onclick="javascript:return permissionCreateSubmit();"  class="btn btn-default">Submit</button>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-sm-offset-2 col-sm-10">
+                                <span id="validate-message-ok" style="color: green;"></span>
+                                <span id="validate-message-error" style="color: red;"></span>
+                            </div>
+                        </div>
+                    </form>
+
+
+                </div>
+            </div>
+        </div>
+        <!-- /.row (main row) -->
+
+    </section>
+    <!-- /.content -->
+</div>
+<th:block layout:fragment="scriptsblock">
+    <script th:inline="javascript">
+
+        function permissionCreateSubmit() {
+            var name =$("#item-form input#name").val();
+            var resourceType =$("#item-form input#resourceType").val();
+            var url =$("#item-form input#url").val();
+            var permission =$("#item-form input#permission").val();
+            var parentId =$("#item-form input#parentId").val();
+            var parentIds =$("#item-form input#parentIds").val();
+            var available =$("#item-form input#available").val();
+
+            var apiUrl = "/api/permission/create";
+            var permissionIndexUrl = "/permission/index";
+
+            $.post(apiUrl, { name: name, resourceType : resourceType, url: url, permission: permission, parentId : parentId, parentIds : parentIds, available : available },
+                function(response){
+                    $("#validate-message-ok").html("");
+                    $("#validate-message-error").html("");
+                    if(response.success)
+                    {
+                        $("#validate-message-ok").html(response.message);
+                        window.location.href = adminIndexUrl;
+                        return;
+                    }
+
+                    $("#validate-message-error").html(response.message);
+                    $("#submitButton").removeAttr("disabled");
+
+                }, "json");
+            return false;
+        }
+    </script>
+</th:block>
+</body>
+</html>

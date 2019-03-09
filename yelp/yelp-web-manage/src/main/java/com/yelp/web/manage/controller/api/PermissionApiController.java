@@ -62,7 +62,7 @@ public class PermissionApiController {
     public ApiResult<Object> createPost(PermissionCreateDto dto){
 
         Permission permission = ConvertDtoToPermission(dto);
-        boolean flag = permissionService.insert(permission);
+        boolean flag = permissionService.insert(permission, dto.getRoleId());
         return flag ? ApiResult.success(null) : ApiResult.paramError();
     }
 
@@ -91,8 +91,6 @@ public class PermissionApiController {
         boolean flag = permissionService.deleteById(id);
         return flag ? ApiResult.success(null) : ApiResult.paramError();
     }
-
-
 
     @ApiOperation(value = "修改权限有效性状态", notes = "")
     @PostMapping("changeValid/{id}")

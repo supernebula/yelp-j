@@ -3,12 +3,11 @@ package com.yelp.service.impl;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import com.yelp.component.AvailableStatus;
+import com.yelp.dao.mapper.AdminRoleMapper;
 import com.yelp.dao.mapper.RoleMapper;
+import com.yelp.dao.mapper.UserRoleMapper;
 import com.yelp.dao.mapper.custom.CustomRoleMapper;
-import com.yelp.entity.Admin;
-import com.yelp.entity.AdminExample;
-import com.yelp.entity.Role;
-import com.yelp.entity.RoleExample;
+import com.yelp.entity.*;
 import com.yelp.searchParam.RoleSearchParam;
 import com.yelp.service.RoleService;
 import evol.security.MD5Util;
@@ -16,6 +15,7 @@ import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
@@ -25,7 +25,16 @@ public class RoleServiceImpl implements RoleService {
 
     private CustomRoleMapper customRoleMapper;
 
+    private AdminRoleMapper adminRoleMapper;
+
     private Logger logger = LoggerFactory.getLogger(getClass());
+
+
+    public RoleServiceImpl(RoleMapper roleMapper, CustomRoleMapper customRoleMapper, AdminRoleMapper adminRoleMapper){
+        this.roleMapper = roleMapper;
+        this.customRoleMapper = customRoleMapper;
+        this.adminRoleMapper = adminRoleMapper;
+    }
 
     @Override
     public PageInfo<Role> Search(RoleSearchParam param) {
@@ -104,6 +113,23 @@ public class RoleServiceImpl implements RoleService {
     public boolean changeAvailable(String roleId, AvailableStatus available) {
         int num = customRoleMapper.changeAvailable(roleId, available.getCode());
         return num > 0;
+    }
+
+    @Override
+    public boolean insertAdminRole(String adminId, String[] roleIds) {
+
+        int num = 0;
+        for (String roleId : roleIds) {
+            AdminRole adminRole = new AdminRole();
+            adminRole.setId(UUID.randomUUID().toString());
+            adminRole.setAdminId(adminId);
+            adminRole.setRoleId(roleId);
+            int num1 = adminRoleMapper.insert(adminRole);
+            num += num1;
+        }
+
+
+        return  num > 0;
     }
 
 

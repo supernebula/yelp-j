@@ -46,7 +46,7 @@ public interface PermissionService {
      */
     List<Permission> getPermissionsByAdmin(String adminId);
 
-    public boolean insert(Permission admin);
+    public boolean insert(Permission admin, String roleId);
 
     public boolean udpate(Permission admin);
 

@@ -4,17 +4,16 @@ import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import com.yelp.component.AvailableStatus;
 import com.yelp.dao.mapper.PermissionMapper;
+import com.yelp.dao.mapper.RolePermissionMapper;
 import com.yelp.dao.mapper.custom.CustomPermissionMapper;
-import com.yelp.entity.Permission;
-import com.yelp.entity.PermissionExample;
-import com.yelp.entity.Role;
-import com.yelp.entity.RoleExample;
+import com.yelp.entity.*;
 import com.yelp.searchParam.PermissionSearchParam;
 import com.yelp.service.PermissionService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.UUID;
@@ -27,13 +26,17 @@ public class PermissionServiceImpl implements PermissionService {
 
     private CustomPermissionMapper customPermissionMapper;
 
+    private RolePermissionMapper rolePermissionMapper;
+
     private Logger logger = LoggerFactory.getLogger(getClass());
 
     @Autowired
     public PermissionServiceImpl(PermissionMapper permissionMapper
-            , CustomPermissionMapper customPermissionMapper){
+            , CustomPermissionMapper customPermissionMapper
+            , RolePermissionMapper rolePermissionMapper){
         this.permissionMapper = permissionMapper;
         this.customPermissionMapper = customPermissionMapper;
+        this.rolePermissionMapper = rolePermissionMapper;
     }
 
 
@@ -88,7 +91,8 @@ public class PermissionServiceImpl implements PermissionService {
     }
 
     @Override
-    public boolean insert(Permission permission) {
+    @Transactional
+    public boolean insert(Permission permission, String roleId) {
         permission.setId(UUID.randomUUID().toString());
         PermissionExample example = new PermissionExample();
         PermissionExample.Criteria criteria = example.createCriteria();
@@ -97,7 +101,14 @@ public class PermissionServiceImpl implements PermissionService {
         if(list.size() > 0)
             throw new RuntimeException("权限" + permission.getName() + "已存在，不能重复创建");
         int num = permissionMapper.insert(permission);
-        return num > 0;
+        if(num == 0)
+            return false;
+        RolePermission rolePermission = new RolePermission();
+        rolePermission.setId(UUID.randomUUID().toString());
+        rolePermission.setRoleId(roleId);
+        rolePermission.setPermissionId(permission.getId());
+        int num2 = rolePermissionMapper.insert(rolePermission);
+        return num2 > 0;
     }
 
     @Override

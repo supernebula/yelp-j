@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="zh-CN" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/web/thymeleaf/layout" layout:decorator="shared/layout">
+
+<head>
+    <title>Yelp Role Management</title>
+    <link rel="stylesheet" th:href="@{/kendoui/css/kendo.common-material.min.css}" />
+    <link rel="stylesheet" th:href="@{/kendoui/css/kendo.material.min.css}" />
+    <link rel="stylesheet" th:href="@{/kendoui/css/kendo.material.mobile.min.css}" />
+</head>
+<body>
+<!-- Content Wrapper. Contains page content -->
+<div layout:fragment="content" class="content-wrapper">
+    <!-- Content Header (Page header) -->
+    <section class="content-header">
+        <h1>
+            Role Edit
+        </h1>
+        <ol class="breadcrumb">
+            <li><a href="#"><i class="fa fa-dashboard"></i> Role</a></li>
+            <li class="active">edit</li>
+            <li><a class="btn btn-default" th:href="@{/role/index}" role="button">返回</a></li>
+        </ol>
+    </section>
+
+    <!-- Main content -->
+    <section class="content">
+        <!-- Main row -->
+        <div class="row">
+            <div class="col-lg-12 col-xs-12">
+                <div id="item-form">
+                    <form class="form-horizontal">
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">Name</label>
+                            <div class="col-sm-10">
+                                <input type="hidden"  id="id" />
+                                <span id="name"  class="checkbox"></span>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">Description</label>
+                            <div class="col-sm-10">
+                                <input type="text"  style="width: 300px;" id="description"  />
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">Available</label>
+                            <div class="col-sm-10">
+                                <input type="text"  style="width: 300px;" id="available"  />
+                            </div>
+                        </div>
+
+
+                        <div class="form-group">
+                            <div class="col-sm-offset-2 col-sm-10">
+                                <button id="submitButton" type="submit"  onclick="javascript:roleEditSubmit();"  class="btn btn-default">Submit</button>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-sm-offset-2 col-sm-10">
+                                <span id="validate-message-ok" style="color: green;"></span>
+                                <span id="validate-message-error" style="color: red;"></span>
+                            </div>
+                        </div>
+                    </form>
+
+
+                </div>
+            </div>
+        </div>
+        <!-- /.row (main row) -->
+
+    </section>
+    <!-- /.content -->
+</div>
+<th:block layout:fragment="scriptsblock">
+    <script th:inline="javascript">
+
+        var apiDetailUrl = "/api/role/detail/" + [[${id}]];
+        var apiEditUrl = "/api/role/edit/" + [[${id}]];
+        $(document).ready(function() {
+            $.getJSON(apiDetailUrl, null, function (response) {
+                if(!response.success)
+                {
+                    $("#validate-message-error").html(response.message);
+                    return;
+                }
+
+                var item = response.data;
+                $("#item-form input#id").val(item.id);
+                $("#item-form #name").html(item.name);
+                $("#item-form input#description").val(item.description);
+                $("#item-form input#available").val(item.available);
+            });
+
+        });
+
+        function roleEditSubmit() {
+
+            $("#submitButton").attr({"disabled":"disabled"});
+
+            var name =$("#item-form input#name").val();
+            var description =$("#item-form input#description").val();
+            var available =$("#item-form input#available").val();
+
+            $.post(apiEditUrl, { name: name, description : description, available: available },
+                function(response){
+                    $("#validate-message-ok").html("");
+                    $("#validate-message-error").html("");
+                    if(response.success)
+                    {
+                        $("#validate-message-ok").html(response.message);
+                    }else{
+                        $("#validate-message-error").html(response.message);
+                    }
+                    $("#submitButton").removeAttr("disabled");
+
+                }, "json");
+
+        }
+    </script>
+</th:block>
+</body>
+</html>

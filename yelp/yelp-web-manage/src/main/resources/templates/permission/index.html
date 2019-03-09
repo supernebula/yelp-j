@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html lang="zh-CN" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/web/thymeleaf/layout" layout:decorator="shared/layout">
+
+<head>
+    <title>Yelp Permission Management</title>
+    <link rel="stylesheet" th:href="@{/kendoui/css/kendo.common-material.min.css}" />
+    <link rel="stylesheet" th:href="@{/kendoui/css/kendo.material.min.css}" />
+    <link rel="stylesheet" th:href="@{/kendoui/css/kendo.material.mobile.min.css}" />
+</head>
+<body>
+<!-- Content Wrapper. Contains page content -->
+<div layout:fragment="content" class="content-wrapper">
+    <!-- Content Header (Page header) -->
+    <section class="content-header">
+        <h1>
+            Permission Management
+            <small>List</small>
+        </h1>
+        <ol class="breadcrumb">
+            <li><a href="#"><i class="fa fa-dashboard"></i> Permission</a></li>
+            <li class="active">list</li>
+        </ol>
+    </section>
+
+    <!-- Main content -->
+    <section class="content">
+        <!-- Main row -->
+        <div class="row">
+            <div class="col-lg-8 col-xs-8">
+                <div id="business-search" class="search-bar">
+                    <form class="form-inline">
+                        <div class="form-group">
+                            <label for="name">Name</label>
+                            <input type="text" class="form-control" id="name" placeholder="" />
+                        </div>
+                        <div class="form-group">
+                            <label for="resourceType">ResourceType</label>
+                            <input type="text" class="form-control" id="resourceType" placeholder="" />
+                        </div>
+                        <div class="form-group">
+                            <label for="url">Url</label>
+                            <input type="text" class="form-control" id="url" placeholder="" />
+                        </div>
+
+                        <div class="form-group">
+                            <label for="permission">Permission</label>
+                            <input type="text" class="form-control" id="permission" placeholder="" />
+                        </div>
+
+                        <div class="form-group">
+                            <label for="parentId">ParentId</label>
+                            <input type="text" class="form-control" id="parentId" placeholder="" />
+                        </div>
+
+                        <div class="form-group">
+                            <label for="available">Available</label>
+                            <input type="text" class="form-control" id="available" placeholder="" />
+                        </div>
+
+                        <button type="button" onclick="javascript:permissionSearch();" class="btn btn-default">Search</button>
+                        <button type="reset" class="btn btn-default">Clear</button>
+                    </form>
+                </div>
+            </div>
+            <div class="col-lg-4 col-xs-4 pull-right">
+                <div class="search-bar pull-right">
+                    <a th:href="@{/permission/create}" class="btn btn-default">Create New</a>
+                </div>
+
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-12 col-xs-12">
+                <div id="permission-grid"></div>
+            </div>
+        </div>
+        <!-- /.row (main row) -->
+
+    </section>
+    <!-- /.content -->
+</div>
+<th:block layout:fragment="scriptsblock">
+    <script th:src="@{/kendoui/js/kendo.all.min.js}"></script>
+    <script>
+        function getSearchParam() {
+
+            return {
+                "name" : $("#name").val().trim(),
+                "resourceType" : $("#resourceType").val().trim(),
+                "url" : $("#url").val().trim(),
+                "permission" : $("#permission").val().trim(),
+                "parentId" : $("#parentId").val().trim(),
+                "available" : $("#available").val().trim()
+            };
+        }
+
+        var apiUrl = "/api/permission/search";
+
+        $(document).ready(function() {
+            window.permissionGrid = $("#permission-grid").kendoGrid({
+                theme: "bootstrap",
+                dataSource: {
+                    transport: {
+                        read:{
+                            url: apiUrl,
+                            contentType: "application/json",
+                            success: function(result) {
+                                // notify the data source that the request succeeded
+                                options.success(result.data.list);
+                            },
+                            error: function(result) {
+                                // notify the data source that the request failed
+                                console.log("错误，code:" + result.code + ", messge:" + result.message);
+                                options.error(result);
+                            }
+                        },
+                        parameterMap: function (data, type) {
+                            if (type === "read") {
+                                var searchParam = getSearchParam();
+                                var param = $.extend(searchParam, data);
+                                // if type is "read", then data is { foo: 1 }, we also want to add { "bar": 2 }
+                                //paramStr = kendo.stringify(param);
+                                return param;
+                            }
+                            return data;
+                        }
+                    },
+                    schema: {
+                        data: function(response) {
+                            return response.data.list; // twitter's response is { "statuses": [ /* results */ ] }
+                        },total: function(response){
+                            return response.data.total;
+                        },
+                        model: {
+                            fields: {
+                                name: { type: "string" },
+                                resource_type: { type: "string" },
+                                url: { type: "string" },
+                                permission: {type: "string"},
+                                parentId:{type: "string"},
+                                parentIds:{type: "string"},
+                                available:{type: "number"}
+                            }
+                        }
+                    },
+                    pageSize: 20,
+                    serverPaging: true,
+                    serverFiltering: true,
+                    serverSorting: true
+                },
+                //height: 550,
+                filterable: true,
+                sortable: true,
+                pageable: {
+                    refresh: true,
+                    pageSizes: true,
+                    buttonCount: 10,
+                    page: 1,
+                    pageSize: 20,
+                    pageSizes: [10, 20, 30, 40, 50, 60, 80, 100]
+                },
+                columns: [{
+                    field: "rowNumber",
+                    title: "No",
+                    width: "100px",
+                    template: '<span style="color:gray;" class="row-number"></span>'
+                },{
+                    field:"name",
+                    title: "Name",
+                    sortable: false,
+                    filterable: false,
+                    template: '<a href="/permission/detail/#: id #">#: name #</a>'
+                },{
+                    field:"resourceType",
+                    title: "ResourceType",
+                    width: "250px",
+                    sortable: false,
+                    filterable: false
+                },{
+                    field:"url",
+                    title: "Url",
+                    width: "200px",
+                    sortable: false,
+                    filterable: false,
+                },{
+                    field:"permission",
+                    title: "Permission",
+                    width: "150px",
+                    sortable: false,
+                    filterable: false
+                },{
+                    field:"parentId",
+                    title: "ParentId",
+                    sortable: false,
+                    filterable: false
+                },{
+                    field:"parentIds",
+                    title: "ParentIds",
+                    sortable: false,
+                    filterable: false
+                },{
+                    field:"available",
+                    title: "Available",
+                    sortable: false,
+                    filterable: false
+                },{
+                    field:"operate",
+                    title: "Operate",
+                    sortable: false,
+                    filterable: false,
+                    template: '<a href="/permission/edit/#: id #">edit</a>&nbsp;&nbsp;&nbsp;&nbsp;<a href="/permission/changeValid/#: id #">Change Password</a>&nbsp;&nbsp;&nbsp;&nbsp;<a onclick="javascript: return confirmDelete(this);" api-href="/api/changeValid/delete/#: id #" style="cursor:pointer; ">delete</a>'
+                }],
+                dataBound: function () {
+                    var rows = this.items();
+
+                    $(rows).each(function () {
+                        var index = $(this).index() + 1;
+                        var rowLabel = $(this).find(".row-number");
+                        $(rowLabel).html(index);
+                    });
+                }
+            });
+        });
+
+
+        function confirmDelete(_this) {
+            var apiDeleteUrl = $(_this).attr("api-href");
+            console.log("api-href:" + apiDeleteUrl);
+
+            if(!confirm("确定删除？")){
+                return;
+            }
+
+            $.ajax({
+                type: "DELETE",
+                url: apiDeleteUrl,
+                dataType: "json",
+                success: function(response){
+                    if(response.success)
+                    {
+                        console.log(response.msg);
+                        window.location.reload();
+                    }
+                }
+            });
+
+        }
+
+
+        /*<![CDATA[*/
+        function permissionSearch() {
+            var permissionGrid = $("#permission-grid").data("kendoGrid");
+            permissionGrid.dataSource.read().then(function () {
+                permissionGrid.dataSource.view();
+            });
+            permissionGrid.refresh();
+
+        }
+        /*]]>*/
+
+    </script>
+</th:block>
+</body>
+</html>

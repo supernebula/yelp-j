@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="zh-CN" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/web/thymeleaf/layout" layout:decorator="shared/layout">
+
+<head>
+    <title>Yelp Role Management</title>
+    <link rel="stylesheet" th:href="@{/kendoui/css/kendo.common-material.min.css}" />
+    <link rel="stylesheet" th:href="@{/kendoui/css/kendo.material.min.css}" />
+    <link rel="stylesheet" th:href="@{/kendoui/css/kendo.material.mobile.min.css}" />
+</head>
+<body>
+<!-- Content Wrapper. Contains page content -->
+<div layout:fragment="content" class="content-wrapper">
+    <!-- Content Header (Page header) -->
+    <section class="content-header">
+        <h1>
+            Role Management
+            <small>List</small>
+        </h1>
+        <ol class="breadcrumb">
+            <li><a href="#"><i class="fa fa-dashboard"></i> Role</a></li>
+            <li class="active">list</li>
+        </ol>
+    </section>
+
+    <!-- Main content -->
+    <section class="content">
+        <!-- Main row -->
+        <div class="row">
+            <div class="col-lg-8 col-xs-8">
+                <div id="role-search" class="search-bar">
+                    <form class="form-inline">
+                        <div class="form-group">
+                            <label for="name">Name</label>
+                            <input type="text" class="form-control" id="name" placeholder="" />
+                        </div>
+                        <div class="form-group">
+                            <label for="description">Description</label>
+                            <input type="text" class="form-control" id="description" placeholder="" />
+                        </div>
+                        <div class="form-group">
+                            <label for="available">Available</label>
+                            <input type="text" class="form-control" id="available" placeholder="" />
+                        </div>
+
+                        <button type="button" onclick="javascript:roleSearch();" class="btn btn-default">Search</button>
+                        <button type="reset" class="btn btn-default">Clear</button>
+                    </form>
+                </div>
+            </div>
+            <div class="col-lg-4 col-xs-4 pull-right">
+                <div class="search-bar pull-right">
+                    <a th:href="@{/role/create}" class="btn btn-default">Role New</a>
+                </div>
+
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-12 col-xs-12">
+                <div id="role-grid"></div>
+            </div>
+        </div>
+        <!-- /.row (main row) -->
+
+    </section>
+    <!-- /.content -->
+</div>
+<th:block layout:fragment="scriptsblock">
+    <script th:src="@{/kendoui/js/kendo.all.min.js}"></script>
+    <script>
+        function getSearchParam() {
+
+            return {
+                "name" : $("#name").val().trim(),
+                "description" : $("#description").val().trim(),
+                "available" : $("#available").val().trim()
+            };
+        }
+
+        var apiUrl = "/api/role/search";
+
+        $(document).ready(function() {
+            window.roleGrid = $("#role-grid").kendoGrid({
+                theme: "bootstrap",
+                dataSource: {
+                    transport: {
+                        read:{
+                            url: apiUrl,
+                            contentType: "application/json",
+                            success: function(result) {
+                                // notify the data source that the request succeeded
+                                options.success(result.data.list);
+                            },
+                            error: function(result) {
+                                // notify the data source that the request failed
+                                console.log("错误，code:" + result.code + ", messge:" + result.message);
+                                options.error(result);
+                            }
+                        },
+                        parameterMap: function (data, type) {
+                            if (type === "read") {
+                                var searchParam = getSearchParam();
+                                var param = $.extend(searchParam, data);
+                                // if type is "read", then data is { foo: 1 }, we also want to add { "bar": 2 }
+                                //paramStr = kendo.stringify(param);
+                                return param;
+                            }
+                            return data;
+                        }
+                    },
+                    schema: {
+                        data: function(response) {
+                            return response.data.list; // twitter's response is { "statuses": [ /* results */ ] }
+                        },total: function(response){
+                            return response.data.total;
+                        },
+                        model: {
+                            fields: {
+                                name: { type: "string" },
+                                description: { type: "string" },
+                                available: { type: "string" }
+                            }
+                        }
+                    },
+                    pageSize: 20,
+                    serverPaging: true,
+                    serverFiltering: true,
+                    serverSorting: true
+                },
+                //height: 550,
+                filterable: true,
+                sortable: true,
+                pageable: {
+                    refresh: true,
+                    pageSizes: true,
+                    buttonCount: 10,
+                    page: 1,
+                    pageSize: 20,
+                    pageSizes: [10, 20, 30, 40, 50, 60, 80, 100]
+                },
+                columns: [{
+                    field: "rowNumber",
+                    title: "No",
+                    width: "100px",
+                    template: '<span style="color:gray;" class="row-number"></span>'
+                },{
+                    field:"name",
+                    title: "Name",
+                    sortable: false,
+                    filterable: false,
+                    template: '<a href="/role/detail/#: id #">#: name #</a>'
+                },{
+                    field:"description",
+                    title: "Description",
+                    width: "250px",
+                    sortable: false,
+                    filterable: false
+                },{
+                    field:"available",
+                    title: "Available",
+                    width: "200px",
+                    sortable: false,
+                    filterable: false,
+                },{
+                    field:"operate",
+                    title: "Operate",
+                    sortable: false,
+                    filterable: false,
+                    template: '<a href="/role/edit/#: id #">edit</a>&nbsp;&nbsp;&nbsp;&nbsp;<a href="/role/changeValid/#: id #">Change Available</a>&nbsp;&nbsp;&nbsp;&nbsp;<a onclick="javascript: return confirmDelete(this);" api-href="/api/role/delete/#: id #" style="cursor:pointer; ">delete</a>'
+                }],
+                dataBound: function () {
+                    var rows = this.items();
+
+                    $(rows).each(function () {
+                        var index = $(this).index() + 1;
+                        var rowLabel = $(this).find(".row-number");
+                        $(rowLabel).html(index);
+                    });;
+                }
+            });
+        });
+
+
+        function confirmDelete(_this) {
+            var apiDeleteUrl = $(_this).attr("api-href");
+            console.log("api-href:" + apiDeleteUrl);
+
+            if(!confirm("确定删除？")){
+                return;
+            }
+
+            $.ajax({
+                type: "DELETE",
+                url: apiDeleteUrl,
+                dataType: "json",
+                success: function(response){
+                    if(response.success)
+                    {
+                        console.log(response.msg);
+                        window.location.reload();
+                    }
+                }
+            });
+
+        }
+
+
+        /*<![CDATA[*/
+        function roleSearch() {
+            var roleGrid = $("#role-grid").data("kendoGrid");
+            roleGrid.dataSource.read().then(function () {
+                roleGrid.dataSource.view();
+            });
+            roleGrid.refresh();
+
+        }
+        /*]]>*/
+
+    </script>
+</th:block>
+</body>
+</html>
