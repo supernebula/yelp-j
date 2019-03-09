@@ -5,17 +5,13 @@ import com.github.pagehelper.PageInfo;
 import com.yelp.component.AvailableStatus;
 import com.yelp.dao.mapper.AdminRoleMapper;
 import com.yelp.dao.mapper.RoleMapper;
-import com.yelp.dao.mapper.UserRoleMapper;
 import com.yelp.dao.mapper.custom.CustomRoleMapper;
 import com.yelp.entity.*;
 import com.yelp.searchParam.RoleSearchParam;
 import com.yelp.service.RoleService;
-import evol.security.MD5Util;
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
-import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
