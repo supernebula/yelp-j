@@ -1,6 +1,7 @@
 package com.yelp.service;
 
 import com.github.pagehelper.PageInfo;
+import com.yelp.component.AvailableStatus;
 import com.yelp.entity.Permission;
 import com.yelp.entity.Role;
 import com.yelp.searchParam.PermissionSearchParam;
@@ -24,7 +25,7 @@ public interface RoleService {
      * @param rows
      * @return
      */
-    List<Role> getRole(int offset, int rows);
+    List<Role> getRoles(int offset, int rows);
 
     /**
      * 根据id获取单条角色记录
@@ -34,8 +35,18 @@ public interface RoleService {
     Role getRole(String id);
 
     /**
-     * 获取指定角色的权限集合
+     * 获取指定（管理员）用户的角色集合
      * @return
      */
-    List<Permission> getPermissions(String roleId);
+    List<Role> getRolesByAdmin(String adminId);
+
+
+    public boolean insert(Role role);
+
+    public boolean udpate(Role role);
+
+    public boolean deleteById(String id);
+
+    public boolean changeAvailable(String roleId, AvailableStatus available);
+
 }

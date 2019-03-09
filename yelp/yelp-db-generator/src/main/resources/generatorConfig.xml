@@ -61,7 +61,7 @@
         <table schema="yelp_db" tableName="permission" >
             <generatedKey column="id" sqlStatement="MySql" identity="true" />
         </table>
-        <table schema="yelp_db" tableName="user_role" >
+        <table schema="yelp_db" tableName="admin_role" >
             <generatedKey column="id" sqlStatement="MySql" identity="true" />
         </table>
         <table schema="yelp_db" tableName="role_permission" >

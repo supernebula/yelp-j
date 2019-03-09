@@ -49,7 +49,6 @@ public class AdminServiceImpl implements AdminService, UserDetailsService {
         if(!StringUtils.isEmpty(param.getEmail())) {criteria.andEmailLike(param.getEmail());}
         if(!StringUtils.isEmpty(param.getMobile())) {criteria.andMobileLike(param.getMobile());}
 
-
         PageHelper.startPage(param.getPage(), param.getPageSize());
         List<Admin> list = adminMapper.selectByExample(example);
         PageInfo<Admin> pageInfo = new PageInfo<>(list);
@@ -171,13 +170,4 @@ public class AdminServiceImpl implements AdminService, UserDetailsService {
         return user;
     }
 
-    @Override
-    public List<Role> getRoleList(String userId) {
-        return null;
-    }
-
-    @Override
-    public List<Permission> getPermissionList(String userId) {
-        return null;
-    }
 }

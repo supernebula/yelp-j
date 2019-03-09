@@ -1,6 +1,7 @@
 package com.yelp.service;
 
 import com.github.pagehelper.PageInfo;
+import com.yelp.component.AvailableStatus;
 import com.yelp.entity.Permission;
 import com.yelp.searchParam.PermissionSearchParam;
 
@@ -21,7 +22,7 @@ public interface PermissionService {
      * @param rows
      * @return
      */
-    List<Permission> getPermission(int offset, int rows);
+    List<Permission> getPermissions(int offset, int rows);
 
     /**
      * 根据id获取单条权限记录
@@ -29,4 +30,27 @@ public interface PermissionService {
      * @return
      */
     Permission getPermission(String id);
+
+
+    /**
+     * 获取指定角色的权限集合
+     * @return
+     */
+    List<Permission> getPermissionsByRole(String roleId);
+
+
+
+    /**
+     * 获取指定管理员的权限集合
+     * @return
+     */
+    List<Permission> getPermissionsByAdmin(String adminId);
+
+    public boolean insert(Permission admin);
+
+    public boolean udpate(Permission admin);
+
+    public boolean deleteById(String id);
+
+    public boolean changeAvailable(String permissionId, AvailableStatus available);
 }

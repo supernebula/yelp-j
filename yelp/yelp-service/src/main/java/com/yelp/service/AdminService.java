@@ -34,17 +34,4 @@ public interface AdminService extends UserDetailsService {
 
     public boolean deleteById(String id);
 
-    /**
-     * 获取指定用户的角色集合
-     * @return
-     */
-    List<Role> getRoleList(String userId);
-
-    /**
-     * 获取指定用户的权限集合
-     * @return
-     */
-    List<Permission> getPermissionList(String userId);
-
-
 }
