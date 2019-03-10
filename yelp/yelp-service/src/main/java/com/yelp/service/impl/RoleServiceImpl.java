@@ -73,6 +73,16 @@ public class RoleServiceImpl implements RoleService {
     }
 
     @Override
+    public List<Role> getRolesByAdminUsername(String username) {
+
+
+        if(username == null)
+            throw new NullPointerException("username");
+        List<Role> roleList = customRoleMapper.getRolesByAdminUsername(username);
+        return roleList;
+    }
+
+    @Override
     public boolean insert(Role role) {
         role.setId(UUID.randomUUID().toString());
         RoleExample example = new RoleExample();

@@ -9,6 +9,8 @@ public interface CustomRoleMapper {
 
     List<Role> getRolesByAdmin(String adminId);
 
+    List<Role> getRolesByAdminUsername(String username);
+
     int changeAvailable(String roleId, int available);
 
 }

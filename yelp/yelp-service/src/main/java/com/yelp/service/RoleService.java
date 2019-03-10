@@ -40,6 +40,12 @@ public interface RoleService {
      */
     List<Role> getRolesByAdmin(String adminId);
 
+    /**
+     * 获取指定（管理员）用户的角色集合
+     * @return
+     */
+    List<Role> getRolesByAdminUsername(String username);
+
 
     public boolean insert(Role role);
 
