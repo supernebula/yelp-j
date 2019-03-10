@@ -1,17 +1,17 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Config 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.essg.dao.mapper.custom.CustomPermissionMapper">
+<mapper namespace="com.yelp.dao.mapper.custom.CustomPermissionMapper">
 
 
 
-    <select id="getPermissionsByRole" resultType="com.essg.entity.Permission">
+    <select id="getPermissionsByRole" resultType="com.yelp.entity.Permission">
       SELECT permission.id, permission.name, permission.resource_type, permission.url, permission.parent_id, permission.parent_ids, permission.available
       FROM permission INNER JOIN role_permission
 	  ON permission.id = role_permission.role_id AND role_permission.role_id = #{roleId}
     </select>
 
     <!--测试添加了临时表测试-->
-    <select id="getPermissionsByAdmin" resultType="com.essg.entity.Permission">
+    <select id="getPermissionsByAdmin" resultType="com.yelp.entity.Permission">
        DROP TEMPORARY TABLE IF EXISTS temp_admin_role_permission;
 			 CREATE TEMPORARY TABLE  temp_admin_role_permission
 			 SELECT role_permission.role_id, role_permission.permission_id
