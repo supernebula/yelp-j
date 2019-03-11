@@ -102,4 +102,6 @@ hashService.generatePublicSalt设置为true，同时配置私有salt，这似乎
 
 [关于spring整合shiro授权验证不通过的问题](https://www.oschina.net/question/589767_136768)
 
+[org.apache.shiro.authc.IncorrectCredentialsException 异常处理](https://blog.csdn.net/qian19950120/article/details/78079762)
+
 ## 缓存 Ehcache（进程内缓存框架）、 Redis

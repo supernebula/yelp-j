@@ -1,6 +1,9 @@
 package com.yelp.web.manage.controller;
 
+import com.yelp.entity.Admin;
+import com.yelp.service.AdminService;
 import com.yelp.web.manage.controller.param.login.LoginDto;
+import evol.security.MD5Util;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.*;
 import org.apache.shiro.subject.Subject;
@@ -18,6 +21,11 @@ import javax.validation.Valid;
 public class ShiroLoginController {
     private static final Logger logger = LoggerFactory.getLogger(ShiroLoginController.class);
 
+    private AdminService adminService;
+
+    public ShiroLoginController(AdminService adminService){
+        this.adminService = adminService;
+    }
 
     @GetMapping("/login")
     public String login() {
@@ -31,7 +39,12 @@ public class ShiroLoginController {
         }
         String loginName = user.getUsername();
         logger.info("准备登陆用户 => {}", loginName);
-        UsernamePasswordToken token = new UsernamePasswordToken(loginName,user.getPassword());
+
+        Admin admin = adminService.getAdminByUsername(loginName);
+
+//        String saltPwd = MD5Util.MD5(user.getPassword(), admin.getSalt());
+//        UsernamePasswordToken token = new UsernamePasswordToken(loginName, saltPwd);
+        UsernamePasswordToken token = new UsernamePasswordToken(loginName, user.getPassword());
         //获取当前的Subject
         Subject currentUser = SecurityUtils.getSubject();
         try {

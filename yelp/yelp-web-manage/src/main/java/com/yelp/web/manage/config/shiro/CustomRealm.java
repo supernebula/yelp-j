@@ -76,6 +76,7 @@ public class CustomRealm extends AuthorizingRealm {
         return info;
     }
 
+
     /**
      * 获取认证信息
      * @param authenticationToken
@@ -98,6 +99,7 @@ public class CustomRealm extends AuthorizingRealm {
 //            throw new AuthenticationException("用户已冻结！");
 //        }
         SimpleAuthenticationInfo info = new SimpleAuthenticationInfo(username, inputPwd, salt, this.getName());
+        //SimpleAuthenticationInfo info = new SimpleAuthenticationInfo(username, admin.getPassword(), salt, this.getName());
         info.setCredentialsSalt(ByteSource.Util.bytes(admin.getSalt()));
         return info;
     }
