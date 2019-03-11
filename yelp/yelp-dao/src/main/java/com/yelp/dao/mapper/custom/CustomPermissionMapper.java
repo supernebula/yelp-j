@@ -10,5 +10,7 @@ public interface CustomPermissionMapper {
 
     List<Permission> getPermissionsByAdmin(String adminId);
 
+    List<Permission> getPermissionsByAdminName(String username);
+
     int changeAvailable(String permissionId, int available);
 }

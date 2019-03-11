@@ -20,7 +20,7 @@ import java.net.URL;
 /**
  * https://blog.csdn.net/huang906391/article/details/78376766/
  */
-@Configuration
+//@Configuration //注释，禁用默认登录安全验证
 public class WebDefaultSecurityConfig extends WebMvcConfigurerAdapter {
 
     public final static String SESSION_KEY="username";

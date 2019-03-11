@@ -8,16 +8,19 @@ import com.yelp.dao.mapper.RolePermissionMapper;
 import com.yelp.dao.mapper.custom.CustomPermissionMapper;
 import com.yelp.entity.*;
 import com.yelp.searchParam.PermissionSearchParam;
+import com.yelp.service.AdminService;
 import com.yelp.service.PermissionService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.UUID;
 
+@Service
 public class PermissionServiceImpl implements PermissionService {
 
 
@@ -28,15 +31,19 @@ public class PermissionServiceImpl implements PermissionService {
 
     private RolePermissionMapper rolePermissionMapper;
 
+    private AdminService adminService;
+
     private Logger logger = LoggerFactory.getLogger(getClass());
 
     @Autowired
     public PermissionServiceImpl(PermissionMapper permissionMapper
             , CustomPermissionMapper customPermissionMapper
-            , RolePermissionMapper rolePermissionMapper){
+            , RolePermissionMapper rolePermissionMapper
+            , AdminService adminService){
         this.permissionMapper = permissionMapper;
         this.customPermissionMapper = customPermissionMapper;
         this.rolePermissionMapper = rolePermissionMapper;
+        this.adminService = adminService;
     }
 
 
@@ -89,6 +96,16 @@ public class PermissionServiceImpl implements PermissionService {
         List<Permission> list = customPermissionMapper.getPermissionsByAdmin(adminId);
         return list;
     }
+
+    @Override
+    public List<Permission> getPermissionsByAdminUsername(String username) {
+        Admin admin = adminService.getAdminByUsername(username);
+        List<Permission> list = customPermissionMapper.getPermissionsByAdmin(admin.getId());
+        return list;
+    }
+
+
+
 
     @Override
     @Transactional

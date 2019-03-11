@@ -89,6 +89,10 @@ spring.resources.static-locations=file:D://User/ 
 
 [Spring Boot 集成 Shiro权限框架](https://www.jianshu.com/p/63449d21b4b9)
 
+[推荐！Spring Boot 集成-Shiro](https://segmentfault.com/a/1190000008847948)
+
+[Shiro 加盐加密](https://www.jianshu.com/p/a052ac0e8102)
+
 
 
 ## 缓存 Ehcache（进程内缓存框架）、 Redis
