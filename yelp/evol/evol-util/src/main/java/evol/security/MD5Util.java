@@ -18,13 +18,15 @@ public class MD5Util {
     }
 
     /**
-     * 对文本附加盐，进行MD5加密
+     * 对文本附加盐，进行MD5加密；
+     * 盐在前，文本在后
+     * val = md5Hex(salt + text)
      * @param text
      * @param salt
      * @return
      */
     public static String MD5(String text, String salt){
-        String encodeStr = DigestUtils.md5Hex(text + salt);
+        String encodeStr = DigestUtils.md5Hex(salt + text);
         return encodeStr;
     }
 }

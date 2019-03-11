@@ -94,5 +94,12 @@ spring.resources.static-locations=file:D://User/ 
 [Shiro 加盐加密](https://www.jianshu.com/p/a052ac0e8102)
 
 
+## shiro issue
+
+[Apache Shiro IncorrectCredentialsException](https://stackoverflow.com/questions/35085418/apache-shiro-incorrectcredentialsexception)
+
+hashService.generatePublicSalt设置为true，同时配置私有salt，这似乎是一个错误;
+
+[关于spring整合shiro授权验证不通过的问题](https://www.oschina.net/question/589767_136768)
 
 ## 缓存 Ehcache（进程内缓存框架）、 Redis

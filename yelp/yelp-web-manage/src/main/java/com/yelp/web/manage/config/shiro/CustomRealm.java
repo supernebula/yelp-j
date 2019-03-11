@@ -87,9 +87,9 @@ public class CustomRealm extends AuthorizingRealm {
         UsernamePasswordToken token = (UsernamePasswordToken) authenticationToken;
 
         String username = (String) token.getPrincipal();
-        String inputPwd = token.getPassword().toString();
+        String inputPwd = new String(token.getPassword());
         Admin admin = adminService.getAdminByUsername(username);
-        String digestPwd = MD5Util.MD5(token.getPassword().toString(), admin.getSalt());
+        String digestPwd = MD5Util.MD5(inputPwd, admin.getSalt());
         ByteSource salt = ByteSource.Util.bytes(admin.getSalt());
         if (!admin.getPassword().equals(digestPwd)){
             throw new AuthenticationException("输入密码不正确！");
@@ -97,8 +97,9 @@ public class CustomRealm extends AuthorizingRealm {
 //        if (admin.getIsFrozen() == 0){
 //            throw new AuthenticationException("用户已冻结！");
 //        }
-        SimpleAuthenticationInfo info = new SimpleAuthenticationInfo(username, token.getPassword(), salt, this.getName());
+        SimpleAuthenticationInfo info = new SimpleAuthenticationInfo(username, inputPwd, salt, this.getName());
         info.setCredentialsSalt(ByteSource.Util.bytes(admin.getSalt()));
         return info;
     }
+
 }
