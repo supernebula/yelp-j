@@ -1,5 +1,20 @@
 # mysql
 
+## MySQL Command Terminal
+
+Mac Mysql安装目录：
+
+```jshelllanguage
+/usr/local/mysql/bin
+```
+
+```jshelllanguage
+# mysql -u root -p
+```
+
+
+## Data Restore
+
 
 ## Issue
 
@@ -12,3 +27,5 @@ $ sudo chown -RL root:mysql /usr/local/mysql
 $ sudo chown -RL mysql:mysql /usr/local/mysql/data
 $ sudo /usr/local/mysql/support-files/mysql.server start
 ```
+
+

@@ -104,4 +104,27 @@ hashService.generatePublicSalt设置为true，同时配置私有salt，这似乎
 
 [org.apache.shiro.authc.IncorrectCredentialsException 异常处理](https://blog.csdn.net/qian19950120/article/details/78079762)
 
+## 一、[springboot集成shiro时认证出现报错(Submitted credentials for token...)](https://blog.csdn.net/pan_fei/article/details/80693416)
+
+springboot集成shiro时认证出现报错无非就是密码不匹配
+
+可能发生的原因：
+
+1. 前端传的密码是明文，而后台存储的是hash值，导致先后台不匹配报错
+
+如果数据库储存的密码是加密的 那么要 从前端获取密码后，在Java里将其转换成hash值
+
+2. 如果java已经将其加密，但仍然报错那就去ShiroConfig里面看凭证匹配器是不是set了hashIterations(2)
+
+![shiro_code](img/shiro/2018061415335740.png)
+
+ 如果设置了2那么就是加密了两次 和你的密码肯定不匹配了，这个时候就把这行代码注释掉吧 因为默认就是1，散列一次
+
+3. 可能是因为在UsernamePasswordToken内部将密码部分转为字符数组了，所以要这样取String password = new String((char[]) token.getCredentials()); ，此密码为明文，然后给密码加密String md5Pwd = new Md5Hash(password, username).toHex();，里面的username为salt,然后再将md5Pwd放到SimpleAuthenticationInfo中，下面贴一张图
+
+![shiro_code2](img/shiro/20180614155023193.png)
+
+这个异常对于对shiro还不太熟悉的我实在是难住了 看了一天的shiro才把问题解决 心塞塞.. 希望可以帮助亲们
+
+
 ## 缓存 Ehcache（进程内缓存框架）、 Redis

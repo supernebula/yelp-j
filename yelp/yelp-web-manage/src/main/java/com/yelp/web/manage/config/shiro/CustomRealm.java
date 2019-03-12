@@ -88,20 +88,50 @@ public class CustomRealm extends AuthorizingRealm {
         UsernamePasswordToken token = (UsernamePasswordToken) authenticationToken;
 
         String username = (String) token.getPrincipal();
-        String inputPwd = new String(token.getPassword());
-        Admin admin = adminService.getAdminByUsername(username);
-        String digestPwd = MD5Util.MD5(inputPwd, admin.getSalt());
-        ByteSource salt = ByteSource.Util.bytes(admin.getSalt());
-        if (!admin.getPassword().equals(digestPwd)){
-            throw new AuthenticationException("输入密码不正确！");
+        String password = new String(token.getPassword());
+        Admin admin = adminService.login(username, password);
+        if(admin == null){
+            //没找到帐号
+            throw new UnknownAccountException("账号或密码无效");
         }
-//        if (admin.getIsFrozen() == 0){
+        ByteSource salt = ByteSource.Util.bytes(admin.getSalt());
+//      if (admin.getIsFrozen() == 0){
 //            throw new AuthenticationException("用户已冻结！");
 //        }
-        SimpleAuthenticationInfo info = new SimpleAuthenticationInfo(username, inputPwd, salt, this.getName());
+
+        //
+        SimpleAuthenticationInfo info = new SimpleAuthenticationInfo(username, admin.getPassword(), salt, this.getName());
         //SimpleAuthenticationInfo info = new SimpleAuthenticationInfo(username, admin.getPassword(), salt, this.getName());
-        info.setCredentialsSalt(ByteSource.Util.bytes(admin.getSalt()));
+        //info.setCredentialsSalt(ByteSource.Util.bytes(admin.getSalt()));
         return info;
     }
+
+
+//    /**
+//     * 获取认证信息
+//     * @param authenticationToken
+//     * @return
+//     * @throws AuthenticationException
+//     */
+//    @Override
+//    protected AuthenticationInfo doGetAuthenticationInfo(AuthenticationToken authenticationToken) throws AuthenticationException {
+//        UsernamePasswordToken token = (UsernamePasswordToken) authenticationToken;
+//
+//        String username = (String) token.getPrincipal();
+//        String inputPwd = new String(token.getPassword());
+//        Admin admin = adminService.getAdminByUsername(username);
+//        String digestPwd = MD5Util.MD5(inputPwd, admin.getSalt());
+//        ByteSource salt = ByteSource.Util.bytes(admin.getSalt());
+//        if (!admin.getPassword().equals(digestPwd)){
+//            throw new AuthenticationException("输入密码不正确！");
+//        }
+////        if (admin.getIsFrozen() == 0){
+////            throw new AuthenticationException("用户已冻结！");
+////        }
+//        SimpleAuthenticationInfo info = new SimpleAuthenticationInfo(username, inputPwd, salt, this.getName());
+//        //SimpleAuthenticationInfo info = new SimpleAuthenticationInfo(username, admin.getPassword(), salt, this.getName());
+//        info.setCredentialsSalt(ByteSource.Util.bytes(admin.getSalt()));
+//        return info;
+//    }
 
 }
