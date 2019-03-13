@@ -12,6 +12,7 @@
         <module name="evol-util" />
         <module name="example" />
         <module name="example-mq" />
+        <module name="yelp-cache" />
         <module name="yelp-common" />
         <module name="yelp-dao" />
         <module name="yelp-db-generator" />
