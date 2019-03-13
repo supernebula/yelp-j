@@ -93,6 +93,10 @@ spring.resources.static-locations=file:D://User/ 
 
 [Shiro 加盐加密](https://www.jianshu.com/p/a052ac0e8102)
 
+[spring boot 2 集成shiro和redis](https://blog.csdn.net/u010514380/article/details/82185451)
+
+[Spring Boot + Redis 实现Shiro集群](https://www.cnblogs.com/april-chen/p/6704664.html)
+
 
 ## shiro issue
 
@@ -125,6 +129,8 @@ springboot集成shiro时认证出现报错无非就是密码不匹配
 ![shiro_code2](img/shiro/20180614155023193.png)
 
 这个异常对于对shiro还不太熟悉的我实在是难住了 看了一天的shiro才把问题解决 心塞塞.. 希望可以帮助亲们
+
+
 
 
 ## 缓存 Ehcache（进程内缓存框架）、 Redis
