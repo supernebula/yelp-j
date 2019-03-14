@@ -29,9 +29,11 @@ import lombok.extern.slf4j.Slf4j;
  *
  * @author April.Chen
  */
+//@Slf4j
 @Configuration
-@Slf4j
 public class ShiroRedisConfig {
+
+    private Logger log = LoggerFactory.getLogger(getClass());
 
     @Resource
     private RedisSessionDAO sessionDAO;
