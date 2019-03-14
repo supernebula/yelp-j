@@ -1,4 +1,4 @@
-package com.yelp.dao;
+package com.yelp.security.dao;
 
 import java.io.Serializable;
 import java.util.concurrent.TimeUnit;
@@ -69,3 +69,4 @@ public class RedisSessionDAO extends EnterpriseCacheSessionDAO {
         redisTemplate.delete(prefix + session.getId().toString());
     }
 }
+

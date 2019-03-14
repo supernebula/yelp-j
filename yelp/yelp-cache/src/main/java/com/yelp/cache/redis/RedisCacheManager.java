@@ -1,7 +1,9 @@
-package com.yelp.dao;
+package com.yelp.cache.redis;
+
 
 import javax.annotation.Resource;
 
+import com.yelp.security.ShiroCache;
 import org.apache.shiro.cache.Cache;
 import org.apache.shiro.cache.CacheException;
 import org.apache.shiro.cache.CacheManager;

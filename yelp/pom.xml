@@ -18,6 +18,7 @@
         <module>yelp-esdata-console</module>
         <module>example</module>
         <module>yelp-cache</module>
+        <module>yelp-security</module>
     </modules>
 
     <properties>

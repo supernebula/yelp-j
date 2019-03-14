@@ -1,4 +1,4 @@
-package com.yelp.dao;
+package com.yelp.security;
 
 import java.util.ArrayList;
 import java.util.Collection;

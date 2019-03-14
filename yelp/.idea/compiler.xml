@@ -18,6 +18,7 @@
         <module name="yelp-db-generator" />
         <module name="yelp-domain" />
         <module name="yelp-esdata-console" />
+        <module name="yelp-security" />
         <module name="yelp-service" />
         <module name="yelp-web-manage" />
         <module name="yelp-web-search" />
