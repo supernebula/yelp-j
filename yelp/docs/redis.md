@@ -14,3 +14,8 @@ $ sudo make install           //安装
 $ cd src                      //切换到 redis-5.0.3/src
 $ ./redis-server              //启动redis
 ```
+
+
+# springboot + redis
+
+[SpringBoot使用Redis缓存](https://www.cnblogs.com/gdpuzxs/p/7222309.html)

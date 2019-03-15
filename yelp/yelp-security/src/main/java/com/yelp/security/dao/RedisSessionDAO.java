@@ -9,13 +9,16 @@ import org.apache.shiro.session.Session;
 import org.apache.shiro.session.mgt.eis.EnterpriseCacheSessionDAO;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Repository;
 
 /**
  * redis实现共享session
  */
-@Component
+//@Component
+@Repository
 public class RedisSessionDAO extends EnterpriseCacheSessionDAO {
 
     private static Logger logger = LoggerFactory.getLogger(RedisSessionDAO.class);
@@ -25,8 +28,14 @@ public class RedisSessionDAO extends EnterpriseCacheSessionDAO {
 
     private static String prefix = "weiyou-shiro-session:";
 
-    @Resource
+    //@Resource
+    //@Autowired
     private RedisTemplate<String, Object> redisTemplate;
+
+    @Autowired
+    public RedisSessionDAO(RedisTemplate<String, Object> redisTemplate){
+        this.redisTemplate = redisTemplate;
+    }
 
     // 创建session，保存到数据库
     @Override
