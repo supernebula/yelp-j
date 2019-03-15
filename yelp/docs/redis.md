@@ -18,4 +18,15 @@ $ ./redis-server              //启动redis
 
 # springboot + redis
 
+1. [springboot之使用redistemplate优雅地操作redis](https://cloud.tencent.com/developer/article/1156496)
+
+概述
+
+    本文内容主要：
+    关于spring-redis
+    关于redis的key设计
+    redis的基本数据结构
+    介绍redis与springboot的整合
+    sringboot中的redistemplate的使用
+
 [SpringBoot使用Redis缓存](https://www.cnblogs.com/gdpuzxs/p/7222309.html)
