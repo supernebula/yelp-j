@@ -20,6 +20,8 @@ $ ./redis-server              //启动redis
 
 1. [springboot之使用redistemplate优雅地操作redis](https://cloud.tencent.com/developer/article/1156496)
 
+2. [spring boo t- session+redis解决session共享问题](https://blog.csdn.net/dream_broken/article/details/72676679)
+
 概述
 
     本文内容主要：
