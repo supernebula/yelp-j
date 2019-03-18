@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration>
+    <include resource="org/springframework/boot/logging/logback/defaults.xml" />
+    <property name="LOG_FILE" value="${LOG_FILE:-${LOG_PATH:-${LOG_TEMP:-${java.io.tmpdir:-/tmp}}}/spring.log}"/>
+    <include resource="org/springframework/boot/logging/logback/console-appender.xml" />
+    
+	<appender name="DAILY_FILE" class="ch.qos.logback.core.rolling.RollingFileAppender">
+		<encoder>
+			<pattern>${FILE_LOG_PATTERN}</pattern>
+		</encoder>
+		<rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+			<fileNamePattern>${LOG_FILE}.%d{yy-MM-dd}.log</fileNamePattern>
+			<maxHistory>30</maxHistory>
+		</rollingPolicy>
+	</appender>
+
+	
+    <springProfile name="prod">
+    	<logger name="com.diangu" level="ERROR" additivity="false">
+			<appender-ref ref="DAILY_FILE" />
+		</logger>
+		<logger name="com.diangu" level="INFO" additivity="false">
+			<appender-ref ref="CONSOLE" />
+		</logger>
+    </springProfile>
+    
+    <springProfile name="test">
+    	<logger name="com.diangu" level="INFO" additivity="false">
+			<appender-ref ref="CONSOLE" />
+			<appender-ref ref="DAILY_FILE" />
+		</logger>
+    </springProfile>
+    
+    <springProfile name="dev">
+    	<logger name="com.diangu" level="TRACE" additivity="false">
+			<appender-ref ref="CONSOLE" />
+			<appender-ref ref="DAILY_FILE" />
+		</logger>
+    </springProfile>
+    
+    <logger name="org.springframework.context.annotation.ConfigurationClassPostProcessor" level="ERROR"/>
+    <logger name="com.ulisesbocchio.jasyptspringboot" level="ERROR"/>
+    
+	<logger name="org" level="WARN">
+		<appender-ref ref="CONSOLE" />
+		<appender-ref ref="DAILY_FILE" />
+	</logger>
+    <root level="INFO">
+        <appender-ref ref="CONSOLE" />
+        <appender-ref ref="DAILY_FILE" />
+    </root>
+</configuration>

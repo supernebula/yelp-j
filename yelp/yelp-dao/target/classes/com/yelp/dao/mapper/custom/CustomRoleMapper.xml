@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Config 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.yelp.dao.mapper.custom.CustomRoleMapper">
+
+
+
+    <select id="getRolesByAdmin" resultType="com.yelp.entity.Role">
+      SELECT role.id, role.name, role.description, role.available
+      FROM role INNER JOIN admin_role
+	  ON role.id = admin_role.role_id AND admin_role.admin_id = #{adminId}
+    </select>
+
+    <select id="getRolesByAdminUsername" resultType="com.yelp.entity.Role">
+      SELECT role.id, role.name, role.description, role.available
+      FROM role INNER JOIN admin_role INNER JOIN admin
+	  ON role.id = admin_role.role_id AND admin_role.admin_id = admin.id AND admin.username = #{username}
+    </select>
+
+    <select id="changeAvailable" resultType="int">
+      UPDATE role SET available = #{available} WHERE id = #{roleId}
+    </select>
+
+
+
+</mapper>

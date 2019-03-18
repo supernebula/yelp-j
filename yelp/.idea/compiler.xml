@@ -8,7 +8,6 @@
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
         <module name="evol-common" />
-        <module name="evol-elasticsearch" />
         <module name="evol-util" />
         <module name="example" />
         <module name="example-mq" />
@@ -17,12 +16,15 @@
         <module name="yelp-dao" />
         <module name="yelp-db-generator" />
         <module name="yelp-domain" />
-        <module name="yelp-esdata-console" />
         <module name="yelp-security" />
         <module name="yelp-service" />
         <module name="yelp-web-manage" />
         <module name="yelp-web-search" />
       </profile>
     </annotationProcessing>
+    <bytecodeTargetLevel>
+      <module name="evol-elasticsearch" target="1.5" />
+      <module name="yelp-esdata-console" target="1.8" />
+    </bytecodeTargetLevel>
   </component>
 </project>

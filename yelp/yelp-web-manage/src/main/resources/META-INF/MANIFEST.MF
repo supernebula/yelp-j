@@ -1,0 +1,88 @@
+Manifest-Version: 1.0
+Class-Path: compiler-0.9.3.jar lucene-highlighter-7.3.1.jar validation
+ -api-1.1.0.Final.jar aggs-matrix-stats-client-6.3.2.jar assertj-core-
+ 3.11.1.jar pagehelper-5.1.8.jar percolator-client-6.3.2.jar swagger-m
+ odels-1.5.10.jar ognl-3.0.8.jar httpcore-4.4.10.jar tomcat-embed-webs
+ ocket-8.5.37.jar spring-web-4.3.22.RELEASE.jar spring-expression-5.1.
+ 3.RELEASE.jar elasticsearch-rest-client-sniffer-6.3.2.jar commons-col
+ lections-3.2.2.jar springfox-swagger-ui-2.6.0.jar lucene-spatial3d-7.
+ 3.1.jar rank-eval-client-6.3.2.jar t-digest-3.2.jar jna-4.5.1.jar spr
+ ingfox-core-2.9.2.jar elasticsearch-rest-high-level-client-6.3.2.jar 
+ thymeleaf-spring4-2.1.6.RELEASE.jar lucene-queryparser-7.3.1.jar comm
+ ons-lang3-3.8.1.jar HdrHistogram-2.1.9.jar thymeleaf-2.1.6.RELEASE.ja
+ r transport-netty4-client-6.3.2.jar spring-messaging-4.3.22.RELEASE.j
+ ar lucene-spatial-extras-7.3.1.jar spring-boot-1.5.19.RELEASE.jar cla
+ ssmate-1.3.4.jar lucene-core-7.3.1.jar springfox-spring-web-2.6.0.jar
+  slf4j-api-1.7.26.jar elasticsearch-x-content-6.3.2.jar spring-contex
+ t-support-4.3.22.RELEASE.jar unbescape-1.1.0.RELEASE.jar lombok-1.18.
+ 4.jar tomcat-annotations-api-8.5.37.jar httpclient-4.5.2.jar spring-a
+ op-5.1.3.RELEASE.jar springfox-schema-2.6.0.jar spring-security-web-4
+ .2.11.RELEASE.jar elasticsearch-cli-6.3.2.jar commons-codec-1.10.jar 
+ shiro-config-ogdl-1.4.0.jar shiro-config-core-1.4.0.jar lucene-querie
+ s-7.3.1.jar spring-boot-actuator-1.5.19.RELEASE.jar spring-boot-start
+ er-actuator-1.5.19.RELEASE.jar shiro-cache-1.4.0.jar spring-boot-star
+ ter-web-1.5.19.RELEASE.jar spring-amqp-1.7.12.RELEASE.jar spring-boot
+ -starter-tomcat-1.5.19.RELEASE.jar springfox-swagger-common-2.9.2.jar
+  jackson-dataformat-smile-2.8.11.jar springfox-spi-2.6.0.jar tomcat-e
+ mbed-el-8.5.37.jar amqp-client-4.8.3.jar spring-boot-starter-1.5.19.R
+ ELEASE.jar jackson-databind-2.8.11.3.jar springfox-swagger-common-2.6
+ .0.jar httpclient-4.5.6.jar lucene-sandbox-7.3.1.jar aspectjweaver-1.
+ 8.13.jar springfox-spring-web-2.9.2.jar netty-transport-4.1.16.Final.
+ jar netty-codec-http-4.1.16.Final.jar guava-20.0.jar springfox-spi-2.
+ 9.2.jar swagger-annotations-1.5.20.jar springfox-swagger2-2.6.0.jar f
+ astjson-1.2.56.jar transport-6.3.2.jar jedis-2.9.1.jar lucene-spatial
+ -7.3.1.jar lucene-suggest-7.3.1.jar tomcat-embed-core-8.5.37.jar page
+ helper-spring-boot-autoconfigure-1.2.10.jar springfox-swagger-ui-2.9.
+ 2.jar byte-buddy-1.8.12.jar spring-jdbc-4.3.22.RELEASE.jar springfox-
+ schema-2.9.2.jar spring-data-keyvalue-1.2.18.RELEASE.jar swagger-anno
+ tations-1.5.10.jar shiro-crypto-core-1.4.0.jar spring-oxm-4.3.22.RELE
+ ASE.jar lucene-analyzers-common-7.3.1.jar mybatis-3.4.6.jar spring-ex
+ pression-4.3.22.RELEASE.jar commons-beanutils-1.9.3.jar netty-handler
+ -4.1.16.Final.jar elasticsearch-rest-client-6.3.2.jar netty-buffer-4.
+ 1.16.Final.jar spring-context-4.3.22.RELEASE.jar slf4j-api-1.7.16.jar
+  jsqlparser-1.2.jar mybatis-spring-boot-autoconfigure-1.3.3.jar mysql
+ -connector-java-5.1.47.jar reindex-client-6.3.2.jar mybatis-spring-1.
+ 3.2.jar jackson-dataformat-yaml-2.8.11.jar spring-security-config-4.2
+ .11.RELEASE.jar tomcat-jdbc-8.5.37.jar shiro-crypto-hash-1.4.0.jar ne
+ tty-resolver-4.1.16.Final.jar spring-session-1.3.5.RELEASE.jar netty-
+ common-4.1.16.Final.jar logback-core-1.1.11.jar spring-tx-5.1.3.RELEA
+ SE.jar aopalliance-1.0.jar elasticsearch-secure-sm-6.3.2.jar spring-b
+ oot-starter-logging-1.5.19.RELEASE.jar shiro-lang-1.4.0.jar spring-bo
+ ot-starter-thymeleaf-1.5.19.RELEASE.jar spring-beans-5.1.3.RELEASE.ja
+ r hibernate-validator-5.3.6.Final.jar commons-logging-1.2.jar commons
+ -logging-1.1.3.jar jackson-annotations-2.8.0.jar log4j-api-2.7.jar to
+ mcat-juli-8.5.37.jar spring-retry-1.2.3.RELEASE.jar spring-tx-4.3.22.
+ RELEASE.jar spring-rabbit-1.7.12.RELEASE.jar lucene-grouping-7.3.1.ja
+ r spring-boot-starter-cache-1.5.19.RELEASE.jar http-client-1.1.1.RELE
+ ASE.jar jcl-over-slf4j-1.7.25.jar guava-18.0.jar groovy-2.4.16.jar co
+ mmons-pool2-2.4.3.jar dozer-5.5.1.jar lucene-join-7.3.1.jar lombok-1.
+ 16.22.jar spring-context-5.1.3.RELEASE.jar httpasyncclient-4.1.2.jar 
+ log4j-over-slf4j-1.7.25.jar shiro-spring-1.4.0.jar httpasyncclient-4.
+ 1.4.jar springfox-swagger2-2.9.2.jar spring-aop-4.3.22.RELEASE.jar sp
+ ring-boot-starter-data-redis-1.5.19.RELEASE.jar javassist-3.21.0-GA.j
+ ar mapstruct-1.0.0.Final.jar jboss-logging-3.3.2.Final.jar spring-cor
+ e-4.3.22.RELEASE.jar lucene-backward-codecs-7.3.1.jar jackson-datafor
+ mat-cbor-2.8.11.jar snakeyaml-1.17.jar springfox-core-2.6.0.jar shiro
+ -web-1.4.0.jar lang-mustache-client-6.3.2.jar spring-boot-starter-amq
+ p-1.5.19.RELEASE.jar gson-2.8.5.jar shiro-core-1.4.0.jar spring-data-
+ commons-1.13.18.RELEASE.jar parent-join-client-6.3.2.jar thymeleaf-la
+ yout-dialect-1.4.0.jar netty-codec-4.1.16.Final.jar mybatis-generator
+ -core-1.3.5.jar spring-boot-starter-aop-1.5.19.RELEASE.jar joda-time-
+ 2.9.9.jar httpcore-4.4.5.jar jul-to-slf4j-1.7.25.jar jackson-dataform
+ at-smile-2.8.10.jar spring-jcl-5.1.3.RELEASE.jar spring-data-redis-1.
+ 8.18.RELEASE.jar spring-beans-4.3.22.RELEASE.jar slf4j-api-1.7.25.jar
+  log4j-core-2.9.1.jar spring-boot-autoconfigure-1.5.19.RELEASE.jar sp
+ ring-boot-starter-security-1.5.19.RELEASE.jar spring-boot-starter-jdb
+ c-1.5.19.RELEASE.jar mybatis-spring-boot-starter-1.3.3.jar jackson-co
+ re-2.8.11.jar commons-codec-1.12.jar spring-plugin-core-1.2.0.RELEASE
+ .jar spring-security-core-4.2.11.RELEASE.jar httpcore-nio-4.4.5.jar s
+ wagger-models-1.5.20.jar spring-core-5.1.3.RELEASE.jar shiro-event-1.
+ 4.0.jar elasticsearch-6.3.2.jar elasticsearch-core-6.3.2.jar mapstruc
+ t-1.2.0.Final.jar log4j-api-2.9.1.jar lucene-misc-7.3.1.jar logback-c
+ lassic-1.1.11.jar pagehelper-spring-boot-starter-1.2.10.jar spring-we
+ bmvc-4.3.22.RELEASE.jar jackson-dataformat-yaml-2.8.10.jar spring-plu
+ gin-metadata-1.2.0.RELEASE.jar jopt-simple-5.0.2.jar jackson-core-2.8
+ .10.jar lucene-memory-7.3.1.jar hppc-0.7.1.jar jackson-dataformat-cbo
+ r-2.8.10.jar shiro-crypto-cipher-1.4.0.jar
+Main-Class: com.yelp.YelpWebManageApplication
+
