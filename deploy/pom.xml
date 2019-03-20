@@ -15,5 +15,9 @@
         <module>sample-website</module>
     </modules>
 
+    <properties>
+        <docker.image.prefix>springboot</docker.image.prefix>
+    </properties>
+
 
 </project>
