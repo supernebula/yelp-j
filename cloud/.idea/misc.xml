@@ -8,6 +8,7 @@
         <option value="$PROJECT_DIR$/consul-client/pom.xml" />
         <option value="$PROJECT_DIR$/eureka-consumer-ribbon/pom.xml" />
         <option value="$PROJECT_DIR$/eureka-consumer-feign/pom.xml" />
+        <option value="$PROJECT_DIR$/config-server-git/pom.xml" />
       </list>
     </option>
   </component>
