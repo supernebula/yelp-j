@@ -7,9 +7,16 @@
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
         <module name="cloud" />
+        <module name="consul-client" />
         <module name="eureka-client" />
+        <module name="eureka-consumer" />
+        <module name="eureka-consumer-feign" />
+        <module name="eureka-consumer-ribbon" />
         <module name="eureka-server" />
       </profile>
     </annotationProcessing>
+    <bytecodeTargetLevel>
+      <module name="consul-server" target="1.8" />
+    </bytecodeTargetLevel>
   </component>
 </project>
