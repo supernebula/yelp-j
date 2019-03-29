@@ -5,6 +5,6 @@ spring:
     config:
       server:
         git:
-          uri: https://github.com/supernebula/config-repo-demo.git
+          uri: https://github.com/supernebula/config-repo-demo
 server:
   port: 8121
