@@ -16,6 +16,7 @@
         <module name="eureka-consumer-ribbon" />
         <module name="eureka-consumer-ribbon-hystrix" />
         <module name="eureka-server" />
+        <module name="hystrix-dashboard" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
