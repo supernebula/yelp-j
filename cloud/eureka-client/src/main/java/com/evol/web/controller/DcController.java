@@ -11,8 +11,17 @@ public class DcController {
     @Autowired
     DiscoveryClient discoveryClient;
 
+//    @GetMapping("/dc")
+//    public String dc() {
+//        String services = "Services: " + discoveryClient.getServices();
+//        System.out.println(services);
+//        return services;
+//    }
+
+    //配合eureka-consumer-ribbon-hystrix，测试熔断
     @GetMapping("/dc")
-    public String dc() {
+    public String dc() throws InterruptedException {
+        Thread.sleep(5000L);
         String services = "Services: " + discoveryClient.getServices();
         System.out.println(services);
         return services;

@@ -14,6 +14,7 @@
         <module name="eureka-consumer" />
         <module name="eureka-consumer-feign" />
         <module name="eureka-consumer-ribbon" />
+        <module name="eureka-consumer-ribbon-hystrix" />
         <module name="eureka-server" />
       </profile>
     </annotationProcessing>
