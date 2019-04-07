@@ -184,3 +184,12 @@ public String addEmp(Employee employee, BindingResult bindingResult){
 
 
 [EventBus VS Spring Event](https://www.cnblogs.com/shoren/p/eventBus_springEvent.html)
+
+
+# ISSUE
+
+cannot resovle symbol
+
+在使用idea的过程中，遇到其中一个maven模块变成灰色，如下所示：
+
+造成这个的原因可能是忽略了maven模块，可以尝试如下解决方法：在idea中maven的setting中找到ignored files,看右边的面板中是否将变灰的maven模块忽略了。我的模块变灰就是因为这个原因，如下图所示：
